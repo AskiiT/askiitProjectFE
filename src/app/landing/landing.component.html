@@ -4,16 +4,10 @@
 
 <div class="row">
   <div class="col-md-6">
-    <section id="promo">
-        <app-promo></app-promo>
-    </section>
+      <app-promo></app-promo>
   </div>
-
   <div class="col-md-6">
-    <section id="sign">
-        <app-sign-in *ngIf = 'sign == true' ></app-sign-in>
-        <app-sign-up *ngIf = 'sign == false'></app-sign-up>
-    </section>
+        <app-sign-in *ngIf='sign == true' ></app-sign-in>
+        <app-sign-up *ngIf='sign == false'></app-sign-up>
   </div>
-
 </div>

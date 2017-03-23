@@ -1,0 +1,10 @@
+.center-top {
+	margin-top: 40px;
+	font-size: 10em;
+}
+
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}
