@@ -1,13 +1,15 @@
-<header>
-  <h1>{{title}}</h1>
-    <nav>
-      <ul>
-        <li><a>Sign In</a></li>
-        <li><a>Sign Up</a></li>
-      </ul>
-    </nav>
+<header class='row'>
+  <div class="col-md-8">
+    <h1>{{title}}</h1>
+  </div>
+  <div class="col-md-2">
+    <button (click)="buttonSignIn()">Sign In</button>
+  </div>
+  <div class="col-md-2">
+    <button (click)="buttonSignUp()">Sign Up</button>
+  </div>
 </header>
 
 <section id="main">
-    <app-landing></app-landing>
+    <app-landing [sign] = "sign"></app-landing>
 </section>

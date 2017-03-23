@@ -1,17 +1,18 @@
 <!-- <p>
-  landing works!
+  landing works! {{sign}}
 </p> -->
 
-<div class="padre">
-  <div class="A">
+<div class="row">
+  <div class="col-md-6">
     <section id="promo">
         <app-promo></app-promo>
     </section>
   </div>
 
-  <div class="B">
+  <div class="col-md-6">
     <section id="sign">
-        <app-sign-in></app-sign-in>
+        <app-sign-in *ngIf = 'sign == true' ></app-sign-in>
+        <app-sign-up *ngIf = 'sign == false'></app-sign-up>
     </section>
   </div>
 
