@@ -1,0 +1,34 @@
+.nav-box {
+	background-color: #000000;
+	max-width: 25%;
+	min-width: 200px;
+	height: 100%;
+	min-height: 565px;
+}
+
+.nav-rank-btn {
+	background-color: #ffffff;
+	color: #606060;
+	margin-top: 50px;
+	margin-left: 20px;
+	width: 150px;
+}
+
+.nav-btn {
+	background-color: #ffffff;
+	color: #606060;
+	margin-top: 10px;
+	margin-left: 20px;
+	width: 150px;
+}
+
+.tags {
+	background-color: #ffffff;
+	margin-top: 40px;
+	min-height: 330px;
+}
+
+.tag-finder {
+	width: 165px;
+	margin-left: 25px;
+}
