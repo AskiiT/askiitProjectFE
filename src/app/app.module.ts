@@ -12,6 +12,8 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { MaterialModule } from '@angular/material';
 import 'hammerjs';
 
+import { RecaptchaModule } from 'ng2-recaptcha';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +26,8 @@ import 'hammerjs';
     BrowserModule,
     FormsModule,
     HttpModule,
-    MaterialModule.forRoot( )
+    MaterialModule.forRoot( ),
+    RecaptchaModule.forRoot( )
   ],
   providers: [],
   bootstrap: [AppComponent]

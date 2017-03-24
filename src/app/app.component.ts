@@ -15,6 +15,4 @@ export class AppComponent {
   buttonSignUp(){
     this.sign = false;
   }
-
-
 }

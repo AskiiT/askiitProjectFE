@@ -1,35 +1,39 @@
 <section>
-	<md-input-container class="md-block" flex-gt-sm>
-        <label class="white-font">Nombre</label>
-        <input mdInput ng-model="user.firstName">
-    </md-input-container>
+    <form name="signUpForm">
+    	<md-input-container class="md-block" flex-gt-sm>
+            <label class="white-font">Nombre</label>
+            <input mdInput>
+        </md-input-container>
 
-    <md-input-container class="md-block" flex-gt-sm>
-        <label class="white-font">Apellido</label>
-        <input mdInput ng-model="user.firstName">
-    </md-input-container>
+        <md-input-container class="md-block" flex-gt-sm>
+            <label class="white-font">Apellido</label>
+            <input mdInput>
+        </md-input-container>
 
-	<md-input-container class="md-block" flex-gt-sm>
-        <label class="white-font">Correo</label>
-        <input mdInput ng-model="user.firstName">
-    </md-input-container>
+    	<md-input-container class="md-block" flex-gt-sm>
+            <label class="white-font">Correo</label>
+            <input mdInput>
+        </md-input-container>
 
-	<md-input-container class="md-block" flex-gt-sm>
-        <label class="white-font">Usuario</label>
-        <input mdInput ng-model="user.firstName">
-    </md-input-container>
+    	<md-input-container class="md-block" flex-gt-sm>
+            <label class="white-font">Usuario</label>
+            <input mdInput>
+        </md-input-container>
 
-	<md-input-container class="md-block" flex-gt-sm>
-        <label class="white-font">Contraseña</label>
-        <input mdInput type="password" ng-model="user.firstName">
-    </md-input-container>
+    	<md-input-container class="md-block" flex-gt-sm>
+            <label class="white-font">Contraseña</label>
+            <input mdInput type="password">
+        </md-input-container>
 
-	<md-input-container class="md-block" flex-gt-sm>
-        <label class="white-font">Confirmar contraseña</label>
-        <input mdInput type="password" ng-model="user.firstName">
-    </md-input-container>	
+    	<md-input-container class="md-block" flex-gt-sm>
+            <label class="white-font">Confirmar contraseña</label>
+            <input mdInput type="password">
+        </md-input-container>	
 
-	<div class="col-md-8 text-right top30">
-	    <button md-button class="btn" type="button" name="buttonSignUp">Registrarse</button>
-	</div>
+        <recaptcha (resolved)="resolved($event)" siteKey="YOUR_SITE_KEY"></recaptcha>
+
+    	<div class="col-md-8 text-right top30">
+    	    <button md-button class="btn" type="button" name="buttonSignUp">Registrarse</button>
+    	</div>
+    </form>
 </section>
