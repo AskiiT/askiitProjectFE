@@ -1,3 +1,8 @@
 .topping {
 	margin-top: 20px;
 }
+.box {
+	background-color: #ffffff;
+	border-color: #a5f6e0;
+	border: 2px;
+}

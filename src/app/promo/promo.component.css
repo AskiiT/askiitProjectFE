@@ -1,6 +1,8 @@
-.center-top {
-	margin-top: 40px;
-	font-size: 10em;
+.logo {
+	margin-top: 0px;
+	margin-left: 50px;
+	width: 80%;
+	height: auto;
 }
 
 .vcenter {

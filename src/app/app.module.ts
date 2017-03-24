@@ -9,6 +9,9 @@ import { PromoComponent } from './promo/promo.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 
+import { MaterialModule } from '@angular/material';
+import 'hammerjs';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +23,8 @@ import { SignUpComponent } from './sign-up/sign-up.component';
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    MaterialModule.forRoot( )
   ],
   providers: [],
   bootstrap: [AppComponent]

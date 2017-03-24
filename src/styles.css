@@ -36,3 +36,14 @@ body{
   box-sizing: border-box;
   margin: 0 auto
 }
+
+.btn {
+  background-color: #07f0fa;
+  color: #18312e;
+  width: 220px;
+  height: 40px;
+}
+
+.white-font {
+  color: white;
+}

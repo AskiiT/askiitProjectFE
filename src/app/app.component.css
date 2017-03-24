@@ -1,3 +1,12 @@
 .topping {
-	margin-top: 10px;
+	margin-top: 20px;
+}
+
+.banner {
+	background: #07f0fa;
+}
+
+.btn1 {
+	color: #56bfa2;
+	background-color: #266755;
 }
