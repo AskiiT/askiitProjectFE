@@ -1,53 +1,22 @@
-<!-- <md-toolbar class="theme-color row">
-  <div class="row banner">
-    <div class="col-md-2">
-      <h1>{{title}}</h1>
-    </div>
+<md-toolbar class="theme-color row">
+  <span class="col-md-6">{{title}}</span>
 
-    <div *ngIf='siteHome == false' >
-      <div class="col-md-6 topping text-right">
-        <button md-button class="btn1" (click)="buttonSignIn()">Sign In</button>
-      </div>
-      <div class="col-md-4 topping text-center">
-        <button md-button class="btn1" (click)="buttonSignUp()">Sign Up</button>
-      </div>
-    </div>
-
-    <div *ngIf='siteHome == true'>
-      <div class="col-md-8">
-        <button md-button class="askiit-btn tool-bar-btn">
-          AskiiT
-        </button>
-      </div>
-      <div class="col-md-2 topping text-center">
-        <button md-button class="logout-btn tool-bar-btn">
-          Log out
-        </button>
-      </div>
-    </div>
+  <div *ngIf='siteHome == false' class="col-md-3">
+    <button md-button class="btn1 tool-bar-btn">
+      Sign In
+    </button>
   </div>
-</md-toolbar> -->
 
-
-  <md-toolbar class="theme-color row">
-    <span class="col-md-6">{{title}}</span>
-
-    <div *ngIf='siteHome == false' class="col-md-3">
-      <button md-button class="btn1 tool-bar-btn">
-        Sign In
-      </button>
-    </div>
-
-    <div *ngIf='siteHome == false' class="col-md-3">
-      <button md-button class="btn1 tool-bar-btn">
-        Sign Out
-      </button>
-    </div>
-
-    <button *ngIf='siteHome == true' md-button class="col-md-3 askiit-btn tool-bar-btn">
-      AskiiT
+  <div *ngIf='siteHome == false' class="col-md-3">
+    <button md-button class="btn1 tool-bar-btn">
+      Sign Out
     </button>
-    <button *ngIf='siteHome == true' md-button class="col-md-3 logout-btn tool-bar-btn">
-      Log out
-    </button>
-  </md-toolbar>
+  </div>
+
+  <button *ngIf='siteHome == true' md-button class="col-md-3 askiit-btn tool-bar-btn">
+    AskiiT
+  </button>
+  <button *ngIf='siteHome == true' md-button class="col-md-3 logout-btn tool-bar-btn">
+    Log out
+  </button>
+</md-toolbar>
