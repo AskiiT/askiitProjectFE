@@ -1,11 +1,13 @@
-<div class="row top-padding">
-	<label class="col-md-4 white-font"Apellid>Usuario/Correo</label>
-    <input class="col-md-6" type="text" name="">
-</div>
-<div class="row">
-	<label class="col-md-4 top10 white-font">Contraseña</label>
-    <input class="col-md-6 top10" type="text" name="">
-</div>
-<div class="text-right col-md-9 top30">
-    <button md-button class="btn" type="button" name="buttonSignUp">Enter</button>
-</div>
+<section>
+	<md-input-container class="md-block" flex-gt-sm>
+        <label class="white-font">Usuario/Correo</label>
+        <input mdInput ng-model="user.firstName">
+    </md-input-container>
+	<md-input-container class="md-block" flex-gt-sm>
+        <label class="white-font">Contraseña</label>
+        <input mdInput type="password" ng-model="user.firstName">
+    </md-input-container>
+	<div class="text-right col-md-8 text-center top30">
+	    <button md-button class="btn" type="button" name="buttonSignUp">Ingresar</button>
+	</div>
+</section>
