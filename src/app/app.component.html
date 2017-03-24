@@ -1,19 +1,7 @@
-<header class='row banner'>
-  <div class="col-md-6">
-    <h1>{{title}}</h1>
-  </div>
-
-  <section>
-    <div class="col-md-3 topping text-right">
-      <button md-button class="btn1" (click)="buttonSignIn()">Sign In</button>
-    </div>
-    <div class="col-md-3 topping text-center">
-      <button md-button class="btn1" (click)="buttonSignUp()">Sign Up</button>
-    </div>
-  </section>
-
+<header>
+  <app-banner> </app-banner>
 </header>
 
-<section id="main">
-    <app-landing [sign]="sign"></app-landing>
-</section>
+
+<app-landing></app-landing>
+<!-- <app-main-view></app-main-view> -->
