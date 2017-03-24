@@ -1,39 +1,46 @@
 <section>
     <form name="signUpForm">
     	<md-input-container class="md-block" flex-gt-sm>
-            <label class="white-font">Nombre</label>
+            <label class="black-font">Nombre</label>
             <input mdInput>
         </md-input-container>
 
         <md-input-container class="md-block" flex-gt-sm>
-            <label class="white-font">Apellido</label>
+            <label class="black-font">Apellido</label>
             <input mdInput>
         </md-input-container>
 
     	<md-input-container class="md-block" flex-gt-sm>
-            <label class="white-font">Correo</label>
+            <label class="black-font">Correo</label>
             <input mdInput>
         </md-input-container>
 
     	<md-input-container class="md-block" flex-gt-sm>
-            <label class="white-font">Usuario</label>
+            <label class="black-font">Usuario</label>
             <input mdInput>
         </md-input-container>
 
     	<md-input-container class="md-block" flex-gt-sm>
-            <label class="white-font">Contraseña</label>
+            <label class="black-font">Contraseña</label>
             <input mdInput type="password">
         </md-input-container>
 
     	<md-input-container class="md-block" flex-gt-sm>
-            <label class="white-font">Confirmar contraseña</label>
+            <label class="black-font">Confirmar contraseña</label>
             <input mdInput type="password">
-        </md-input-container>	
+        </md-input-container>
 
-        <recaptcha (resolved)="resolved($event)" siteKey="YOUR_SITE_KEY"></recaptcha>
 
-    	<div class="col-md-8 text-right top30">
-    	    <button md-button class="btn" type="button" name="buttonSignUp">Registrarse</button>
-    	</div>
+      <div class="row">
+        <div class="col-md-6 text-center">
+          <recaptcha (resolved)="resolved($event)" siteKey="YOUR_SITE_KEY"></recaptcha>
+        </div>
+
+
+        <div class="col-md-6 text-center">
+            <button md-button class="btn" type="button" name="buttonSignUp">Registrarse</button>
+        </div>
+      </div>
+
     </form>
 </section>
