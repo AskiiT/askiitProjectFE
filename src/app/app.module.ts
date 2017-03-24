@@ -13,6 +13,10 @@ import { MaterialModule } from '@angular/material';
 import 'hammerjs';
 
 import { RecaptchaModule } from 'ng2-recaptcha';
+import { MainViewComponent } from './main-view/main-view.component';
+import { LeftNavComponent } from './left-nav/left-nav.component';
+import { RightBarComponent } from './right-bar/right-bar.component';
+import { ToolBarComponent } from './tool-bar/tool-bar.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +24,11 @@ import { RecaptchaModule } from 'ng2-recaptcha';
     LandingComponent,
     PromoComponent,
     SignInComponent,
-    SignUpComponent
+    SignUpComponent,
+    MainViewComponent,
+    LeftNavComponent,
+    RightBarComponent,
+    ToolBarComponent
   ],
   imports: [
     BrowserModule,
