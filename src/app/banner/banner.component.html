@@ -1,0 +1,22 @@
+<md-toolbar class="theme-color row">
+  <span class="col-md-6">{{title}}</span>
+
+  <div *ngIf='siteHome == false' class="col-md-3">
+    <button md-button class="btn1 tool-bar-btn">
+      Sign In
+    </button>
+  </div>
+
+  <div *ngIf='siteHome == false' class="col-md-3">
+    <button md-button class="btn1 tool-bar-btn">
+      Sign Out
+    </button>
+  </div>
+
+  <button *ngIf='siteHome == true' md-button class="col-md-3 askiit-btn tool-bar-btn">
+    AskiiT
+  </button>
+  <button *ngIf='siteHome == true' md-button class="col-md-3 logout-btn tool-bar-btn">
+    Log out
+  </button>
+</md-toolbar>

@@ -28,12 +28,14 @@
     	<md-input-container class="md-block" flex-gt-sm>
             <label class="white-font">Confirmar contraseña</label>
             <input mdInput type="password">
-        </md-input-container>	
+        </md-input-container>
 
-        <recaptcha (resolved)="resolved($event)" siteKey="YOUR_SITE_KEY"></recaptcha>
 
-    	<div class="col-md-8 text-right top30">
-    	    <button md-button class="btn" type="button" name="buttonSignUp">Registrarse</button>
-    	</div>
+      <recaptcha (resolved)="resolved($event)" siteKey="YOUR_SITE_KEY"></recaptcha>
+
+        <div class="col-md-8 text-rigth top30">
+            <button md-button class="btn" type="button" name="buttonSignUp">Registrarse</button>
+        </div>
+
     </form>
 </section>

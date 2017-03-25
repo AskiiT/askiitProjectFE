@@ -7,8 +7,16 @@
         <label class="white-font">Contraseña</label>
         <input mdInput type="password" ng-model="user.firstName">
     </md-input-container>
-    <recaptcha (resolved)="resolved($event)" siteKey="YOUR_SITE_KEY"></recaptcha>
-	<div class="text-right col-md-8 text-center top30">
-	    <button md-button class="btn" type="button" name="buttonSignUp">Ingresar</button>
-	</div>
+
+
+		<div class="row top">
+			<!-- <div class="col-md-6 text-center">
+				<recaptcha (resolved)="resolved($event)" siteKey="YOUR_SITE_KEY"></recaptcha>
+			</div> -->
+
+
+			<div class="col-md-6" style="text-align:right">
+					<button md-button class="btn" type="button" name="buttonSignUp">Ingresar</button>
+			</div>
+		</div>
 </section>

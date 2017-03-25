@@ -6,7 +6,7 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./landing.component.css']
 })
 export class LandingComponent implements OnInit {
-  @Input() sign;
+  public sign = true;
   constructor() { }
 
   ngOnInit() {
