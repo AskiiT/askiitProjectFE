@@ -21,20 +21,37 @@ import { ProfileComponent } from './profile/profile.component';
 import { ChatsComponent } from './chats/chats.component';
 import { HomeComponent } from './home/home.component';
 import { ToolBarComponent } from './tool-bar/tool-bar.component';
+import { MyQuestionsComponent } from './my-questions/my-questions.component';
 
 export const appRoutes: Routes = [
   { path: 'home',
-    component: HomeComponent},
+    component: HomeComponent,
+    children: [
+      {
+        path: '',
+        component: WallComponent,
+      },
+      {
+        path: 'profile',
+        component: ProfileComponent,
+      },
+      {
+        path: 'questions',
+        component: MyQuestionsComponent,
+      },
+    ]
+  },
   { path: '',
     component: LandingComponent,
     children: [
       { path: '',
-        component: SignInComponent
+        component: SignInComponent,
       },
       { path: 'sign-up',
         component: SignUpComponent,
       },
-    ] },
+    ]
+  },
 ];
 
 @NgModule({
@@ -51,7 +68,8 @@ export const appRoutes: Routes = [
     ChatsComponent,
     LandingComponent,
     HomeComponent,
-    ToolBarComponent
+    ToolBarComponent,
+    MyQuestionsComponent
   ],
   imports: [
     BrowserModule,
