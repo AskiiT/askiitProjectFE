@@ -12,7 +12,7 @@ import { AppComponent } from './app.component';
 import { LandingComponent } from './landing/landing.component';
 import { PromoComponent } from './promo/promo.component';
 import { SignInComponent } from './sign-in/sign-in.component';
-import { SignUpComponent } from './sign-up/sign-up.component'
+import { SignUpComponent } from './sign-up/sign-up.component';
 import { BannerComponent } from './banner/banner.component';
 import { NavigatorComponent } from './navigator/navigator.component';
 import { SearchComponent } from './search/search.component';
@@ -20,16 +20,43 @@ import { WallComponent } from './wall/wall.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ChatsComponent } from './chats/chats.component';
 import { HomeComponent } from './home/home.component';
+import { ToolBarComponent } from './tool-bar/tool-bar.component';
+import { MyQuestionsComponent } from './my-questions/my-questions.component';
 
 export const appRoutes: Routes = [
-  { path: 'home', component: HomeComponent },
-  { path: '', component: LandingComponent },
+  { path: 'home',
+    component: HomeComponent,
+    children: [
+      {
+        path: '',
+        component: WallComponent,
+      },
+      {
+        path: 'profile',
+        component: ProfileComponent,
+      },
+      {
+        path: 'questions',
+        component: MyQuestionsComponent,
+      },
+    ]
+  },
+  { path: '',
+    component: LandingComponent,
+    children: [
+      { path: '',
+        component: SignInComponent,
+      },
+      { path: 'sign-up',
+        component: SignUpComponent,
+      },
+    ]
+  },
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    LandingComponent,
     PromoComponent,
     SignInComponent,
     SignUpComponent,
@@ -39,7 +66,10 @@ export const appRoutes: Routes = [
     WallComponent,
     ProfileComponent,
     ChatsComponent,
-    HomeComponent
+    LandingComponent,
+    HomeComponent,
+    ToolBarComponent,
+    MyQuestionsComponent
   ],
   imports: [
     BrowserModule,

@@ -1,11 +1,13 @@
+<header>
+  <app-banner> </app-banner>
+</header>
 <section id ="main">
   <div class="row">
     <div class="col-md-6">
-        <app-promo></app-promo>
+          <app-promo></app-promo>
     </div>
     <div class="col-md-6">
-          <app-sign-in *ngIf='sign == true' ></app-sign-in>
-          <app-sign-up *ngIf='sign == false' class="margin"></app-sign-up>
+          <router-outlet></router-outlet>
     </div>
   </div>
 </section>
