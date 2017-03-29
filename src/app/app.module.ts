@@ -22,6 +22,7 @@ import { ChatsComponent } from './chats/chats.component';
 import { HomeComponent } from './home/home.component';
 import { ToolBarComponent } from './tool-bar/tool-bar.component';
 import { MyQuestionsComponent } from './my-questions/my-questions.component';
+import { ContactComponent } from './contact/contact.component';
 
 export const appRoutes: Routes = [
   { path: 'home',
@@ -69,7 +70,8 @@ export const appRoutes: Routes = [
     LandingComponent,
     HomeComponent,
     ToolBarComponent,
-    MyQuestionsComponent
+    MyQuestionsComponent,
+    ContactComponent
   ],
   imports: [
     BrowserModule,
