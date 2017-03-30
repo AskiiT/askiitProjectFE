@@ -2,26 +2,25 @@
 	<md-input-container class="md-block" flex-gt-sm>
         <label class="white-font">Usuario/Correo</label>
         <input mdInput ng-model="user.firstName">
-    </md-input-container>
+    </md-input-container><br>
 	<md-input-container class="md-block" flex-gt-sm>
         <label class="white-font">Contraseña</label>
         <input mdInput type="password" ng-model="user.firstName">
-    </md-input-container>
+    </md-input-container><br>
 
 
-		<div class="row top">
-			<!-- <div class="col-md-6 text-center">
-				<recaptcha (resolved)="resolved($event)" siteKey="YOUR_SITE_KEY"></recaptcha>
-			</div> -->
-
-
-			<div class="col-md-6" style="text-align:right">
-					<button md-button class="btn"
-									type="button"
-									name="buttonSignUp"
-									routerLink='home'>
-									Ingresar
-					</button>
-			</div>
+	<div class="row top">
+		<!-- <div class="col-md-6 text-center">
+			<recaptcha (resolved)="resolved($event)" siteKey="YOUR_SITE_KEY"></recaptcha>
+		</div> -->
+		<div class="col-md-6" style="text-align:right">
+			<button md-button class="btn"
+				type="button"
+				name="buttonSignUp"
+				style="color: white"
+				routerLink='home'>
+				Ingresar
+			</button>
 		</div>
+	</div>
 </section>
