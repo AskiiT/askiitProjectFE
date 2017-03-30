@@ -1,0 +1,27 @@
+a {
+	text-decoration: none;
+	color: white;
+}
+
+a:hover {
+	color: #46dd50;
+}
+
+.askiit-btn {
+	background-color: #46dd50;
+	color: #113813;
+	margin-right: 70px;
+	margin-left: 120px;
+	max-width: 200px;
+}
+
+.logout-btn {
+	background-color: #E63232;
+	color: #FFBCBC;
+	max-width: 200px;
+}
+
+.theme-color {
+	background-color: #0E445F;
+	color: #18312e;
+}
