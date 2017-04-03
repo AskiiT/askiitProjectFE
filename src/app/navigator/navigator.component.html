@@ -1,5 +1,8 @@
-  <nav class="col-md-2 top15 nav-box">
-    <button md-button class="nav-rank-btn text-center">Rank</button>
+<nav class="col-md-2 nav-box" style="margin-top: 10px">
+    <div class="nav-rank">Rank</div>
     <button md-button [routerLink]="['/home','profile']" class="nav-btn text-center">Mi perfil</button>
     <button md-button [routerLink]="['/home','questions']" class="nav-btn text-center">Mis preguntas</button>
-  <nav>
+
+    <app-search></app-search>
+
+<nav>

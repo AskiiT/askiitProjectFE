@@ -8,24 +8,12 @@
 
 .btn1 {
 	color: #56bfa2;
-	background-color: #266755;
+	background-color: #36945B;
 }
 
 .theme-color {
-	background-color: #07f0fa;
+	background-color: #0E445F;
 	color: #18312e;
-}
-
-.askiit-btn {
-	background-color: #46dd50;
-	color: #113813;
-	margin-right: 70px;
-	margin-left: 120px;
-}
-
-.logout-btn {
-	background-color: #43c5bc;
-	color: #053e3a;
 }
 
 .tool-bar-btn {

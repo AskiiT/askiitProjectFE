@@ -21,12 +21,17 @@ body{
 
 #main{
   background: #000000;
+  margin-top: 5px;
   padding-top: 140px;
   padding-left: 0px;
   padding-right: 0px;
   width: 100%;
   min-height: 600px;
   height: 100%;
+
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  border-radius: 10px; 
 }
 
 #promo, #sign{
