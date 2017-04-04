@@ -2,4 +2,17 @@
 	<p>
 	  wall works!
 	</p>
+	<!--button (click)="test( )">qService</button>-->
+	<div id="designDiv">
+		<ul>
+			<li *ngFor="let q of data">
+			 	<div>
+			 		<h4> Hecha por: {{q.user.first_name}} {{q.user.last_name}}</h4>
+			 		<h5> Título: {{q.title}} </h5>
+				 	<p>Descripción: {{q.body}}</p>  		
+			 	</div>
+
+			</li>
+		</ul>
+	</div>
 </div>
