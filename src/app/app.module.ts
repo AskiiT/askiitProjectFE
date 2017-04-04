@@ -23,6 +23,7 @@ import { HomeComponent } from './home/home.component';
 import { ToolBarComponent } from './tool-bar/tool-bar.component';
 import { MyQuestionsComponent } from './my-questions/my-questions.component';
 import { ContactComponent } from './contact/contact.component';
+import { TagFilterPipe } from './tag-filter.pipe';
 
 export const appRoutes: Routes = [
   { path: 'home',
@@ -75,7 +76,8 @@ export const appRoutes: Routes = [
     HomeComponent,
     ToolBarComponent,
     MyQuestionsComponent,
-    ContactComponent
+    ContactComponent,
+    TagFilterPipe
   ],
   imports: [
     BrowserModule,
