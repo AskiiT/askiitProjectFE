@@ -10,7 +10,7 @@ export class QuestionService {
   	console.log( "I am the question service." );
   }
 
-  getData( ) {
+  getAllQuestions( ) {
   	return this.http.get( 'http://localhost:3000/api/v1/questions' ).map( ( res: Response ) => res.json( ).data );
   }
 

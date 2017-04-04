@@ -1,15 +1,31 @@
 import { Component, OnInit } from '@angular/core';
+import { TagService } from '../tag.service';
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
-  styleUrls: ['./search.component.css']
+  styleUrls: ['./search.component.css'],
+  providers: [ TagService ]
 })
 export class SearchComponent implements OnInit {
 
-  constructor() { }
+	allTags: Array<any>;
+	response$;
 
-  ngOnInit() {
-  }
+    constructor( private tService: TagService ) { }
+
+    ngOnInit( ) {
+    	this.subscribeData( );
+    }
+
+    subscribeData( ) {
+    	this.response$ = this.tService.getAllTags( );
+
+    	this.response$.subscribe( 
+    		res => this.allTags = res,
+    		() => {},
+    		() => console.log( "OK: completed!" )
+    	);
+    }
 
 }

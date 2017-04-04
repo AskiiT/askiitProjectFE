@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { QuestionService } from '../question.service';
-import { Response } from '@angular/http';
 
 @Component({
   selector: 'app-wall',
@@ -10,7 +9,7 @@ import { Response } from '@angular/http';
 })
 export class WallComponent implements OnInit {
 
-	data: Array<any>;
+	allQuestions: Array<any>;
 	response$;
 
     constructor( private qService: QuestionService ) { }
@@ -24,10 +23,10 @@ export class WallComponent implements OnInit {
     }
 
     subscribeData( ) {
-    	this.response$ = this.qService.getData( );
+    	this.response$ = this.qService.getAllQuestions( );
 
     	this.response$.subscribe( 
-    		res => this.data = res,
+    		res => this.allQuestions = res,
     		() => {},
     		() => console.log( "OK: completed!" )
     	);
