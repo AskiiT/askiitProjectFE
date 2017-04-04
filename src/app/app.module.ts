@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
 import { RecaptchaModule } from 'ng2-recaptcha';
-import { RouterModule, Routes } from '@angular/router';
+import { ActivatedRoute, RouterModule, Routes } from '@angular/router';
 
 import 'hammerjs';
 
@@ -33,7 +33,7 @@ export const appRoutes: Routes = [
         component: WallComponent,
       },
       {
-        path: 'profile',
+        path: 'profile/:user',
         component: ProfileComponent,
       },
       {
