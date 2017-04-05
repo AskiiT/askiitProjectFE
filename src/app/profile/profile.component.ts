@@ -1,20 +1,36 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  styleUrls: ['./profile.component.css'],
+  providers: [ UserService ]
 })
 export class ProfileComponent implements OnInit {
 
-  public user: String;
+    public usernameParam: String;
+    response$;
+    userData: Array<any>;
 
-  constructor(private route: ActivatedRoute) {
-    this.user = route.snapshot.params['user'];
-  }
+    constructor(private route: ActivatedRoute, private uService: UserService) {
+        this.usernameParam = route.snapshot.params[ 'user' ];
+    }
 
-  ngOnInit() {
-  }
+    ngOnInit( ) {
+    	this.subscribeData( );
+    }
+
+    subscribeData( ) {
+    	this.response$ = this.uService.getUserByUsername( this.usernameParam );
+
+    	this.response$.subscribe( 
+    		res => this.userData = res,
+    		() => {},
+    		() => console.log( "OK: user completed!" )
+    	);
+    }
+
 
 }

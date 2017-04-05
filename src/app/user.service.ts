@@ -10,4 +10,8 @@ export class UserService {
   	return this.http.get( 'http://localhost:3000/api/v1/users' ).map( ( res: Response ) => res.json( ).data );
   }
 
+  getUserByUsername( username ) {
+  	return this.http.get( 'http://localhost:3000/api/v1/users/' + username ).map( ( res: Response ) => res.json( ).data );
+  }
+
 }
