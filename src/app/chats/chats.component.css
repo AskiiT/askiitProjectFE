@@ -12,3 +12,8 @@
     -moz-border-radius: 50px;
     border-radius: 10px; 
 }
+
+#designDiv {
+    overflow-y: auto;
+    max-height: 520px;
+}
