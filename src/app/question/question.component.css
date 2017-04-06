@@ -1,0 +1,31 @@
+#diffilcuty {
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  vertical-align: top;
+  display: inline-block;
+  border-radius: 100%;
+  background: #105477;
+  color: #ffffff;
+}
+.item-content {
+  display: inline-block;
+  padding-top: 10px;
+  padding-left: 20px;
+  vertical-align: middle;
+}
+
+.divQuestion{
+  padding-left: 30px;
+  padding-top: 20px;
+  padding-right: 10px;
+}
+
+.cardQuestion{
+  border-radius: 10px;
+  background: #ffffff;
+  border: 2px solid #0E445F;
+  color: #105477;
+  padding: 10px;
+}

@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
 import { RecaptchaModule } from 'ng2-recaptcha';
 import { ActivatedRoute, RouterModule, Routes } from '@angular/router';
+import { VirtualScrollModule } from 'angular2-virtual-scroll';
 
 import 'hammerjs';
 
@@ -24,6 +25,7 @@ import { ToolBarComponent } from './tool-bar/tool-bar.component';
 import { MyQuestionsComponent } from './my-questions/my-questions.component';
 import { ContactComponent } from './contact/contact.component';
 import { TagFilterPipe } from './tag-filter.pipe';
+import { QuestionComponent } from './question/question.component';
 
 export const appRoutes: Routes = [
   { path: 'home',
@@ -77,7 +79,8 @@ export const appRoutes: Routes = [
     ToolBarComponent,
     MyQuestionsComponent,
     ContactComponent,
-    TagFilterPipe
+    TagFilterPipe,
+    QuestionComponent
   ],
   imports: [
     BrowserModule,
@@ -85,7 +88,8 @@ export const appRoutes: Routes = [
     HttpModule,
     RouterModule.forRoot( appRoutes ),
     MaterialModule.forRoot( ),
-    RecaptchaModule.forRoot( )
+    RecaptchaModule.forRoot( ),
+    VirtualScrollModule
   ],
   providers: [],
   bootstrap: [AppComponent]
