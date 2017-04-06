@@ -6,7 +6,7 @@
 		</div>
 		<div id="searchBox" *ngIf="empty">
 				<li  *ngFor="let u of allUsers | chatFilter:term">
-						{{u.username}}
+					<a href="home/profile/{{u.username}}">{{u.username}}</a>
 				</li>
 		</div>
 	</div>
