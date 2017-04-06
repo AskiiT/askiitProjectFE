@@ -1,15 +1,13 @@
 <nav class="col-md-2 chat-box" style="margin-top: 10px;">
 	<h5 style="margin-top: 10px; color: #0E445F">Tus conversaciones</h5>
-
 	<div id="designDiv">
-		<ul>
-			<li *ngFor="let u of allUsers">
-			 	<div>
-			 		{{u.username}}		
-			 	</div>
-			</li>
-		</ul>
+		<div>
+			<input  class="form-control"type="text"  placeholder="Search by User" [(ngModel)]="term" (ngModelChange)="isEmpty()">
+		</div>
+		<div id="searchBox" *ngIf="empty">
+				<li  *ngFor="let u of allUsers | chatFilter:term">
+						{{u.username}}
+				</li>
+		</div>
 	</div>
-
-
 </nav>

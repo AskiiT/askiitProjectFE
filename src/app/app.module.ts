@@ -24,6 +24,8 @@ import { ToolBarComponent } from './tool-bar/tool-bar.component';
 import { MyQuestionsComponent } from './my-questions/my-questions.component';
 import { ContactComponent } from './contact/contact.component';
 import { TagFilterPipe } from './tag-filter.pipe';
+import { ChatFilterPipe } from './chat-filter.pipe';
+import { Ng2FilterPipeModule } from 'ng2-filter-pipe';
 
 export const appRoutes: Routes = [
   { path: 'home',
@@ -77,7 +79,8 @@ export const appRoutes: Routes = [
     ToolBarComponent,
     MyQuestionsComponent,
     ContactComponent,
-    TagFilterPipe
+    TagFilterPipe,
+    ChatFilterPipe
   ],
   imports: [
     BrowserModule,
@@ -85,7 +88,8 @@ export const appRoutes: Routes = [
     HttpModule,
     RouterModule.forRoot( appRoutes ),
     MaterialModule.forRoot( ),
-    RecaptchaModule.forRoot( )
+    RecaptchaModule.forRoot( ),
+    Ng2FilterPipeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
