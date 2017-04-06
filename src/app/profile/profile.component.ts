@@ -12,7 +12,7 @@ export class ProfileComponent implements OnInit {
 
     public usernameParam: String;
     response$;
-    userData: Array<any>;
+    userData: any;
 
     constructor(private route: ActivatedRoute, private uService: UserService) {
         this.usernameParam = route.snapshot.params[ 'user' ];
@@ -26,7 +26,7 @@ export class ProfileComponent implements OnInit {
     	this.response$ = this.uService.getUserByUsername( this.usernameParam );
 
     	this.response$.subscribe( 
-    		res => this.userData = res,
+    		res => this.userData = res[ 0 ],
     		() => {},
     		() => console.log( "OK: user completed!" )
     	);
