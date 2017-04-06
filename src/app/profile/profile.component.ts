@@ -19,8 +19,8 @@ export class ProfileComponent implements OnInit {
     }
 
     ngOnInit( ) {
-    	this.subscribeData( );
-    }
+    	this.subscribeData( )
+   }
 
     subscribeData( ) {
     	this.response$ = this.uService.getUserByUsername( this.usernameParam );
