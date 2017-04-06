@@ -7,11 +7,17 @@ export class QuestionService {
   constructor( private http: Http ) { }
 
   log ( ) {
-  	console.log( "I am the question service." );
+  	  console.log( "I am the question service." );
   }
 
   getAllQuestions( ) {
-  	return this.http.get( 'http://localhost:3000/api/v1/questions' ).map( ( res: Response ) => res.json( ).data );
+  	  return this.http.get( 'http://localhost:3000/api/v1/questions' )
+  	      .map( ( res: Response ) => res.json( ).data );
+  }
+
+  getAllQuestionsByTag( tagName ) {
+  	  return this.http.get( 'http://localhost:3000/api/v1/questions/tagsearch/' + tagName )
+  		.map( ( res: Response ) => res.json( ).data );
   }
 
 }
