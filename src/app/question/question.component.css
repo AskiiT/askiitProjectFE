@@ -9,11 +9,12 @@
   background: #105477;
   color: #ffffff;
 }
-.item-content {
+.title{
   display: inline-block;
   padding-top: 10px;
   padding-left: 20px;
   vertical-align: middle;
+  width: 80%;
 }
 
 .divQuestion{
@@ -28,4 +29,9 @@
   border: 2px solid #0E445F;
   color: #105477;
   padding: 10px;
+}
+
+.divExpandButtom{
+  display: inline-block;
+  float:right;
 }

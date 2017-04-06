@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ChangeEvent } from 'angular2-virtual-scroll';
 import { Question } from '../question/question.component';
 import { QuestionService } from '../question.service';
@@ -34,7 +34,6 @@ export class WallComponent implements OnInit {
   //   	);
   //   }
 
-    @Input()
    questions: Question[];
 
    protected indices: ChangeEvent;
@@ -47,11 +46,9 @@ export class WallComponent implements OnInit {
 
   ngOnInit() {
     this.qService.getAllQuestions().subscribe(
-      (dataQuestions) => this.questions = dataQuestions.data
+      (dataQuestions) => {this.questions = dataQuestions.data, this.reset()}
     );
-    this.reset();
   }
-
 
   protected reset() {
     this.fetchNextChunk(0, this.bufferSize, {}).then(chunk => this.buffer = chunk);
@@ -79,5 +76,4 @@ export class WallComponent implements OnInit {
        }, 1000 + Math.random() * 1000);
      });
   }
-
 }

@@ -1,8 +1,13 @@
 <div class="divQuestion">
   <md-card class="cardQuestion">
-    <div class="">
-      <div id = "diffilcuty">{{question.difficulty}}</div>
-      <div class = "item-content ">{{question.title}}</div>
-    </div>
+    <md-card-content>
+        <div id = "diffilcuty">{{question.difficulty}}</div>
+        <div class = "title">{{question.title}}</div>
+        <div class="divExpandButtom">
+          <button md-button>
+            <i class="material-icons md-18">low_priority</i>
+          </button>
+        </div>
+    </md-card-content>
   </md-card>
 </div>
