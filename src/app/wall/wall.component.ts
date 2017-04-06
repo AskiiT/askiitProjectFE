@@ -11,29 +11,6 @@ import { QuestionService } from '../question.service';
 })
 export class WallComponent implements OnInit {
 
-	// allQuestions: Array<any>;
-	// response$;
-  //
-  //   constructor( private qService: QuestionService ) { }
-  //
-  //   ngOnInit( ) {
-  //   	this.subscribeData( );
-  //   }
-  //
-  //   test( ) {
-  //   	this.qService.log( );
-  //   }
-  //
-  //   subscribeData( ) {
-  //   	this.response$ = this.qService.getAllQuestions( );
-  //
-  //   	this.response$.subscribe(
-  //   		res => this.allQuestions = res,
-  //   		() => {},
-  //   		() => console.log( "OK: completed!" )
-  //   	);
-  //   }
-
    questions: Question[];
 
    protected indices: ChangeEvent;
@@ -46,7 +23,7 @@ export class WallComponent implements OnInit {
 
   ngOnInit() {
     this.qService.getAllQuestions().subscribe(
-      (dataQuestions) => {this.questions = dataQuestions.data, this.reset()}
+      (dataQuestions) => {this.questions = dataQuestions, this.reset()}
     );
   }
 
