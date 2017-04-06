@@ -1,18 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
 
-
 @Component({
   selector: 'app-chats',
   templateUrl: './chats.component.html',
   styleUrls: ['./chats.component.css'],
-  providers: [ UserService ]
+  providers: [ UserService ],
 })
 export class ChatsComponent implements OnInit {
-  public term;
-	allUsers: Array<any>;
+  allUsers: Array<any>;
 	response$;
-
+  empty:boolean=false;
+  term:string;
     constructor( private uService: UserService ) { }
 
     ngOnInit( ) {
@@ -27,6 +26,16 @@ export class ChatsComponent implements OnInit {
     		() => {},
     		() => console.log( "OK: completed!" )
     	);
+    }
+
+    isEmpty(){
+      if (this.term.length > 0){
+        this.empty = true;
+        console.log(this.term);
+      }else{
+        this.empty = false;
+        console.log(0);
+      }
     }
 
 }
