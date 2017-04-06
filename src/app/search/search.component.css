@@ -32,3 +32,26 @@ input {
 input:focus {
     border: 2px solid #0E445F;
 }
+
+#searchBox li{
+    -webkit-border-radius: 50px;
+    border: 1px solid #ddd;
+    margin-top: -1px;
+    background-color: #f6f6f6;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-decoration: none;
+    color: black;
+    display: block;
+		width: 95%;
+		margin-left: 13px;
+}
+
+#searchBox li:hover{
+  background-color: #267ba7;
+}
+
+#designDiv {
+    overflow-y: auto;
+    max-height: 335px;
+}

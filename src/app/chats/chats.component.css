@@ -52,6 +52,12 @@ input:focus {
     display: block;
 }
 
+#searchBox li::before{
+  content: "• ";
+  align-content: stretch;
+  color: #42b72a;
+}
+
 #searchBox li:hover{
-  background-color: #267ba7;
+  background-color: #dee0e3;
 }

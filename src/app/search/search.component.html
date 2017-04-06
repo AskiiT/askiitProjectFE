@@ -1,8 +1,10 @@
 <nav class="tags">
-	<input class="tag-finder" type="text" name="" placeholder="Añade un tag..." [(ngModel)]="term">
-	<div *ngFor="let t of allTags | tagFilter:term">
-		<li>
-			{{t.tag_name}}
-		</li>
+	<div id="designDiv">
+		<input class="tag-finder" type="text" name="" placeholder="Añade un tag..." [(ngModel)]="term" (ngModelChange)="isEmpty()">
+		<div id="searchBox" *ngIf="empty">
+			<li *ngFor="let t of allTags | tagFilter:term">
+				{{t.tag_name}}
+			</li>
+		</div>
 	</div>
 </nav>
