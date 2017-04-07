@@ -1,18 +1,9 @@
-<div style="margin-left: 30px; margin-top: 10px">
-	<p>
-	  wall works!
-	</p>
-	<!--button (click)="test( )">qService</button>-->
-	<div id="designDiv">
-		<ul>
-			<li *ngFor="let q of allQuestions">
-			 	<div>
-			 		<h4> Hecha por: {{q.user.first_name}} {{q.user.last_name}}</h4>
-			 		<h5> Título: {{q.title}} </h5>
-				 	<p>Descripción: {{q.body}}</p>  		
-			 	</div>
+<virtual-scroll style="min-height: 560px"
+  [items]="buffer"
+  (update)="scrollItems = $event"
+  (end)="fetchMore($event)">
 
-			</li>
-		</ul>
-	</div>
-</div>
+  <app-question *ngFor="let question of scrollItems" [question]="question"> </app-question>
+
+  <div *ngIf="loading" class="loader">Loading...</div>
+</virtual-scroll>
