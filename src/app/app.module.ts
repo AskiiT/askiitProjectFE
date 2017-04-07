@@ -81,7 +81,7 @@ export const appRoutes: Routes = [
     ToolBarComponent,
     MyQuestionsComponent,
     ContactComponent,
-    ChatFilterPipe
+    ChatFilterPipe,
     TagFilterPipe,
     QuestionComponent
   ],
@@ -92,7 +92,7 @@ export const appRoutes: Routes = [
     RouterModule.forRoot( appRoutes ),
     MaterialModule.forRoot( ),
     RecaptchaModule.forRoot( ),
-    Ng2FilterPipeModule
+    Ng2FilterPipeModule,
     VirtualScrollModule
   ],
   providers: [],
