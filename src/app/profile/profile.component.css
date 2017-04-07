@@ -1,0 +1,57 @@
+.c1{
+  background-color: white;
+}
+
+.c1 p{
+  color: black;
+  text-align: center;
+  margin-bottom:5px;
+}
+.c1 h1{
+  font-style:italic;
+}
+
+.c1 img{
+  border: 3px solid #105477;
+  -webkit-border-radius: 50px;
+  width: 250px;
+  height: 300px;
+  margin-left: 30px;
+}
+
+.c-username {
+    text-align: center;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 24px;
+    color: #666;
+}
+.c-name{
+  color: black;
+  text-align: center;
+  font-size: 29px;
+}
+
+.rank img{
+  width: 80px;
+  height: 80px;
+}
+
+.rank{
+  font-size: 20px;
+  color: #666;
+}
+
+.rank #inner-rank{
+    font-weight: bold;
+}
+
+.c2{
+  background-color: white;
+  border: 2px solid #105477;
+}
+
+.c2 p, h1{
+  color:black;
+}
