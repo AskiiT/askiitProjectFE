@@ -1,3 +1,4 @@
+
 .tags {
 	background-color: #0E3142;
 	margin-top: 40px;
@@ -29,6 +30,7 @@ input {
     padding-left: 30px;
 }
 
+
 input:focus {
     border: 2px solid #0E445F;
 }
@@ -56,9 +58,9 @@ input:focus {
     text-decoration: none;
     color: black;
     display: block;
-	width: 90%;
-	margin-left: 13px;
-    font-size: 0.7em;
+		width: 95%;
+		margin-left: 13px;
+		font-size: 0.8em;
 }
 
 .tag-color {
