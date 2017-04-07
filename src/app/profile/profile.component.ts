@@ -16,8 +16,9 @@ export class ProfileComponent implements OnInit {
     response1$;
     userData: any;
     rankData:any;
+
     percentq:any;
-    percente:any;
+    percente:string;
     percentc:any;
 
     constructor(private route: ActivatedRoute, private uService: UserService,private sanitizer: DomSanitizer) {
@@ -40,9 +41,12 @@ export class ProfileComponent implements OnInit {
     	);
 
       this.response1$.subscribe(
-        res => this.rankData = res[0],
+        res => { this.rankData = res[0], 
+          this.percente = ( String( this.rankData.efectiveness * 100 / 5741 ) + '%' ),
+          this.percentc = ( String( this.rankData.clarity * 100 / 5741 ) + '%' ),
+          this.percentq = ( String( this.rankData.quickness * 100 / 5741 ) + '%' ) },
         () => {},
-        () => console.log(this.rankData)
+        () => console.log( "OK: rank completed" )
       );
     }
 
