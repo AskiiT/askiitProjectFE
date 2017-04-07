@@ -33,18 +33,40 @@ input:focus {
     border: 2px solid #0E445F;
 }
 
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+}
+
 #searchBox li{
     -webkit-border-radius: 50px;
-    border: 1px solid #ddd;
+    border: 1px solid #0E445F;
     margin-top: -1px;
-    background-color: #f6f6f6;
     padding-top: 5px;
     padding-bottom: 5px;
     text-decoration: none;
     color: black;
     display: block;
-		width: 95%;
-		margin-left: 13px;
+	width: 90%;
+	margin-left: 13px;
+    font-size: 0.7em;
+}
+
+.tag-color {
+    background-color: #A2FF9D
+}
+
+.topic-color {
+    background-color: #FFCF6E
 }
 
 #searchBox li:hover{

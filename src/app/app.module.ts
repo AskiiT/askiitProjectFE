@@ -28,6 +28,7 @@ import { TagFilterPipe } from './tag-filter.pipe';
 import { Ng2FilterPipeModule } from 'ng2-filter-pipe';
 import { ChatFilterPipe } from './chat-filter.pipe';
 import { QuestionComponent } from './question/question.component';
+import { TopicFilterPipe } from './topic-filter.pipe';
 
 export const appRoutes: Routes = [
   { path: 'home',
@@ -83,7 +84,8 @@ export const appRoutes: Routes = [
     ContactComponent,
     ChatFilterPipe,
     TagFilterPipe,
-    QuestionComponent
+    QuestionComponent,
+    TopicFilterPipe
   ],
   imports: [
     BrowserModule,
