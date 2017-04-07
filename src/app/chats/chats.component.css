@@ -50,6 +50,7 @@ input:focus {
     text-decoration: none;
     color: black;
     display: block;
+    font-size: 0.8em;
 }
 
 #searchBox li::before{

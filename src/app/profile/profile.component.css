@@ -14,9 +14,6 @@
 .c1 img{
   border: 3px solid #105477;
   -webkit-border-radius: 50px;
-  width: 250px;
-  height: 300px;
-  margin-left: 30px;
 }
 
 .c-username {
@@ -41,17 +38,34 @@
 .rank{
   font-size: 20px;
   color: #666;
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.rank inner-rank{
+  padding-left: 20px;
 }
 
 .rank #inner-rank{
-    font-weight: bold;
+    padding-left: 20px;
+}
+
+.rank img{
+    padding-left: 20px;
 }
 
 .c2{
-  background-color: white;
-  border: 2px solid #105477;
+  background-color: #E7E7E7;
 }
 
 .c2 p, h1{
   color:black;
+}
+
+#es{
+  color: black;
+}
+.de{
+  font-size: 25px;
+  color: #666;
 }
