@@ -19,18 +19,20 @@
 							</div>
 							<div class="de">Descripción:</div>
 							<p>{{userData.description}}</p>
-								<div id="es">Efectividad: </div>
+							<div *ngIf="rankData!=undefined">
+								<div id="es">Efectividad: {{rankData.efectiveness}} </div>
 								<div class="progress">
-									<div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar"aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:40%">40%</div>
+									<div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar"aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">{{rankData.efectiveness}}</div>
 								</div>
-							<div id="es">Claridad: </div>
+							<div id="es">Claridad: {{rankData.clarity}}</div>
 							<div class="progress">
-								<div class="progress-bar progress-bar-warning progress-bar-striped active" role="progressbar"aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:60%">60%</div>
+								<div class="progress-bar progress-bar-warning progress-bar-striped active" role="progressbar"aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:60%">{{rankData.clarity}}</div>
 							</div>
-							<div id="es">Rapidez: </div>
+							<div id="es">Rapidez: {{rankData.quickness}} </div>
 							<div class="progress">
-								<div class="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar"aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width:80%">80%</div>
+								<div class="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar"aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width:80%">{{rankData.quickness}}</div>
 							</div>
+						 </div>
 						</md-card>
 					</div>
 				</div>
