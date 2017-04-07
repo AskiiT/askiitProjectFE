@@ -15,6 +15,11 @@ export class QuestionService {
   	      .map( ( res: Response ) => res.json( ).data );
   }
 
+  getAllQuestionsByPage( page ){
+    return this.http.get( 'http://localhost:3000/api/v1/questions?page=' + page )
+        .map( ( res: Response ) => res.json( ).data );
+  }
+
   getAllQuestionsByTag( tagName ) {
   	  return this.http.get( 'http://localhost:3000/api/v1/questions/tagsearch/' + tagName )
   		    .map( ( res: Response ) => res.json( ).data );

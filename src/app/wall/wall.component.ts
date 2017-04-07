@@ -18,39 +18,26 @@ export class WallComponent implements OnInit {
    protected readonly bufferSize: number = 10;
    protected timer;
    protected loading: boolean;
+   protected page: number = 1;
 
   constructor(private qService: QuestionService) { }
 
   ngOnInit() {
-    this.qService.getAllQuestions().subscribe(
-      (dataQuestions) => {this.questions = dataQuestions, this.reset()}
+    this.qService.getAllQuestionsByPage(this.page).subscribe(
+      (dataQuestions) => {this.buffer = dataQuestions, console.log(dataQuestions)}
     );
-  }
-
-  protected reset() {
-    this.fetchNextChunk(0, this.bufferSize, {}).then(chunk => this.buffer = chunk);
   }
 
   protected fetchMore(event: ChangeEvent) {
     this.indices = event;
     if (event.end === this.buffer.length) {
       this.loading = true;
-      this.fetchNextChunk(this.buffer.length, this.bufferSize, event).then(chunk => {
-        this.buffer = this.buffer.concat(chunk);
-        this.loading = false;
-      }, () => this.loading = false);
+      this.page = this.page + 1;
+      this.timer = setTimeout(() => {
+        this.qService.getAllQuestionsByPage(this.page).subscribe(
+          (chunk) => {this.buffer = this.buffer.concat(chunk), this.loading = false}
+        );
+      }, 1000 + Math.random() * 1000);
     }
-  }
-
-  protected fetchNextChunk(skip: number, limit: number, event?: any): Promise<Question[]> {
-     return new Promise((resolve, reject) => {
-       clearTimeout(this.timer);
-       this.timer = setTimeout(() => {
-         if (skip < this.questions.length) {
-           return resolve(this.questions.slice(skip, skip + limit));
-         }
-         reject();
-       }, 1000 + Math.random() * 1000);
-     });
   }
 }
