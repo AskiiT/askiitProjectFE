@@ -13,7 +13,6 @@ export class ProfileComponent implements OnInit {
 
     public usernameParam: String;
     response$;
-    response1$;
     userData: any;
     rankData:any;
 
@@ -39,22 +38,17 @@ export class ProfileComponent implements OnInit {
 
     subscribeData( ) {
     	this.response$ = this.uService.getUserByUsername( this.usernameParam );
-        this.response1$ = this.uService.getRankByUsername( this.usernameParam );
 
     	this.response$.subscribe(
-    		res => this.userData = res[ 0 ],
+    		res => {
+                this.userData = res[ 0 ],
+                this.percente = ( String( this.userData.rank.efectiveness * 100 / 5741 ) + '%' ),
+                this.percentc = ( String( this.userData.rank.clarity * 100 / 5741 ) + '%' ),
+                this.percentq = ( String( this.userData.rank.quickness * 100 / 5741 ) + '%' )
+            },
     		() => {},
     		() => console.log( "OK: user completed!" )
     	);
-
-        this.response1$.subscribe(
-            res => { this.rankData = res[0],
-            this.percente = ( String( this.rankData.efectiveness * 100 / 5741 ) + '%' ),
-            this.percentc = ( String( this.rankData.clarity * 100 / 5741 ) + '%' ),
-            this.percentq = ( String( this.rankData.quickness * 100 / 5741 ) + '%' ) },
-            () => {},
-            () => console.log( "OK: rank completed" )
-        );
     }
 
 

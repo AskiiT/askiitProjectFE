@@ -13,9 +13,4 @@ export class UserService {
   getUserByUsername( username ) {
   	return this.http.get( 'http://localhost:3000/api/v1/users/' + username).map( ( res: Response ) => res.json( ).data );
   }
-
-  getRankByUsername( username ) {
-    return this.http.get( 'http://localhost:3000/api/v1/users/' + username+'/rank').map( ( res: Response ) => res.json( ).data );
-  }
-
 }

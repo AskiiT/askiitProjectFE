@@ -1,3 +1,19 @@
+#container{
+width:250px;
+height:250px;
+position:relative;
+border:#000 solid 0px;
+}
+
+#c3{
+width:250px;
+height:250px;
+border:#000 0px solid;
+top:24px;
+left:24px;
+position:absolute;
+}
+
 .c1{
   background-color: white;
 }
