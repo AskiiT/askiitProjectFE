@@ -16,9 +16,11 @@ export class ProfileComponent implements OnInit {
     userData: any;
     rankData:any;
 
-    percentq:any;
+    percentq:string;
     percente:string;
-    percentc:any;
+    percentc:string;
+
+    avatarColor:string;
 
     constructor(private route: ActivatedRoute, private uService: UserService ) {
 
@@ -44,7 +46,8 @@ export class ProfileComponent implements OnInit {
                 this.userData = res[ 0 ],
                 this.percente = ( String( this.userData.rank.efectiveness * 100 / 5741 ) + '%' ),
                 this.percentc = ( String( this.userData.rank.clarity * 100 / 5741 ) + '%' ),
-                this.percentq = ( String( this.userData.rank.quickness * 100 / 5741 ) + '%' )
+                this.percentq = ( String( this.userData.rank.quickness * 100 / 5741 ) + '%' ),
+                this.avatarColor = ( '#' + String( this.userData.topic.color ) )
             },
     		() => {},
     		() => console.log( "OK: user completed!" )
