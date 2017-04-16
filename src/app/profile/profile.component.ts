@@ -21,18 +21,25 @@ export class ProfileComponent implements OnInit {
     percente:string;
     percentc:any;
 
-    constructor(private route: ActivatedRoute, private uService: UserService,private sanitizer: DomSanitizer) {
+    constructor(private route: ActivatedRoute, private uService: UserService ) {
+
+        this.route.params.subscribe(
+            params => {
+                this.usernameParam = params[ 'user' ],
+                this.subscribeData( )
+            }
+        );
+
         this.usernameParam = route.snapshot.params[ 'user' ];
-        this.percentq = sanitizer.bypassSecurityTrustStyle(this.percentq);
     }
 
     ngOnInit( ) {
-    	this.subscribeData( )
-   }
+    	this.subscribeData( );
+    }
 
     subscribeData( ) {
     	this.response$ = this.uService.getUserByUsername( this.usernameParam );
-      this.response1$ = this.uService.getRankByUsername( this.usernameParam );
+        this.response1$ = this.uService.getRankByUsername( this.usernameParam );
 
     	this.response$.subscribe(
     		res => this.userData = res[ 0 ],
@@ -40,14 +47,14 @@ export class ProfileComponent implements OnInit {
     		() => console.log( "OK: user completed!" )
     	);
 
-      this.response1$.subscribe(
-        res => { this.rankData = res[0], 
-          this.percente = ( String( this.rankData.efectiveness * 100 / 5741 ) + '%' ),
-          this.percentc = ( String( this.rankData.clarity * 100 / 5741 ) + '%' ),
-          this.percentq = ( String( this.rankData.quickness * 100 / 5741 ) + '%' ) },
-        () => {},
-        () => console.log( "OK: rank completed" )
-      );
+        this.response1$.subscribe(
+            res => { this.rankData = res[0],
+            this.percente = ( String( this.rankData.efectiveness * 100 / 5741 ) + '%' ),
+            this.percentc = ( String( this.rankData.clarity * 100 / 5741 ) + '%' ),
+            this.percentq = ( String( this.rankData.quickness * 100 / 5741 ) + '%' ) },
+            () => {},
+            () => console.log( "OK: rank completed" )
+        );
     }
 
 
