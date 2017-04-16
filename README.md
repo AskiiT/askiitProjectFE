@@ -28,10 +28,10 @@ Before running the tests make sure you are serving the app via `ng serve`.
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
 
 ## Additional Modules
-Run `npm install`
-Run `npm install --save @angular/material`
-Run `npm install --save hammerjs`
-Run `npm install --save-dev @types/hammerjs`
-Run `npm install --save ng2-recaptcha`
-Run `npm install --save ng2-filter-pipe`
-Run `npm install --save angular2-virtual-scroll`
+Run `npm install`  
+Run `npm install --save @angular/material`  
+Run `npm install --save hammerjs`  
+Run `npm install --save-dev @types/hammerjs`  
+Run `npm install --save ng2-recaptcha`  
+Run `npm install --save ng2-filter-pipe`  
+Run `npm install --save angular2-virtual-scroll`  
