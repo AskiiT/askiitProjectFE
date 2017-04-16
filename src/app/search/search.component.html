@@ -2,7 +2,7 @@
 	<div id="designDiv">
 		<div class="search">
 			<span class="fa fa-search"></span>
-			<input class="tag-finder" type="text" name="" placeholder="Añade un tag..." [(ngModel)]="term" (ngModelChange)="isEmpty()">
+			<input class="form-control tag-finder" type="text" name="" placeholder="Añade un tag..." [(ngModel)]="term" (ngModelChange)="isEmpty()">
 		</div>
 		<div id="searchBox" *ngIf="empty">
 			<li class="tag-color" *ngFor="let tag of allTags | tagFilter:term">
