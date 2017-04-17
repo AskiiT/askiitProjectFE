@@ -35,7 +35,7 @@ export class WallComponent implements OnInit {
       this.page = this.page + 1;
       this.timer = setTimeout(() => {
         this.qService.getAllQuestionsByPage(this.page).subscribe(
-          (chunk) => {this.buffer = this.buffer.concat(chunk), this.loading = false}
+          (chunk) => {this.buffer = this.buffer.concat(chunk), this.loading = false, console.log(this.buffer)}
         );
       }, 1000 + Math.random() * 1000);
     }
