@@ -1,4 +1,4 @@
-import { Component, Input,  OnInit} from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit} from '@angular/core';
 
 export interface Question {
     id?: number;
@@ -15,17 +15,20 @@ export interface Question {
 })
 export class QuestionComponent implements OnInit {
 
-  @Input()
-  question: Question;
+  @Input() question: Question;
+  @Output() onResize = new EventEmitter();
+
+
   expand: boolean = false;
-  tags;
+  topicColor;
 
   ngOnInit(){
-    this.tags = ( '#' + String( this.question.topic.color  ) );
+    this.topicColor = ( '#' + String( this.question.topic.color  ) );
   }
 
-  onChange(){
+  onChange(e){
     this.expand = (this.expand == false ? this.expand = true : this.expand = false);
+    this.onResize.emit(e)
   }
 
 }

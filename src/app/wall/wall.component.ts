@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ChangeEvent } from 'angular2-virtual-scroll';
 import { Question } from '../question/question.component';
 import { QuestionService } from '../question.service';
+
+import { VirtualScrollComponent } from 'angular2-virtual-scroll';
 
 @Component({
   selector: 'app-wall',
@@ -10,6 +12,9 @@ import { QuestionService } from '../question.service';
   providers: [ QuestionService ]
 })
 export class WallComponent implements OnInit {
+
+  @ViewChild(VirtualScrollComponent)
+  private virtualScroll: VirtualScrollComponent;
 
    questions: Question[];
 
@@ -22,9 +27,10 @@ export class WallComponent implements OnInit {
 
   constructor(private qService: QuestionService) { }
 
+
   ngOnInit() {
     this.qService.getAllQuestionsByPage(this.page).subscribe(
-      (dataQuestions) => {this.buffer = dataQuestions, console.log(dataQuestions)}
+      (dataQuestions) => {this.buffer = dataQuestions}
     );
   }
 
@@ -35,9 +41,14 @@ export class WallComponent implements OnInit {
       this.page = this.page + 1;
       this.timer = setTimeout(() => {
         this.qService.getAllQuestionsByPage(this.page).subscribe(
-          (chunk) => {this.buffer = this.buffer.concat(chunk), this.loading = false, console.log(this.buffer)}
+          (chunk) => {this.buffer = this.buffer.concat(chunk), this.loading = false}
         );
       }, 1000 + Math.random() * 1000);
     }
   }
+
+  refresh(e){
+    this.virtualScroll.refresh();
+  }
+
 }

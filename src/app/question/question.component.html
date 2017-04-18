@@ -4,7 +4,7 @@
         <div id = "diffilcuty">{{question.difficulty}}</div>
         <div class = "title">{{question.title}}</div>
         <div class="divExpandButtom">
-          <button md-button (click) = onChange()>
+          <button md-button (click) = onChange($event)>
             <i class="material-icons md-18">low_priority</i>
           </button>
         </div>
@@ -13,7 +13,7 @@
 
   <md-card class="cardBodyQuestion center-block row" *ngIf="expand">
       <md-card-content class="bodyContain">
-        <div class="topic text-center" [ngStyle]="{'background-color': tags }">
+        <div class="topic text-center" [ngStyle]="{'background-color': topicColor }">
           {{question.topic.topic_name}}
         </div>
         <div class="bodyQuestion">
@@ -21,7 +21,7 @@
         </div>
 
 
-        <div class="tag text-center" *ngFor="let tag of question.tags">{{tag.tag_name}}&nbsp;</div>
+        <div class="tag text-center" *ngFor="let tag of question.tags">{{tag.tag_name}}</div>
 
       </md-card-content>
 
