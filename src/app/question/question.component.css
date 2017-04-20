@@ -29,9 +29,87 @@
   border: 2px solid #0E445F;
   color: #105477;
   padding: 10px;
+  position: relative;
+  z-index: 1;
 }
 
 .divExpandButtom{
   display: inline-block;
   float:right;
+}
+
+.cardBodyQuestion{
+  border-radius: 10px;
+  background: #ffffff;
+  border: 2px solid #0E445F;
+  color: #105477;
+  padding: 0;
+  width: 95%;
+  height: 250px;
+  position: relative;
+  bottom: 10px;
+  z-index: 0;
+}
+
+.image{
+  max-width: 100%;
+  max-width: 100%;
+}
+
+.bodyContain{
+  display: inline-block;
+  padding: 10px;
+  padding-top: 25px;
+  height: 100%;
+  width: 85%
+}
+
+.divButtons{
+  display: inline-block;
+  float: right;
+  margin: 0 auto;
+  align-items: center;
+  padding: 0;
+  height: 100%;
+}
+
+.topic{
+  padding: 0px;
+  border-radius: 10px;
+  background: #ffffff;
+  border: 2px solid #0E445F;
+  color: white;
+}
+
+.bodyQuestion{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  height: 45%
+}
+
+.buttons{
+  position: relative;
+  top: 3px;
+  display: block;
+  padding: 0;
+  height: 33%;
+}
+
+.tag{
+  padding: 0px;
+  border-radius: 10px;
+  background: #ffffff;
+  border: 1px solid #0E445F;
+}
+
+#report{
+  color: red;
+}
+
+#replay{
+  color: blue
+}
+
+#reply{
+  color: green;
 }

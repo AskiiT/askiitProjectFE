@@ -1,9 +1,11 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit} from '@angular/core';
 
 export interface Question {
     id?: number;
     title?: string;
     body?: string;
+    topic?: any;
+    tags?: Array<any>;
 }
 
 @Component({
@@ -11,7 +13,22 @@ export interface Question {
   templateUrl: './question.component.html',
   styleUrls: ['./question.component.css']
 })
-export class QuestionComponent {
-  @Input()
-  question: Question;
+export class QuestionComponent implements OnInit {
+
+  @Input() question: Question;
+  @Output() onResize = new EventEmitter();
+
+
+  expand: boolean = false;
+  topicColor;
+
+  ngOnInit(){
+    this.topicColor = ( '#' + String( this.question.topic.color  ) );
+  }
+
+  onChange(e){
+    this.expand = (this.expand == false ? this.expand = true : this.expand = false);
+    this.onResize.emit(e)
+  }
+
 }

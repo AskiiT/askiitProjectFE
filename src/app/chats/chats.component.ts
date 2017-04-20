@@ -31,10 +31,8 @@ export class ChatsComponent implements OnInit {
     isEmpty(){
       if (this.term.length > 0){
         this.empty = true;
-        console.log(this.term);
       }else{
         this.empty = false;
-        console.log(0);
       }
     }
 
