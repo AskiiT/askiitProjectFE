@@ -48,3 +48,9 @@ body{
 .white-font {
   color: white;
 }
+
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}

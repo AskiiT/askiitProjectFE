@@ -1,12 +1,15 @@
 <md-toolbar class="theme-color">
-  <span class="col-md-6">
-    <a routerLink='/home' >AskiiT Home</a>
-  </span>
+  <div class="col-md-6 home" routerLink='/home'>
+      <img src="../assets/icon.PNG" width="40" height="40">
+      <span class="white-font vcenter">AskiiT Home</span>
+  </div>
 
-  <button md-button class="col-md-3 askiit-btn tool-bar-btn">
+  <button md-button class="col-md-3 askiit-btn tool-bar-btn" style="text-align: left">
+    <md-icon style="margin-right: 40px">play_for_work</md-icon>
     AskiiT
   </button>
-  <button md-button routerLink='' class="col-md-3 logout-btn tool-bar-btn">
+  <button md-button routerLink='' class="col-md-3 logout-btn tool-bar-btn" style="text-align: left">
+    <md-icon style="margin-right: 40px">exit_to_app_black</md-icon>
     Log out
   </button>
 </md-toolbar>

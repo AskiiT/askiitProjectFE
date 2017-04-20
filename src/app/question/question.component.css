@@ -24,13 +24,29 @@
 }
 
 .cardQuestion{
-  border-radius: 10px;
+  border-radius: 3px;
   background: #ffffff;
-  border: 2px solid #0E445F;
+
   color: #105477;
   padding: 10px;
   position: relative;
   z-index: 1;
+
+  -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+
+  -webkit-transition: background-color 400ms linear;
+  -ms-transition: background-color 400ms linear;
+  transition: background-color 400ms linear;
+}
+
+md-card.cardQuestion:hover {
+    background: #D8D8D8;
+    -webkit-transition: background-color 200ms linear;
+    -ms-transition: background-color 200ms linear;
+    transition: background-color 200ms linear;
+
+    cursor: pointer;
 }
 
 .divExpandButtom{
@@ -39,9 +55,9 @@
 }
 
 .cardBodyQuestion{
-  border-radius: 10px;
+  border-radius: 6px;
   background: #ffffff;
-  border: 2px solid #0E445F;
+
   color: #105477;
   padding: 0;
   width: 95%;

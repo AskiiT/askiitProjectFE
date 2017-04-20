@@ -1,13 +1,13 @@
 <div class="divQuestion">
-  <md-card class="cardQuestion">
+  <md-card class="cardQuestion" (click) = onChange($event)>
     <md-card-content>
         <div id = "diffilcuty">{{question.difficulty}}</div>
         <div class = "title">{{question.title}}</div>
-        <div class="divExpandButtom">
-          <button md-button (click) = onChange($event)>
-            <i class="material-icons md-18">low_priority</i>
-          </button>
-        </div>
+            <!--div class="divExpandButtom">
+                <button md-button (click) = onChange($event)>
+                    <i class="material-icons md-18">low_priority</i>
+                </button>
+            </div>-->
     </md-card-content>
   </md-card>
 
