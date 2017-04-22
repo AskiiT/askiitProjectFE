@@ -6,11 +6,13 @@
 				placeholder="Añade un tag..." [(ngModel)]="term" (ngModelChange)="isEmpty()">
 		</div>
 		<div id="searchBox" *ngIf="empty">
-			<li style="font-size: 8px; max-width: 170px;" class="tag-color" *ngFor="let tag of allTags | tagFilter:term">
-				{{tag.tag_name}}
-			</li>
-			<li style="font-size: 8px; max-width: 170px;" class="topic-color" *ngFor="let topic of allTopics | topicFilter:term">
+			<li style="font-size: 8px; max-width: 170px;" class="topic-color"
+				*ngFor="let topic of allTopics | topicFilter:term">
 				{{topic.topic_name}}
+			</li>
+			<li style="font-size: 8px; max-width: 170px;" class="tag-color"
+				*ngFor="let tag of allTags | tagFilter:term">
+				{{tag.tag_name}}
 			</li>
 		</div>
 	</div>

@@ -79,6 +79,10 @@ input:focus {
     color: black;
     display: block;
     font-size: 0.8em;
+
+    -webkit-transition: background-color 200ms linear;
+    -ms-transition: background-color 200ms linear;
+    transition: background-color 200ms linear;
 }
 
 #searchBox li::before{
@@ -90,6 +94,10 @@ input:focus {
 #searchBox li:hover{
   background-color: #dee0e3;
   cursor: pointer;
+
+  -webkit-transition: background-color 200ms linear;
+  -ms-transition: background-color 200ms linear;
+  transition: background-color 200ms linear;
 }
 
 a:hover{

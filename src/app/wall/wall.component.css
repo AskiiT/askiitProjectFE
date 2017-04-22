@@ -1,7 +1,5 @@
 virtual-scroll {
-  overflow: hidden;
-  overflow-y: auto;
-  padding-right: 17px;
+  overflow-y: hidden, auto;
   height: 55vh;
   display: block;
 }

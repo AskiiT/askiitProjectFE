@@ -3,7 +3,8 @@
   [items]="buffer"
   (update)="scrollItems = $event"
   (end)="fetchMore($event)">
-  <app-question *ngFor="let question of scrollItems" [question]="question" (onResize)="refresh($event)"> </app-question>
+  <app-question *ngFor="let question of scrollItems" 
+    [question]="question" (onResize)="refresh($event)"> </app-question>
 
   <div *ngIf="loading" class="loader">Loading...</div>
 </virtual-scroll>
