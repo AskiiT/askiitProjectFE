@@ -3,9 +3,9 @@
 		<div class="container-fluid">
 				<div class="row">
 					<div class="col-md-4">
-						<md-card class="c1">
+						<md-card class="c1" style="">
 							<img src="http://localhost:3000{{userData.avatar.avatars.avatars.url}}"
-								alt="leyend" class="md-card-image img-responsive" width="200" height="200"
+								alt="leyend" class="md-card-image img-responsive center-block" width="200" height="200"
 									[ngStyle]="{'background-color': avatarColor}">
 							<md-card-content>
 								<div class="c-name">{{userData.first_name}} {{userData.last_name}}</div>
@@ -40,7 +40,9 @@
 							</div>
 							<div id="es">Rapidez: {{userData.rank.quickness}} </div>
 							<div class="progress">
-								<div class="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar"aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{width: percentq}" style="color: black">
+								<div class="progress-bar progress-bar-danger progress-bar-striped active"
+									role="progressbar"aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"
+										[ngStyle]="{width: percentq}" style="color: black">
 										{{percentq.slice(0, 4)+'%'}}
 								</div>
 						 </div>
@@ -50,4 +52,5 @@
 				</div>
 			 </div>
 			</div>
+			<md-spinner *ngIf="userData===undefined"></md-spinner>
 </div>

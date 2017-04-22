@@ -1,12 +1,28 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
+import {style, state, animate, transition, trigger} from '@angular/core';
 
 @Component({
   selector: 'app-chats',
   templateUrl: './chats.component.html',
   styleUrls: ['./chats.component.css'],
   providers: [ UserService ],
+  animations: [
+      trigger('slideIn', [
+        state('*', style({})),
+        state('void', style({})),
+        transition('* => void', [
+            style({ height: '*' }),
+            animate(150, style({ height: 0}))
+        ]),
+        transition('void => *', [
+            style({ height: '0' }),
+            animate(150, style({ height: '*' }))
+        ])
+    ])
+  ]
 })
+
 export class ChatsComponent implements OnInit {
   allUsers: Array<any>;
 	response$;

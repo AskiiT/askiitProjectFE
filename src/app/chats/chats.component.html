@@ -3,12 +3,13 @@
 	<div id="designDiv">
 		<div class="search">
 			<span class="fa fa-search"></span>
-			<input  class="form-control" type="text"  placeholder="Search by User" [(ngModel)]="term" (ngModelChange)="isEmpty()">
+			<input  class="form-control" type="text"  placeholder="Search by User"
+				[(ngModel)]="term" (ngModelChange)="isEmpty()">
 		</div>
-		<div id="searchBox" *ngIf="empty">
-			<li  *ngFor="let u of allUsers | chatFilter:term">
-				<!--a href="home/profile/{{u.username}}">{{u.username}}</a>-->
-				<a [routerLink]="['/home','profile', u.username]">{{u.username}}</a>
+		<div id="searchBox" *ngIf="empty" [@slideIn]>
+			<li style="color: #538CD1;" [routerLink]="['/home','profile', u.username]"
+				*ngFor="let u of allUsers | chatFilter:term">
+				{{u.username}}
 			</li>
 		</div>
 	</div>

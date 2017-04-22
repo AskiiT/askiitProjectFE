@@ -1,12 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { TagService } from '../tag.service';
 import { TopicService } from '../topic.service';
+import {style, state, animate, transition, trigger} from '@angular/core';
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css'],
-  providers: [ TagService, TopicService ]
+  providers: [ TagService, TopicService ],
+  animations: [
+      trigger('slideIn', [
+        state('*', style({})),
+        state('void', style({})),
+        transition('* => void', [
+            style({ height: '*' }),
+            animate(150, style({ height: 0}))
+        ]),
+        transition('void => *', [
+            style({ height: '0' }),
+            animate(150, style({ height: '*' }))
+        ])
+    ])
+  ]
 })
 export class SearchComponent implements OnInit {
 

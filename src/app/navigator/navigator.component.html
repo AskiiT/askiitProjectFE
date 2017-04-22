@@ -1,7 +1,18 @@
-<nav class="col-md-2 nav-box" style="margin-top: 10px">
-    <div class="nav-rank">Rank</div>
-    <button md-button [routerLink]="['/home','profile', user]" class="nav-btn text-center">Mi perfil</button>
-    <button md-button [routerLink]="['/home','questions']" class="nav-btn text-center">Mis preguntas</button>
+<nav class="col-md-2 nav-box" style="margin-top: 10px;">
+    <div class="nav-rank">
+        <i class="material-icons vcenter" style="color: yellow;">star</i>
+        Rank
+    </div>
+    <!--button md-button [routerLink]="['/home','profile', user]" class="nav-btn text-center">Mi perfil</button>-->
+    <button md-button class="nav-btn">
+        <md-icon style="margin-right: 12px;">person</md-icon>
+        Mi perfil
+    </button>
+    <!--button md-button [routerLink]="['/home','questions']" class="nav-btn text-center">Mis preguntas</button>-->
+    <button md-button class="nav-btn">
+        <md-icon style="margin-right: 12px;">school</md-icon>
+        Mis preguntas
+    </button>
 
     <app-search></app-search>
 

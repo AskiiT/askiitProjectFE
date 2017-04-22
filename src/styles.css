@@ -6,22 +6,15 @@
 
 body{
   font-family: 'Lato', sans-serif;
-  letter-spacing: 0.1em;
-  color: #606060;
-  background: #eee;
+  background: #F0F0F0;
+  overflow: hidden;
 }
 
 #main{
   background: #000000;
-  margin-top: 5px;
   padding-top: 140px;
   width: 100%;
-  min-height: 600px;
-  height: 100%;
-
-  -webkit-border-radius: 50px;
-  -moz-border-radius: 50px;
-  border-radius: 10px;
+  height: 92vh;
 }
 
 #promo, #sign{
@@ -43,8 +36,25 @@ body{
   color: white;
   width: 220px;
   height: 40px;
+
+  -webkit-transition: background-color 400ms linear;
+  -ms-transition: background-color 400ms linear;
+  transition: background-color 400ms linear;
+}
+
+.btn:hover {
+    background-color: #36945B;
+    -webkit-transition: background-color 200ms linear;
+    -ms-transition: background-color 200ms linear;
+    transition: background-color 200ms linear;
 }
 
 .white-font {
   color: white;
+}
+
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
 }

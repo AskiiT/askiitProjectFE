@@ -1,27 +1,83 @@
-a {
-	text-decoration: none;
-	color: white;
-}
-
-a:hover {
-	color: #46dd50;
-}
-
 .askiit-btn {
-	background-color: #46dd50;
-	color: #113813;
+	font-family: 'Lato', sans-serif;
+	background-color: #1FC129;
+	color: #0A1E0B;
 	margin-right: 70px;
 	margin-left: 120px;
-	max-width: 200px;
+	max-width: 150px;
+
+	-webkit-transition: background-color 400ms linear;
+    -ms-transition: background-color 400ms linear;
+    transition: background-color 400ms linear;
+}
+
+.askiit-btn:hover {
+	background-color: #1BAA24;
+	-webkit-transition: background-color 200ms linear;
+    -ms-transition: background-color 200ms linear;
+    transition: background-color 200ms linear;
 }
 
 .logout-btn {
-	background-color: #E63232;
-	color: #FFBCBC;
-	max-width: 200px;
+	background-color: #BC1111;
+	color: #FFDFDF;
+	max-width: 150px;
+	-webkit-transition: background-color 400ms linear;
+    -ms-transition: background-color 400ms linear;
+    transition: background-color 400ms linear;
+}
+
+.logout-btn:hover {
+	background-color: #A60F0F;
+	-webkit-transition: background-color 200ms linear;
+    -ms-transition: background-color 200ms linear;
+    transition: background-color 200ms linear;
 }
 
 .theme-color {
-	background-color: #0E445F;
+	background: linear-gradient(to right, #01060E, #010916);
 	color: #18312e;
+	padding-right: 80px;
+}
+
+.home {
+
+	background-color: #01060E;
+
+	padding: 3px;
+
+	max-width: 200px;
+
+	-webkit-border-radius: 50px;
+	-moz-border-radius: 50px;
+	border-radius: 10px;
+
+	-moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+
+	-webkit-transition: background-color 400ms linear;
+    -ms-transition: background-color 400ms linear;
+    transition: background-color 400ms linear;
+}
+
+div.home:hover {
+	background-color: #2C8738;
+	cursor: pointer;
+
+	-moz-box-shadow: 0px 0px 17px 0px rgba(24,75,31,0.75);
+    box-shadow: 0px 0px 17px 0px rgba(24,75,31,0.75);
+
+	-webkit-transition: background-color 400ms linear;
+    -ms-transition: background-color 400ms linear;
+    transition: background-color 400ms linear;
+}
+
+md-toolbar {
+    box-shadow: 0px 0px 10px 0px rgba(1,6,14,1);
+}
+
+.spacer {
+	-webkit-box-flex: 1;
+	-ms-flex: 1 1 auto;
+	flex: 1 1 auto;
 }

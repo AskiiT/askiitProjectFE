@@ -1,4 +1,4 @@
-#diffilcuty {
+#difficulty {
   width: 40px;
   height: 40px;
   line-height: 40px;
@@ -6,31 +6,68 @@
   vertical-align: top;
   display: inline-block;
   border-radius: 100%;
-  background: #105477;
+  box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.75);
+  background: #3B6695;
   color: #ffffff;
 }
+
+#postuls {
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  vertical-align: top;
+  display: inline-block;
+
+  box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.75);
+  background: #9AF059;
+  color: #2E471C;
+
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  border-radius: 10px;
+}
+
 .title{
   display: inline-block;
+  color: #333333;
   padding-top: 10px;
   padding-left: 20px;
+  margin-right: 7%;
   vertical-align: middle;
   width: 80%;
 }
 
 .divQuestion{
-  padding-left: 30px;
-  padding-top: 20px;
+  padding-left: 10px;
   padding-right: 10px;
+  margin-top: 12px;
 }
 
 .cardQuestion{
-  border-radius: 10px;
-  background: #ffffff;
-  border: 2px solid #0E445F;
+  border-radius: 3px;
+  background: #FCFCFC;
+
   color: #105477;
   padding: 10px;
   position: relative;
   z-index: 1;
+
+  -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+
+  -webkit-transition: background-color 400ms linear;
+  -ms-transition: background-color 400ms linear;
+  transition: background-color 400ms linear;
+}
+
+md-card.cardQuestion:hover {
+    background: #DCE9FF;
+    -webkit-transition: background-color 200ms linear;
+    -ms-transition: background-color 200ms linear;
+    transition: background-color 200ms linear;
+
+    cursor: pointer;
 }
 
 .divExpandButtom{
@@ -39,9 +76,10 @@
 }
 
 .cardBodyQuestion{
-  border-radius: 10px;
+  border-radius: 6px;
   background: #ffffff;
-  border: 2px solid #0E445F;
+  overflow-x: hidden;
+
   color: #105477;
   padding: 0;
   width: 95%;
@@ -58,27 +96,19 @@
 
 .bodyContain{
   display: inline-block;
-  padding: 10px;
+  padding: 20px;
   padding-top: 25px;
   height: 100%;
   width: 85%
 }
 
-.divButtons{
-  display: inline-block;
-  float: right;
-  margin: 0 auto;
-  align-items: center;
-  padding: 0;
-  height: 100%;
-}
-
 .topic{
-  padding: 0px;
-  border-radius: 10px;
-  background: #ffffff;
-  border: 2px solid #0E445F;
-  color: white;
+  border-radius: 5px;
+  color: black;
+  width: 70%;
+  margin-left: 15%;
+  margin-bottom: 10px;
+  color: #707070;
 }
 
 .bodyQuestion{
@@ -87,29 +117,97 @@
   height: 45%
 }
 
+.divButtons{
+    margin-top: 60px;
+    height: 100%;
+}
+
 .buttons{
-  position: relative;
-  top: 3px;
-  display: block;
-  padding: 0;
-  height: 33%;
+    background-color: #F7F7F7;
+    min-width: 130px;
+    height: 20%;
+    text-align: left;
+    margin-top: 5px;
 }
 
 .tag{
   padding: 0px;
   border-radius: 10px;
-  background: #ffffff;
-  border: 1px solid #0E445F;
+  background: #FFA629;
+  color: black;
+  padding-left: 10px;
+  padding-right: 10px;
+  color: #333333;
+  margin-right: 8px;
+}
+
+.content {
+    background-color: #F7F7F7;
+    min-height: 180px;
+    box-shadow: inset 0px 0px 5px 0px rgba(0,0,0,0.8);
+    padding: 10px;
+
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    border-radius: 3px;
+}
+
+#know{
+  color: #95E61B;
+  -webkit-transition: background-color 400ms linear;
+  -ms-transition: background-color 400ms linear;
+  transition: background-color 400ms linear;
+}
+
+#know-button:hover{
+  background-color: #D9FF9F;
+  -webkit-transition: background-color 200ms linear;
+  -ms-transition: background-color 200ms linear;
+  transition: background-color 200ms linear;
+}
+
+#know-button {
+    -webkit-transition: background-color 400ms linear;
+    -ms-transition: background-color 400ms linear;
+    transition: background-color 400ms linear;
+}
+
+#report-button:hover{
+  background-color: #FFB8B8;
+  -webkit-transition: background-color 200ms linear;
+  -ms-transition: background-color 200ms linear;
+  transition: background-color 200ms linear;
+}
+
+#report-button {
+    -webkit-transition: background-color 400ms linear;
+    -ms-transition: background-color 400ms linear;
+    transition: background-color 400ms linear;
+}
+
+#up-button:hover{
+  background-color: #BBC4FF;
+  -webkit-transition: background-color 200ms linear;
+  -ms-transition: background-color 200ms linear;
+  transition: background-color 200ms linear;
+}
+
+#up-button {
+    -webkit-transition: background-color 400ms linear;
+    -ms-transition: background-color 400ms linear;
+    transition: background-color 400ms linear;
 }
 
 #report{
-  color: red;
+  color: #EE3E3E
 }
 
-#replay{
-  color: blue
+#up{
+  color: #5D83E3;
 }
 
-#reply{
-  color: green;
+.spacer {
+	-webkit-box-flex: 1;
+	-ms-flex: 1 1 auto;
+	flex: 1 1 auto;
 }
