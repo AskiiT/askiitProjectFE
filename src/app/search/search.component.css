@@ -1,7 +1,7 @@
 .tags {
 	background-color: #F0F6FF;
 	margin-top: 40px;
-	min-height: 340px;
+	min-height: 50vh;
 
   	box-shadow: inset 0px 0px 5px 0px rgba(116,120,127,0.75),
 		0 1px 3px 0 rgba(0,0,0,0.2),0 1px 1px 0 rgba(0,0,0,0.14),
@@ -64,7 +64,7 @@ input:focus {
 
 #searchBox {
 	overflow: auto;
-	max-height: 270px;
+	max-height: 40vh;
 	padding-top: 8px;
 	padding-top: 8px;
 }

@@ -6,7 +6,7 @@
 			<input  class="form-control" type="text"  placeholder="Search by User"
 				[(ngModel)]="term" (ngModelChange)="isEmpty()">
 		</div>
-		<div id="searchBox" *ngIf="empty">
+		<div id="searchBox" *ngIf="empty" [@slideIn]>
 			<li style="color: #538CD1;" [routerLink]="['/home','profile', u.username]"
 				*ngFor="let u of allUsers | chatFilter:term">
 				{{u.username}}
