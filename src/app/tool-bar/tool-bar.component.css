@@ -5,16 +5,37 @@
 	margin-right: 70px;
 	margin-left: 120px;
 	max-width: 150px;
+
+	-webkit-transition: background-color 400ms linear;
+    -ms-transition: background-color 400ms linear;
+    transition: background-color 400ms linear;
+}
+
+.askiit-btn:hover {
+	background-color: #1BAA24;
+	-webkit-transition: background-color 200ms linear;
+    -ms-transition: background-color 200ms linear;
+    transition: background-color 200ms linear;
 }
 
 .logout-btn {
 	background-color: #BC1111;
 	color: #FFDFDF;
 	max-width: 150px;
+	-webkit-transition: background-color 400ms linear;
+    -ms-transition: background-color 400ms linear;
+    transition: background-color 400ms linear;
+}
+
+.logout-btn:hover {
+	background-color: #A60F0F;
+	-webkit-transition: background-color 200ms linear;
+    -ms-transition: background-color 200ms linear;
+    transition: background-color 200ms linear;
 }
 
 .theme-color {
-	background-color: #01060E;
+	background: linear-gradient(to right, #01060E, #03132E);
 	color: #18312e;
 	padding-right: 80px;
 }
