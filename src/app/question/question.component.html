@@ -1,5 +1,5 @@
 <div class="divQuestion">
-  <md-card class="cardQuestion" (click) = onChange($event)>
+  <md-card class="cardQuestion" (click) ="onChange($event)">
     <md-card-content>
         <div id = "difficulty">{{question.difficulty}}</div>
         <div class = "title">{{question.title}}</div>
@@ -11,7 +11,7 @@
     </md-card-content>
   </md-card>
 
-  <md-card class="cardBodyQuestion center-block row" *ngIf="expand">
+  <md-card class="cardBodyQuestion center-block row" *ngIf="expand" [@slideIn]>
       <md-card-content class="bodyContain">
         <div class="topic text-center" [ngStyle]="{'background-color': topicColor }">
           {{question.topic.topic_name}}
