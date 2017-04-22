@@ -5,12 +5,12 @@
 			<input class="form-control tag-finder" type="text" name=""
 				placeholder="Añade un tag..." [(ngModel)]="term" (ngModelChange)="isEmpty()">
 		</div>
-		<div id="searchBox" *ngIf="empty" [@slideIn]>
-			<li style="font-size: 8px; max-width: 170px;" class="topic-color"
+		<div id="searchBox" *ngIf="empty" [@slideIn] class="center-block text-center">
+			<li style="" class="topic-color center-block text-center"
 				*ngFor="let topic of allTopics | topicFilter:term">
 				{{topic.topic_name}}
 			</li>
-			<li style="font-size: 8px; max-width: 170px;" class="tag-color"
+			<li style="" class="tag-color center-block text-center"
 				*ngFor="let tag of allTags | tagFilter:term">
 				{{tag.tag_name}}
 			</li>

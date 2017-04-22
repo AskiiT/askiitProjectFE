@@ -1,6 +1,6 @@
 virtual-scroll {
-  overflow-y: hidden, auto;
-  height: 83vh;
+  overflow-y: scroll;
+  height: 85vh;
   display: block;
 }
 

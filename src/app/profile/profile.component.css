@@ -13,6 +13,7 @@
 
 .c1 img{
   border: 3px solid #105477;
+  align-self: center;
   -webkit-border-radius: 50px;
 }
 
@@ -56,7 +57,7 @@
 
 .c2{
   background-color: #E7E7E7;
-  height: 82vh;
+  height: 86vh;
 }
 
 .c2 p, h1{
