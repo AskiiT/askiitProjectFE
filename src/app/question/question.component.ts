@@ -7,6 +7,7 @@ export interface Question {
     body?: string;
     topic?: any;
     tags?: Array<any>;
+    p_users?: Array<any>;
 }
 
 @Component({
