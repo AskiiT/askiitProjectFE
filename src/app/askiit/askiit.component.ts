@@ -71,4 +71,8 @@ export class AskiitComponent implements OnInit {
     input.value = null;
   }
 
+  closeAskiit(){
+    this.dialogRef.close();
+  }
+
 }
