@@ -9,22 +9,17 @@ import {MdDialog, MdDialogRef} from '@angular/material';
 })
 export class ToolBarComponent implements OnInit {
 
-  selectedOption: string;
-
   constructor(public dialog: MdDialog) { }
 
   ngOnInit() {
   }
 
-  openDialog() {
-    let dialogRef = this.dialog.open(AskiitComponent, {
-      height: '400px',
-      width: '600px',
+  openAskiit() {
+    let dialogRef = this.dialog.open(AskiitComponent,{
+      height: '420px',
+      width: '1000px'
     });
-
-    dialogRef.afterClosed().subscribe(result => {
-      this.selectedOption = result;
-    });
+    dialogRef.afterClosed();
   }
 
 }
