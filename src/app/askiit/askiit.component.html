@@ -1,0 +1,43 @@
+<h1 md-dialog-title class="title text-center">Askiit</h1>
+
+<div md-dialog-content class="row divContent">
+  <div class="col-md-4 divTagSearch">
+    <div class="search">
+      <span class="fa fa-search"></span>
+      <input #searchInput class="inputTagStyle form-control tag-finder" type="text" name=""
+        placeholder="Añade un tag..." [(ngModel)]="term" (ngModelChange)="isEmpty()">
+    </div>
+    <div id="searchBox" *ngIf="openBox" [@slideIn] class="center-block text-center">
+      <li style="" class="topic-color center-block text-center"
+        *ngFor="let topic of allTopics | topicFilter:term" (click)="addTopic(topic.topic_name, searchInput)">
+        {{topic.topic_name}}
+      </li>
+      <li style="" class="tag-color center-block text-center"
+        *ngFor="let tag of allTags | tagFilter:term" (click)="addTag(tag.tag_name, searchInput)">
+        {{tag.tag_name}}
+      </li>
+    </div>
+    <div id="divTagsSelected"  *ngIf="!openBox">
+      <li style="" class="tag-color center-block text-center"
+        *ngFor="let selectedTag of selectedTags" >
+        {{selectedTag}}
+      </li>
+    </div>
+  </div>
+  <div class="col-md-8 divQuestion">
+    <textarea name="question" rows="12" cols="83" class="inputQuestionStyle">¿Qué deseas saber?</textarea>
+  </div>
+</div>
+
+
+
+<div md-dialog-actions class="divButtons text-center">
+  <button md-button class="btn askiitBtn">
+    <md-icon>play_for_work</md-icon>
+    AskiiT
+  </button>
+  <button md-button class="btn cancelBtn" (click)="closeAskiit()">
+  <md-icon>close</md-icon>
+    Cancel
+  </button>
+</div>
