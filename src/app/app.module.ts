@@ -21,7 +21,7 @@ import { WallComponent } from './wall/wall.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ChatsComponent } from './chats/chats.component';
 import { HomeComponent } from './home/home.component';
-import { ToolBarComponent } from './tool-bar/tool-bar.component';
+import { ToolBarComponent, DialogResultExampleDialog } from './tool-bar/tool-bar.component';
 import { MyQuestionsComponent } from './my-questions/my-questions.component';
 import { ContactComponent } from './contact/contact.component';
 import { TagFilterPipe } from './tag-filter.pipe';
@@ -85,7 +85,8 @@ export const appRoutes: Routes = [
     ChatFilterPipe,
     TagFilterPipe,
     QuestionComponent,
-    TopicFilterPipe
+    TopicFilterPipe,
+    DialogResultExampleDialog
   ],
   imports: [
     BrowserModule,
@@ -96,6 +97,9 @@ export const appRoutes: Routes = [
     RecaptchaModule.forRoot( ),
     Ng2FilterPipeModule,
     VirtualScrollModule
+  ],
+  entryComponents: [
+    DialogResultExampleDialog
   ],
   providers: [],
   bootstrap: [AppComponent]
