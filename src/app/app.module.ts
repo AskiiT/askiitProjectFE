@@ -21,7 +21,7 @@ import { WallComponent } from './wall/wall.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ChatsComponent } from './chats/chats.component';
 import { HomeComponent } from './home/home.component';
-import { ToolBarComponent, DialogResultExampleDialog } from './tool-bar/tool-bar.component';
+import { ToolBarComponent } from './tool-bar/tool-bar.component';
 import { MyQuestionsComponent } from './my-questions/my-questions.component';
 import { ContactComponent } from './contact/contact.component';
 import { TagFilterPipe } from './tag-filter.pipe';
@@ -29,6 +29,7 @@ import { Ng2FilterPipeModule } from 'ng2-filter-pipe';
 import { ChatFilterPipe } from './chat-filter.pipe';
 import { QuestionComponent } from './question/question.component';
 import { TopicFilterPipe } from './topic-filter.pipe';
+import { AskiitComponent } from './askiit/askiit.component';
 
 export const appRoutes: Routes = [
   { path: 'home',
@@ -86,7 +87,7 @@ export const appRoutes: Routes = [
     TagFilterPipe,
     QuestionComponent,
     TopicFilterPipe,
-    DialogResultExampleDialog
+    AskiitComponent
   ],
   imports: [
     BrowserModule,
@@ -99,7 +100,7 @@ export const appRoutes: Routes = [
     VirtualScrollModule
   ],
   entryComponents: [
-    DialogResultExampleDialog
+    AskiitComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
