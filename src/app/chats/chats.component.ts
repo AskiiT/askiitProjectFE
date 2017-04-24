@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
 import {style, state, animate, transition, trigger} from '@angular/core';
+import {MdAutocompleteModule} from '@angular/material';
+
 
 @Component({
   selector: 'app-chats',
@@ -24,6 +26,7 @@ import {style, state, animate, transition, trigger} from '@angular/core';
 })
 
 export class ChatsComponent implements OnInit {
+
   allUsers: Array<any>;
 	response$;
   empty:boolean=false;

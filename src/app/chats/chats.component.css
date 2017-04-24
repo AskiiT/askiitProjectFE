@@ -62,8 +62,8 @@ input:focus {
 #searchBox {
 	padding-top: 8px;
 	padding-top: 8px;
-    overflow: auto;
-    max-height: 75vh;
+  overflow: auto;
+  max-height: 75vh;
 }
 
 #searchBox li{

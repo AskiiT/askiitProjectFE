@@ -12,5 +12,17 @@
 				{{u.username}}
 			</li>
 		</div>
+
+		<md-input-container >
+   		<input type="text" mdInput [(ngModel)]="term" [mdAutocomplete]="auto" placeholder="Search by User">
+		</md-input-container>
+
+		<md-autocomplete #auto="mdAutocomplete">
+   		<md-option *ngFor="let u of allUsers | chatFilter:term " [value]="u.username"  [routerLink]="['/home','profile', u.username]">
+      	{{u.username}}
+   		</md-option>
+		</md-autocomplete>
+
+
 	</div>
 </nav>
