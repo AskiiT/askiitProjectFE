@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
 import {style, state, animate, transition, trigger} from '@angular/core';
 import {MdAutocompleteModule} from '@angular/material';
-
+import {FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-chats',
