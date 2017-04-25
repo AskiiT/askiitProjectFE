@@ -10,3 +10,45 @@
 .md-block {
 	width: 40%;
 }
+
+.color-item {
+	display: inline-block;
+	min-width: 20px;
+	min-height: 20px;
+	max-width: 20px;
+	max-height: 20px;
+
+	margin-right: 4px;
+
+	padding-left: 3px;
+	padding-right: 3px;
+
+	-webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    border-radius: 5px;
+
+	border: 0px;
+	-webkit-transition : border 400ms ease-out;
+    -moz-transition : border 400ms ease-out;
+    -o-transition : border 400ms ease-out;
+    transition : border 400ms ease-out;
+}
+
+.color-item:hover {
+	cursor: pointer;
+	border: 1px solid black !important;
+
+	-webkit-transition : border 200ms ease-out;
+    -moz-transition : border 200ms ease-out;
+    -o-transition : border 200ms ease-out;
+    transition : border 200ms ease-out;
+}
+
+.choosen-color {
+	width: 40px;
+	height: 40px;
+	background-color: #ffaabb;
+	-webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    border-radius: 5px;
+}

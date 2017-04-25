@@ -16,14 +16,28 @@
             <input mdInput placeholder="Usuario">
         </md-input-container><br>
 
-    	<md-input-container class="md-block" flex-gt-sm>
-            <input mdInput type="password" placeholder="Contraseña">
-        </md-input-container><br>
+        <div class="row">
+        	<md-input-container class="col-md-6" style="width: 38%; margin-right: 4%">
+                <input mdInput type="password" placeholder="Contraseña">
+            </md-input-container><br>
+
+            <div class="col-md-2 choosen-color" [ngStyle]="{'background-color': colorSelected}"></div>
+
+            <div class="dropdown col-md-4">
+              <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Favorite Color
+              <span class="caret"></span></button>
+              <ul class="dropdown-menu" style="margin-left: 10%; min-width: 70%; max-width: 70%; padding: 5px;
+                    background-color: black">
+                <span *ngFor="let c of availableColors" [ngStyle]="{'background-color': c}"
+                    class="color-item" (click)="updateColor(c)">
+                </span>
+              </ul>
+            </div>
+        </div>
 
     	<md-input-container class="md-block" flex-gt-sm>
             <input mdInput type="password" placeholder="Confirmar contraseña">
         </md-input-container><br>
-
 
         <recaptcha (resolved)="resolved($event)" siteKey="YOUR_SITE_KEY"></recaptcha><br>
 
