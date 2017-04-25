@@ -20,8 +20,6 @@ export class ProfileComponent implements OnInit {
     percente:string;
     percentc:string;
 
-    avatarColor:string;
-
     constructor(private route: ActivatedRoute, private uService: UserService ) {
 
         this.route.params.subscribe(
@@ -46,8 +44,7 @@ export class ProfileComponent implements OnInit {
                 this.userData = res[ 0 ],
                 this.percente = ( String( this.userData.rank.efectiveness * 100 / 5741 ) + '%' ),
                 this.percentc = ( String( this.userData.rank.clarity * 100 / 5741 ) + '%' ),
-                this.percentq = ( String( this.userData.rank.quickness * 100 / 5741 ) + '%' ),
-                this.avatarColor = ( '#' + String( this.userData.topic.color ) )
+                this.percentq = ( String( this.userData.rank.quickness * 100 / 5741 ) + '%' )
             },
     		() => {},
     		() => console.log( "OK: user completed!" )

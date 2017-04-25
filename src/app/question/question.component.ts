@@ -36,10 +36,8 @@ export class QuestionComponent implements OnInit {
 
 
   expand: boolean = false;
-  topicColor;
 
   ngOnInit(){
-    this.topicColor = ( '#' + String( this.question.topic.color  ) );
   }
 
   onChange(e){
