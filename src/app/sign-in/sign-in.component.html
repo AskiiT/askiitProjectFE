@@ -1,25 +1,23 @@
-<section class="">
-	<md-input-container class="md-block" flex-gt-sm>
-        <label class="white-font">Usuario/Correo</label>
-        <input mdInput ng-model="user.firstName">
+<div class="unicorn-dark-theme">
+    <md-input-container class="md-block">
+        <input mdInput placeholder="Usuario/Correo" ng-model="user.firstName">
     </md-input-container><br>
-	<md-input-container class="md-block" flex-gt-sm>
-        <label class="white-font">Contraseña</label>
-        <input mdInput type="password" ng-model="user.firstName">
+    <md-input-container class="md-block">
+        <input mdInput placeholder="Contraseña" type="password" ng-model="user.firstName">
     </md-input-container><br>
 
-	<div class="row top">
-		<!-- <div class="col-md-6 text-center">
-			<recaptcha (resolved)="resolved($event)" siteKey="YOUR_SITE_KEY"></recaptcha>
-		</div> -->
-		<div style="">
-			<button md-button class="btn center-block"
-				type="button"
-				name="buttonSignUp"
-				style="color: white; margin-left: 170px; margin-top: 20px;"
-				routerLink='home'>
-				Ingresar
-			</button>
-		</div>
-	</div>
-</section>
+    <div class="row top">
+    	<!-- <div class="col-md-6 text-center">
+    		<recaptcha (resolved)="resolved($event)" siteKey="YOUR_SITE_KEY"></recaptcha>
+    	</div> -->
+    	<div>
+    		<button md-button class="btn center-block"
+    			type="button"
+    			name="buttonSignUp"
+    			style="color: white; margin-left: 24%; margin-top: 20px; background-color: #3DA867"
+    			routerLink='home'>
+    			Ingresar
+    		</button>
+    	</div>
+    </div>
+</div>

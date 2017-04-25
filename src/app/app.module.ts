@@ -29,6 +29,7 @@ import { Ng2FilterPipeModule } from 'ng2-filter-pipe';
 import { ChatFilterPipe } from './chat-filter.pipe';
 import { QuestionComponent } from './question/question.component';
 import { TopicFilterPipe } from './topic-filter.pipe';
+import { AskiitComponent } from './askiit/askiit.component';
 
 export const appRoutes: Routes = [
   { path: 'home',
@@ -85,7 +86,8 @@ export const appRoutes: Routes = [
     ChatFilterPipe,
     TagFilterPipe,
     QuestionComponent,
-    TopicFilterPipe
+    TopicFilterPipe,
+    AskiitComponent
   ],
   imports: [
     BrowserModule,
@@ -96,6 +98,9 @@ export const appRoutes: Routes = [
     RecaptchaModule.forRoot( ),
     Ng2FilterPipeModule,
     VirtualScrollModule
+  ],
+  entryComponents: [
+    AskiitComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,40 +1,35 @@
-<section>
+<section class="unicorn-dark-theme">
     <form name="signUpForm">
     	<md-input-container class="md-block" flex-gt-sm>
-            <label class="white-font">Nombre</label>
-            <input mdInput>
+            <input mdInput placeholder="Nombre">
         </md-input-container>
 
         <md-input-container class="md-block" flex-gt-sm>
-            <label class="white-font">Apellido</label>
-            <input mdInput>
+            <input mdInput placeholder="Apellido">
         </md-input-container><br>
 
     	<md-input-container class="md-block" flex-gt-sm>
-            <label class="white-font">Correo</label>
-            <input mdInput>
+            <input mdInput placeholder="Correo" type="email">
         </md-input-container>
 
     	<md-input-container class="md-block" flex-gt-sm>
-            <label class="white-font">Usuario</label>
-            <input mdInput>
+            <input mdInput placeholder="Usuario">
         </md-input-container><br>
 
     	<md-input-container class="md-block" flex-gt-sm>
-            <label class="white-font">Contraseña</label>
-            <input mdInput type="password">
+            <input mdInput type="password" placeholder="Contraseña">
         </md-input-container><br>
 
     	<md-input-container class="md-block" flex-gt-sm>
-            <label class="white-font">Confirmar contraseña</label>
-            <input mdInput type="password">
+            <input mdInput type="password" placeholder="Confirmar contraseña">
         </md-input-container><br>
 
 
         <recaptcha (resolved)="resolved($event)" siteKey="YOUR_SITE_KEY"></recaptcha><br>
 
         <div class="col-md-8 text-rigth top30">
-            <button md-button class="btn" style="color: white; margin-left: 120px;" type="button" name="buttonSignUp">Registrarse</button>
+            <button md-button class="btn" style="color: white; margin-left: 35%; background-color: #3DA867"
+                type="button" name="buttonSignUp">Registrarse</button>
         </div>
 
     </form>

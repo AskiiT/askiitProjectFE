@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {AskiitComponent} from '../askiit/askiit.component';
+import {MdDialog, MdDialogRef} from '@angular/material';
 
 @Component({
   selector: 'app-tool-bar',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ToolBarComponent implements OnInit {
 
-  constructor() { }
+  constructor(public dialog: MdDialog) { }
 
   ngOnInit() {
+  }
+
+  openAskiit() {
+    let dialogRef = this.dialog.open(AskiitComponent,{
+      height: '420px',
+      width: '1000px'
+    });
+    dialogRef.afterClosed();
   }
 
 }
