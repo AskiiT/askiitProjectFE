@@ -1,8 +1,18 @@
 <section class="unicorn-dark-theme">
     <form name="signUpForm" [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
     	<md-input-container class="md-block" flex-gt-sm>
-            <input mdInput placeholder="Nombre" class="form-control" formControlName="name">
+            <input mdInput placeholder="Nombre" #refName class="form-control" formControlName="name" required>
+            <md-hint *ngIf="signUpForm.controls['name'].hasError('required') && refName.pristine" align="end" >
+              A Name is required
+            </md-hint>
+            <md-hint *ngIf="signUpForm.controls['name'].hasError('minlength')" align="end" >
+              Please enter at least 4 characters
+            </md-hint>
+            <md-hint *ngIf="signUpForm.controls['name'].hasError('pattern')"  >
+              Please enter a valid name
+            </md-hint>
         </md-input-container>
+
 
         <md-input-container class="md-block" flex-gt-sm>
             <input mdInput placeholder="Apellido" class="form-control" formControlName="lastName">
