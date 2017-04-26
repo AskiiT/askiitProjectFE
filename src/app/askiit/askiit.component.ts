@@ -2,13 +2,17 @@ import {Component, OnInit} from '@angular/core';
 import {MdDialog, MdDialogRef} from '@angular/material';
 import {TagService} from '../tag.service';
 import {TopicService} from '../topic.service';
+import {QuestionService} from '../question.service';
 import {style, state, animate, transition, trigger} from '@angular/core';
+import {FormControl} from '@angular/forms';
+import {Question} from '../question';
+import 'rxjs/add/operator/startWith';
 
 @Component({
   selector: 'app-askiit',
   templateUrl: './askiit.component.html',
   styleUrls: ['./askiit.component.css'],
-  providers: [TagService, TopicService],
+  providers: [TagService, TopicService, QuestionService],
   animations: [
       trigger('slideIn', [
         state('*', style({})),
@@ -26,15 +30,18 @@ import {style, state, animate, transition, trigger} from '@angular/core';
 })
 export class AskiitComponent implements OnInit {
 
+  stateCtrl: FormControl;
+
   allTags: Array<any>;
   allTopics: Array<any>;
 
-  selectedTags:string[] = [];
+  selectedTopic: string;
+  selectedTags: string[] = [];
 
-  openBox: boolean = false;
-  term:string;
+  StateSelectTopic:boolean = false;
+  StateSelectTags: Array<boolean> = [false, false, false];
 
-  constructor(public dialogRef: MdDialogRef<AskiitComponent>, private tagService: TagService, private topicService: TopicService) { }
+  constructor(public dialogRef: MdDialogRef<AskiitComponent>, private tagService: TagService, private topicService: TopicService, private questionService: QuestionService,) {  }
 
   ngOnInit() {
     this.subscribeData();
@@ -51,24 +58,37 @@ export class AskiitComponent implements OnInit {
     );
   }
 
-  isEmpty(){
-    if (this.term.length > 0){
-      this.openBox = true;
-    }else{
-      this.openBox = false;
+  OnSelectTopic(input){
+    this.selectedTopic = input.value;
+    this.StateSelectTopic = true;
+  }
+
+  OnDelecteTopic(){
+    this.selectedTopic = null;
+    this.StateSelectTopic = false;
+  }
+
+  OnSelectTag(input, index){
+    this.selectedTags[index] = input.value;
+    this.StateSelectTags[index] = true;
+  }
+
+  OnDelecteTag(index){
+    this.selectedTags[index] = null;
+    this.StateSelectTags[index] = false;
+  }
+
+  OnAskiit(title, body){
+    const question = new Question(title.value, body.value, this.selectedTopic, "1", "1", this.selectedTags);
+    this.questionService.postQuestion(question).subscribe(
+      res => {console.log(res), this.responseValidation(res)}
+    );
+  }
+
+  responseValidation(res){
+    if(res.error == null){
+      this.dialogRef.close();
     }
-  }
-
-  addTopic(topic, input){
-    this.selectedTags = this.selectedTags.concat(topic);
-    this.openBox = false;
-    input.value = null;
-  }
-
-  addTag(tag, input){
-    this.selectedTags = this.selectedTags.concat(tag);
-    this.openBox = false;
-    input.value = null;
   }
 
   closeAskiit(){

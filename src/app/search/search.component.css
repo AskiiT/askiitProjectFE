@@ -63,18 +63,10 @@ input:focus {
 }
 
 #searchBox {
-	position: absolute;
 	overflow: auto;
-	padding-top: 5px;
-	z-index:1000;
-	border-right: 1.5px solid #0e445f;
-	border-left: 1.5px solid #0e445f;
-	border-bottom: 1.5px solid #0e445f;
-	border-radius: 10px;
-	max-height: 200px;
-	background-color: #f0f0f0;
-	width: 80%;
-	margin-left: 25px;
+	max-height: 40vh;
+	padding-top: 8px;
+	padding-top: 8px;
 }
 
 #searchBox li{
@@ -87,7 +79,7 @@ input:focus {
     color: black;
     display: block;
 	width: 75%;
-	margin-left: 25px;
+	margin-left: 15%;
 	font-size: 0.8em;
 }
 
