@@ -1,24 +1,24 @@
 <section class="unicorn-dark-theme">
-    <form name="signUpForm">
+    <form name="signUpForm" [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
     	<md-input-container class="md-block" flex-gt-sm>
-            <input mdInput placeholder="Nombre">
+            <input mdInput placeholder="Nombre" class="form-control" formControlName="name">
         </md-input-container>
 
         <md-input-container class="md-block" flex-gt-sm>
-            <input mdInput placeholder="Apellido">
+            <input mdInput placeholder="Apellido" class="form-control" formControlName="lastName">
         </md-input-container><br>
 
     	<md-input-container class="md-block" flex-gt-sm>
-            <input mdInput placeholder="Correo" type="email">
+            <input mdInput placeholder="Correo" type="email" class="form-control" formControlName="email">
         </md-input-container>
 
     	<md-input-container class="md-block" flex-gt-sm>
-            <input mdInput placeholder="Usuario">
+            <input mdInput placeholder="Usuario" class="form-control" formControlName="userName">
         </md-input-container><br>
 
         <div class="row">
         	<md-input-container class="col-md-6" style="width: 38%; margin-right: 4%">
-                <input mdInput type="password" placeholder="Contraseña">
+                <input mdInput type="password" placeholder="Contraseña" class="form-control" formControlName="password">
             </md-input-container><br>
 
             <div class="col-md-2 choosen-color" [ngStyle]="{'background-color': colorSelected}"></div>
@@ -34,18 +34,18 @@
                 </span>
               </ul>
             </div>
-            
+
         </div>
 
     	<md-input-container class="md-block" flex-gt-sm>
-            <input mdInput type="password" placeholder="Confirmar contraseña">
+            <input mdInput type="password" placeholder="Confirmar contraseña" class="form-control" formControlName="cpassword">
         </md-input-container><br>
 
         <recaptcha (resolved)="resolved($event)" siteKey="6LegqR4UAAAAAEDmXG2UgqwhMZ_Q2vLl2i45BXcG"></recaptcha><br>
 
         <div class="col-md-8 text-rigth top30">
             <button md-button class="btn" style="color: white; margin-left: 35%; background-color: #3DA867"
-                type="button" name="buttonSignUp">Registrarse</button>
+                type="submit" name="buttonSignUp">Registrarse</button>
         </div>
 
     </form>

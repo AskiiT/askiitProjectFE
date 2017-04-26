@@ -6,6 +6,7 @@ import { MaterialModule } from '@angular/material';
 import { RecaptchaModule } from 'ng2-recaptcha';
 import { ActivatedRoute, RouterModule, Routes } from '@angular/router';
 import { VirtualScrollModule } from 'angular2-virtual-scroll';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import 'hammerjs';
 
@@ -91,6 +92,7 @@ export const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
     FormsModule,
     HttpModule,
     RouterModule.forRoot( appRoutes ),
