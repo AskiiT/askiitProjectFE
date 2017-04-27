@@ -31,8 +31,9 @@ export class SearchComponent implements OnInit {
 	tagsResponse$;
     topicsResponse$;
 
-    empty:boolean=false;
-    term:string;
+    tagGotResponse: boolean = true;
+    topicGotResponse: boolean = true;
+
     constructor( private tagService: TagService, private topicService: TopicService ) { }
 
     ngOnInit( ) {
@@ -40,21 +41,22 @@ export class SearchComponent implements OnInit {
     }
 
     subscribeData( term ) {
+
+        this.topicsResponse$ = this.topicService.getTopicsByMatch( term );
+
+        this.topicsResponse$.subscribe(
+          res => { this.allTopics = res, this.topicGotResponse = true },
+          () => {},
+          () => console.log( "OK: topics match completed!" )
+        );
+
     	this.tagsResponse$ = this.tagService.getTagsByMatch( term );
 
     	this.tagsResponse$.subscribe(
-    		res => this.allTags = res,
+    		res => { this.allTags = res, this.tagGotResponse = true },
     		() => {},
     		() => console.log( "OK: tags match completed!" )
     	);
-
-      this.tagsResponse$ = this.topicService.getTopicsByMatch( term );
-
-      this.tagsResponse$.subscribe(
-        res => this.allTopics = res,
-        () => {},
-        () => console.log( "OK: topics match completed!" )
-      );
     }
 
     checkForTagsEmptyResponse( term ) {
@@ -74,7 +76,14 @@ export class SearchComponent implements OnInit {
     }
 
     inputChange( term ) {
-        if ( term != '' )
+        if ( term != '' ) {
+            this.tagGotResponse = false;
+            this.topicGotResponse = false;
             this.subscribeData( term );
+        }
+        else {
+            this.allTopics = null;
+            this.allTags = null;
+        }
     }
 }

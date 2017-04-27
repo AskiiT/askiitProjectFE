@@ -7,6 +7,9 @@
 			<input  class="form-control" type="text"  placeholder="Search by User"
 				[(ngModel)]="term" (ngModelChange)="inputChange(term)">
 		</div>
+
+		<md-progress-bar class="unicorn-dark-theme" mode="indeterminate"
+			style="width: 90%;" *ngIf="!gotResponse"></md-progress-bar>
 		<div id="searchBox" *ngIf="checkForEmptyResponse(term)" [@slideIn]>
 			<li style="color: #538CD1;" [routerLink]="['/home','profile', u.username]"
  				*ngFor="let u of allUsers">

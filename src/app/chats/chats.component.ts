@@ -29,7 +29,9 @@ export class ChatsComponent implements OnInit {
 
     allUsers: any;
 	response$;
-    term:string;
+    gotResponse: boolean = true;
+
+
     constructor( private uService: UserService ) { }
 
     ngOnInit( ) {
@@ -40,7 +42,7 @@ export class ChatsComponent implements OnInit {
     	this.response$ = this.uService.getUsersByMatch( term );
 
     	this.response$.subscribe(
-    		res => this.allUsers = res,
+    		res => { this.allUsers = res, this.gotResponse = true },
     		() => {},
     		() => console.log( "OK: users match completed!" )
     	);
@@ -55,8 +57,10 @@ export class ChatsComponent implements OnInit {
     }
 
     inputChange( term ){
-        if ( term != '' )
+        if ( term != '' ) {
+            this.gotResponse = false;
             this.subscribeData( term );
+        }
     }
 
 }
