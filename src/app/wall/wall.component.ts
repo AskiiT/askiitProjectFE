@@ -22,6 +22,7 @@ export class WallComponent implements OnInit {
    protected readonly bufferSize: number = 10;
    protected timer;
    protected loading: boolean;
+   protected initialResponse = false;
    protected page: number = 1;
 
   constructor(private qService: QuestionService) { }
@@ -29,7 +30,7 @@ export class WallComponent implements OnInit {
 
   ngOnInit() {
     this.qService.getAllQuestionsByPage(this.page).subscribe(
-      (dataQuestions) => {this.buffer = dataQuestions}
+      (dataQuestions) => {this.buffer = dataQuestions, this.initialResponse = true} 
     );
   }
 

@@ -3,6 +3,7 @@
   [items]="buffer"
   (update)="scrollItems = $event"
   (end)="fetchMore($event)">
+  <md-spinner class="center-block" style="margin-top: 25%" *ngIf="initialResponse==false"></md-spinner>
   <app-question *ngFor="let question of scrollItems"
     [question]="question"
     (onResize)="refresh($event)"> </app-question>
