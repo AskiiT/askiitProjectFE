@@ -9,18 +9,44 @@
 		</div>
 		<div id="searchBox" *ngIf="checkForTopicsEmptyResponse(term)||checkForTagsEmptyResponse(term)"
 			class="center-block text-center" [@slideIn]>
-			<div *ngIf="checkForTopicsEmptyResponse(term)">
-				<li style="" class="topic-color center-block text-center"
-					*ngFor="let topic of allTopics">
-					{{topic.topic_name}}
-				</li>
-			</div>
-			<div *ngIf="checkForTagsEmptyResponse(term)">
-				<li style="" class="tag-color center-block text-center"
-					*ngFor="let tag of allTags">
-					{{tag.tag_name}}
-				</li>
-			</div>
+			<md-chip-list>
+				<div *ngIf="checkForTopicsEmptyResponse(term)">
+					<md-chip class="topic-color center-block text-center"
+						*ngFor="let topic of allTopics" (click)="addTopic(topic.topic_name)">
+						{{topic.topic_name}}
+					</md-chip>
+				</div>
+				<div *ngIf="checkForTagsEmptyResponse(term)">
+					<md-chip style="" class="tag-color center-block text-center"
+						*ngFor="let tag of allTags" (click)="addTag(tag.tag_name)">
+						{{tag.tag_name}}
+					</md-chip>
+				</div>
+			</md-chip-list>
+		</div>
+
+		<div id="ttselected">
+			<md-chip-list>
+				<md-chip class="topic-color-selected center-block text-center"
+					*ngFor="let c of selectedTopics; let i = index"
+						[ngStyle]="{'padding-right':'4px', 'padding-left':'4px', 'padding-top':'2px', 'padding-bottom':'2px'}">
+					{{c}}
+					<md-icon (click)="removeTopic(i)" class="vcenter topic-color-selected" style="border-radius: 10px">
+						clear
+					</md-icon>
+				</md-chip>
+			</md-chip-list>
+
+			<md-chip-list>
+				<md-chip class="tag-color-selected center-block text-center"
+					*ngFor="let c of selectedTags; let i = index"
+						[ngStyle]="{'padding-right':'4px', 'padding-left':'4px', 'padding-top':'2px', 'padding-bottom':'2px'}">
+					{{c}}
+					<md-icon (click)="removeTag(i)" class="vcenter tag-color-selected" style="border-radius: 10px">
+						clear
+					</md-icon>
+				</md-chip>
+			</md-chip-list>
 		</div>
 	</div>
 </nav>

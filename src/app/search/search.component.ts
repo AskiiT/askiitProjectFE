@@ -28,13 +28,19 @@ export class SearchComponent implements OnInit {
 	allTags: any;
     allTopics: any;
 
+    selectedTopics: Array<any>;
+    selectedTags: Array<any>;
+
 	tagsResponse$;
     topicsResponse$;
 
     tagGotResponse: boolean = true;
     topicGotResponse: boolean = true;
 
-    constructor( private tagService: TagService, private topicService: TopicService ) { }
+    constructor( private tagService: TagService, private topicService: TopicService ) {
+        this.selectedTopics = new Array<any>( );
+        this.selectedTags = new Array<any>( );
+    }
 
     ngOnInit( ) {
 
@@ -86,4 +92,25 @@ export class SearchComponent implements OnInit {
             this.allTags = null;
         }
     }
+
+    addTopic( topic ) {
+        if ( !this.selectedTopics.includes( topic ) )
+            this.selectedTopics.push( topic );
+    }
+
+    addTag( tag ) {
+        if ( !this.selectedTopics.includes( tag ) )
+            this.selectedTags.push( tag );
+    }
+
+    removeTopic( index ) {
+        this.selectedTopics = this.selectedTopics.slice( 0, index )
+            .concat( this.selectedTopics.slice( index + 1, this.selectedTopics.length ) );
+    }
+
+    removeTag( index ) {
+        this.selectedTags = this.selectedTags.slice( 0, index )
+            .concat( this.selectedTags.slice( index + 1, this.selectedTags.length ) );
+    }
+
 }
