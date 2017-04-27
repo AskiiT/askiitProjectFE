@@ -1,20 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
-  styleUrls: ['./sign-up.component.css']
+  styleUrls: ['./sign-up.component.css'],
+  providers: [ UserService ]
 })
 export class SignUpComponent implements OnInit {
   repass:boolean=false;
   term:string;
   term1:string;
+  us:string;
+
+  allUsers: any;
+  response$;
+  gotResponse: boolean = true;
 
   availableColors: Array<string>;
   colorSelected: string;
 
-  constructor() { }
+  constructor( private uService: UserService ) {  }
 
   signUpForm = new FormGroup({
     name: new FormControl(null,[Validators.required,Validators.minLength(4),Validators.maxLength(30),Validators.pattern('[^0-9`!@#\$%\^&*+_=]+')]),
@@ -41,6 +48,31 @@ export class SignUpComponent implements OnInit {
       ];
 
       this.colorSelected = '#ffffff';
+  }
+
+  subscribeData( us ) {
+    this.response$ = this.uService.getUserByUsername( us );
+
+    this.response$.subscribe(
+      res => { this.allUsers = res, this.gotResponse = true },
+      () => {},
+      () => console.log( "OK: users match completed!" )
+    );
+  }
+
+  checkForEmptyResponse( us ) {
+      if ( us === '' )
+          return false;
+      if ( this.allUsers instanceof Array )
+          return true;
+      return false;
+  }
+
+  inputChange( us ){
+      if ( us != '' ) {
+          this.gotResponse = false;
+          this.subscribeData( us );
+      }
   }
 
   updateColor( c ) {
