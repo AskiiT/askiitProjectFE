@@ -3,11 +3,9 @@
   [items]="buffer"
   (update)="scrollItems = $event"
   (end)="fetchMore($event)">
-  <md-spinner class="center-block" style="margin-top: 25%" *ngIf="initialResponse==false"></md-spinner>
   <app-question *ngFor="let question of scrollItems"
     [question]="question"
     (onResize)="refresh($event)"> </app-question>
 
-  <!--div *ngIf="loading" class="loader">Loading...</div>-->
-  <md-spinner class="center-block" style="margin-top: 15px;" *ngIf="loading"></md-spinner>
+  <div *ngIf="loading" class="loader">Loading...</div>
 </virtual-scroll>

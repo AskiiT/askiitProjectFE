@@ -24,8 +24,7 @@
             <div class="col-md-2 choosen-color" [ngStyle]="{'background-color': colorSelected}"></div>
 
             <div class="dropdown col-md-4">
-              <button md-button style="background-color: #3DA867; color: white" class="btn btn-primary dropdown-toggle"
-                type="button" data-toggle="dropdown">Favorite Color
+              <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Favorite Color
               <span class="caret"></span></button>
               <ul class="dropdown-menu" style="margin-left: 10%; min-width: 70%; max-width: 70%; padding: 5px;
                     background-color: black">
@@ -41,7 +40,7 @@
             <input mdInput type="password" placeholder="Confirmar contraseña">
         </md-input-container><br>
 
-        <recaptcha (resolved)="resolved($event)" siteKey="6LegqR4UAAAAAEDmXG2UgqwhMZ_Q2vLl2i45BXcG"></recaptcha><br>
+        <recaptcha (resolved)="resolved($event)" siteKey="YOUR_SITE_KEY"></recaptcha><br>
 
         <div class="col-md-8 text-rigth top30">
             <button md-button class="btn" style="color: white; margin-left: 35%; background-color: #3DA867"
