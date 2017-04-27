@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-sign-up',
@@ -11,6 +12,16 @@ export class SignUpComponent implements OnInit {
   colorSelected: string;
 
   constructor() { }
+
+  signUpForm = new FormGroup({
+    name: new FormControl(null,[Validators.required,Validators.minLength(4),Validators.pattern('[^0-9`!@#\$%\^&*+_=]+')]),
+    lastName: new FormControl('',[Validators.required,Validators.minLength(4)]),
+    email: new FormControl(),
+    userName: new FormControl(),
+    password: new FormControl(),
+    cpassword: new FormControl(),
+    color: new FormControl()
+  });
 
   ngOnInit() {
       this.availableColors = [
@@ -35,6 +46,10 @@ export class SignUpComponent implements OnInit {
 
   resolved( captchaResponse: string ) {
         console.log('Resolved captcha with response ${captchaResponse}:');
+  }
+
+  onSubmit(){
+    console.log(this.signUpForm.value);
   }
 
 }
