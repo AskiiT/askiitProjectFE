@@ -27,13 +27,13 @@
               <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Favorite Color
               <span class="caret"></span></button>
               <ul class="dropdown-menu" style="margin-left: 10%; min-width: 70%; max-width: 70%; padding: 5px;
-                    background-color: black">
+                    background-color: black" >
                 <span *ngFor="let c of availableColors" [ngStyle]="{'background-color': c}"
                     class="color-item" (click)="updateColor(c)">
                 </span>
               </ul>
             </div>
-            
+
         </div>
 
     	<md-input-container class="md-block" flex-gt-sm>

@@ -7,7 +7,7 @@
 @import '~@angular/material/core/theming/prebuilt/pink-bluegrey.css';
 
 body{
-  font-family: 'Lato', sans-serif;
+  font-family: 'Lato', sans-serif !important;
   background: #F0F0F0;
   overflow: hidden;
 }
