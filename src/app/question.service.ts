@@ -25,6 +25,15 @@ export class QuestionService {
   		    .map( ( res: Response ) => res.json( ).data );
   }
 
+  postulateToQuestion( questionId, userId ){
+    const user = {"user_id": userId};
+    const headers = new Headers({'Content-Type': 'application/json; charset=utf-8'});
+    const options = new RequestOptions({headers: headers});
+
+    return this.http.post( 'http://localhost:3000/api/v1/questions/'+ questionId +'/postulate', JSON.stringify(user), options)
+          .map( ( res: Response ) => res.json( ).data );
+  }
+
   postQuestion( question ){
     const headers = new Headers({'Content-Type': 'application/json; charset=utf-8'});
     const options = new RequestOptions({headers: headers});

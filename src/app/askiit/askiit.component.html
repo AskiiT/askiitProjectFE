@@ -8,7 +8,7 @@
         <input #topicInput mdInput placeholder="Topic" list="topics" (keyup.enter)="OnSelectTopic(topicInput)">
       </md-input-container>
       <datalist id="topics">
-        <option *ngFor="let topic of allTopics" value = {{topic.topic_name}}>
+        <option *ngFor="let topic of allTopics" value = {{topic.topic_name}} (keyup.enter)="OnSelectTopic(topicInput)">
       </datalist>
       <div class="topicChip">
         <md-chip selected="true" color="warn" *ngIf="StateSelectTopic" (click)=OnDelecteTopic()>{{selectedTopic}}</md-chip>
