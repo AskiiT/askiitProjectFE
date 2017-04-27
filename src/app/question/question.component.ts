@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter, OnInit} from '@angular/core';
 import {style, state, animate, transition, trigger} from '@angular/core';
+import { QuestionService } from '../question.service';
 
 export interface Question {
     id?: number;
@@ -37,12 +38,22 @@ export class QuestionComponent implements OnInit {
 
   expand: boolean = false;
 
+  constructor(private questionService: QuestionService){ }
+
+
+
   ngOnInit(){
   }
 
   onChange(e){
     this.expand = (this.expand == false ? this.expand = true : this.expand = false);
     this.onResize.emit(e)
+  }
+
+  OnIKnowIt(questionId){
+    this.questionService.postulateToQuestion(questionId, '1').subscribe(
+      res => {console.log(res)}
+    );
   }
 
 }
