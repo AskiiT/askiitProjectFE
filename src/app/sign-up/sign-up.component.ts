@@ -7,6 +7,9 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./sign-up.component.css']
 })
 export class SignUpComponent implements OnInit {
+  repass:boolean=false;
+  term:string;
+  term1:string;
 
   availableColors: Array<string>;
   colorSelected: string;
@@ -14,12 +17,12 @@ export class SignUpComponent implements OnInit {
   constructor() { }
 
   signUpForm = new FormGroup({
-    name: new FormControl(null,[Validators.required,Validators.minLength(4),Validators.pattern('[^0-9`!@#\$%\^&*+_=]+')]),
-    lastName: new FormControl('',[Validators.required,Validators.minLength(4)]),
+    name: new FormControl(null,[Validators.required,Validators.minLength(4),Validators.maxLength(30),Validators.pattern('[^0-9`!@#\$%\^&*+_=]+')]),
+    lastName: new FormControl(null,[Validators.required,Validators.minLength(4),Validators.maxLength(30),Validators.pattern('[^0-9`!@#\$%\^&*+_=]+')]),
     email: new FormControl(),
-    userName: new FormControl(),
-    password: new FormControl(),
-    cpassword: new FormControl(),
+    userName: new FormControl(null,[Validators.required,Validators.minLength(5),Validators.maxLength(20),Validators.pattern('[a-zA-Z][a-zA-Z0-9]+')]),
+    password: new FormControl(null,[Validators.required,Validators.minLength(8),Validators.maxLength(72)]),
+    cpassword: new FormControl(null,[Validators.required,Validators.minLength(8),Validators.maxLength(72)]),
     color: new FormControl()
   });
 
@@ -50,6 +53,14 @@ export class SignUpComponent implements OnInit {
 
   onSubmit(){
     console.log(this.signUpForm.value);
+  }
+
+  isPass(){
+    if (this.term == this.term1){
+      this.repass = true;
+    }else{
+      this.repass = false;
+    }
   }
 
 }

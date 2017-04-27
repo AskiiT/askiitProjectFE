@@ -1,34 +1,59 @@
 <section class="unicorn-dark-theme">
     <form name="signUpForm" [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
     	<md-input-container class="md-block" flex-gt-sm>
-            <input mdInput placeholder="Nombre" #refName class="form-control" formControlName="name" required>
-            <md-hint *ngIf="signUpForm.controls['name'].hasError('required') && refName.pristine" align="end" >
-              A Name is required
-            </md-hint>
+            <input mdInput placeholder="Nombre" #refName  formControlName="name" required>
             <md-hint *ngIf="signUpForm.controls['name'].hasError('minlength')" align="end" >
-              Please enter at least 4 characters
+              Ingresa mínimo 4 caracteres
+            </md-hint>
+            <md-hint *ngIf="signUpForm.controls['name'].hasError('maxlength')" align="end" >
+               Ingresa máximo 30 caracteres
             </md-hint>
             <md-hint *ngIf="signUpForm.controls['name'].hasError('pattern')"  >
-              Please enter a valid name
+              Ingresa un nombre valido
             </md-hint>
         </md-input-container>
 
 
         <md-input-container class="md-block" flex-gt-sm>
-            <input mdInput placeholder="Apellido" class="form-control" formControlName="lastName">
+            <input mdInput placeholder="Apellido" #refLastName formControlName="lastName"  required>
+            <md-hint *ngIf="signUpForm.controls['lastName'].hasError('minlength')" align="end" >
+              Ingresa mínimo 4 caracteres
+            </md-hint>
+            <md-hint *ngIf="signUpForm.controls['lastName'].hasError('maxlength')" align="end" >
+               Ingresa máximo 30 caracteres
+            </md-hint>
+            <md-hint *ngIf="signUpForm.controls['lastName'].hasError('pattern')"  >
+              Ingresa un apellido valido
+            </md-hint>
+
         </md-input-container><br>
 
     	<md-input-container class="md-block" flex-gt-sm>
-            <input mdInput placeholder="Correo" type="email" class="form-control" formControlName="email">
+            <input mdInput placeholder="Correo" type="email"  formControlName="email" required>
         </md-input-container>
 
     	<md-input-container class="md-block" flex-gt-sm>
-            <input mdInput placeholder="Usuario" class="form-control" formControlName="userName">
+            <input mdInput placeholder="Usuario" #refUserName formControlName="userName" required>
+            <md-hint *ngIf="signUpForm.controls['userName'].hasError('minlength')" align="end" >
+              Ingresa mínimo 5 caracteres
+            </md-hint>
+            <md-hint *ngIf="signUpForm.controls['userName'].hasError('maxlength')" align="end" >
+               Ingresa máximo 20 caracteres
+            </md-hint>
+            <md-hint *ngIf="signUpForm.controls['userName'].hasError('pattern')"  >
+              Ingresa un usuario valido
+            </md-hint>
         </md-input-container><br>
 
         <div class="row">
         	<md-input-container class="col-md-6" style="width: 38%; margin-right: 4%">
-                <input mdInput type="password" placeholder="Contraseña" class="form-control" formControlName="password">
+                <input mdInput type="password" placeholder="Contraseña" #refPassword formControlName="password" [(ngModel)]="term"  required>
+                <md-hint *ngIf="signUpForm.controls['password'].hasError('minlength')" align="end" >
+                  Ingresa mínimo 8 caracteres
+                </md-hint>
+                <md-hint *ngIf="signUpForm.controls['password'].hasError('maxlength')" align="end" >
+                   Ingresa máximo 72 caracteres
+                </md-hint>
             </md-input-container><br>
 
             <div class="col-md-2 choosen-color" [ngStyle]="{'background-color': colorSelected}"></div>
@@ -48,7 +73,10 @@
         </div>
 
     	<md-input-container class="md-block" flex-gt-sm>
-            <input mdInput type="password" placeholder="Confirmar contraseña" class="form-control" formControlName="cpassword">
+            <input mdInput type="password" placeholder="Confirmar contraseña"  formControlName="cpassword" [(ngModel)]="term1"  (ngModelChange)="isPass()" required>
+            <md-hint *ngIf="!repass ">
+               Debe ser la misma contraseña
+            </md-hint>
         </md-input-container><br>
 
         <recaptcha (resolved)="resolved($event)" siteKey="6LegqR4UAAAAAEDmXG2UgqwhMZ_Q2vLl2i45BXcG"></recaptcha><br>
