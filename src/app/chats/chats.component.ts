@@ -27,32 +27,36 @@ import {FormControl} from '@angular/forms';
 
 export class ChatsComponent implements OnInit {
 
-  allUsers: Array<any>;
+    allUsers: any;
 	response$;
-  empty:boolean=false;
-  term:string;
+    term:string;
     constructor( private uService: UserService ) { }
 
     ngOnInit( ) {
-    	this.subscribeData( );
+
     }
 
-    subscribeData( ) {
-    	this.response$ = this.uService.getAllUsers( );
+    subscribeData( term ) {
+    	this.response$ = this.uService.getUsersByMatch( term );
 
     	this.response$.subscribe(
     		res => this.allUsers = res,
     		() => {},
-    		() => console.log( "OK: completed!" )
+    		() => console.log( "OK: users match completed!" )
     	);
     }
 
-    isEmpty(){
-      if (this.term.length > 0){
-        this.empty = true;
-      }else{
-        this.empty = false;
-      }
+    checkForEmptyResponse( term ) {
+        if ( term === '' )
+            return false;
+        if ( this.allUsers instanceof Array )
+            return true;
+        return false;
+    }
+
+    inputChange( term ){
+        if ( term != '' )
+            this.subscribeData( term );
     }
 
 }

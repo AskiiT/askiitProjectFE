@@ -13,4 +13,9 @@ export class UserService {
   getUserByUsername( username ) {
   	return this.http.get( 'http://localhost:3000/api/v1/users/' + username).map( ( res: Response ) => res.json( ).data );
   }
+
+  getUsersByMatch( subString ) {
+      return this.http.get( 'http://localhost:3000/api/v1/users/search/username/' + subString )
+        .map( ( res: Response ) => res.json( ).data );
+  }
 }

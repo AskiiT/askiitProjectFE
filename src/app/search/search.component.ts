@@ -25,44 +25,56 @@ import {style, state, animate, transition, trigger} from '@angular/core';
 })
 export class SearchComponent implements OnInit {
 
-	allTags: Array<any>;
-  allTopics: Array<any>;
+	allTags: any;
+    allTopics: any;
 
 	tagsResponse$;
-  topicsResponse$;
+    topicsResponse$;
 
-  empty:boolean=false;
-  term:string;
+    empty:boolean=false;
+    term:string;
     constructor( private tagService: TagService, private topicService: TopicService ) { }
 
     ngOnInit( ) {
-    	this.subscribeData( );
+
     }
 
-    subscribeData( ) {
-    	this.tagsResponse$ = this.tagService.getAllTags( );
+    subscribeData( term ) {
+    	this.tagsResponse$ = this.tagService.getTagsByMatch( term );
 
     	this.tagsResponse$.subscribe(
     		res => this.allTags = res,
     		() => {},
-    		() => console.log( "OK: completed!" )
+    		() => console.log( "OK: tags match completed!" )
     	);
 
-      this.tagsResponse$ = this.topicService.getAllTopics( );
+      this.tagsResponse$ = this.topicService.getTopicsByMatch( term );
 
       this.tagsResponse$.subscribe(
         res => this.allTopics = res,
         () => {},
-        () => console.log( "OK: completed!" )
+        () => console.log( "OK: topics match completed!" )
       );
     }
-    isEmpty(){
-      if (this.term.length > 0){
-        this.empty = true;
-        console.log(this.term);
-      }else{
-        this.empty = false;
-        console.log(0);
-      }
+
+    checkForTagsEmptyResponse( term ) {
+        if ( term === '' )
+            return false;
+        if ( this.allTags instanceof Array )
+            return true;
+        return false;
+    }
+
+    checkForTopicsEmptyResponse( term ) {
+        if ( term === '' )
+            return false;
+        if ( this.allTopics instanceof Array )
+            return true;
+        return false;
+    }
+
+    inputChange( term ) {
+        if ( term != '' )
+            this.subscribeData( term );
     }
 }

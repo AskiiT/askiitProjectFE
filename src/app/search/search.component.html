@@ -3,13 +3,15 @@
 		<div class="search">
 			<span class="fa fa-search"></span>
 			<input class="form-control tag-finder" type="text" name=""
-				placeholder="Añade un tag..." [(ngModel)]="term" (ngModelChange)="isEmpty()">
+				placeholder="Añade un tag..." [(ngModel)]="term" (ngModelChange)="inputChange(term)">
 		</div>
-		<div id="searchBox" *ngIf="empty" [@slideIn] class="center-block text-center">
+		<div id="searchBox" *ngIf="checkForTopicsEmptyResponse(term)" [@slideIn] class="center-block text-center">
 			<li style="" class="topic-color center-block text-center"
 				*ngFor="let topic of allTopics | topicFilter:term">
 				{{topic.topic_name}}
 			</li>
+		</div>
+		<div id="searchBox" *ngIf="checkForTagsEmptyResponse(term)" [@slideIn] class="center-block text-center">
 			<li style="" class="tag-color center-block text-center"
 				*ngFor="let tag of allTags | tagFilter:term">
 				{{tag.tag_name}}
