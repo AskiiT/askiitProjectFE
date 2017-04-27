@@ -10,4 +10,9 @@ export class TagService {
   	return this.http.get( 'http://localhost:3000/api/v1/tags' ).map( ( res: Response ) => res.json( ).data );
   }
 
+  getTagsByMatch( subString ) {
+    return this.http.get( 'http://localhost:3000/api/v1/tags/search/' + subString )
+        .map( ( res: Response ) => res.json( ).data );
+  }
+
 }

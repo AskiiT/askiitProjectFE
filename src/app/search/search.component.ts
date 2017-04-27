@@ -25,44 +25,65 @@ import {style, state, animate, transition, trigger} from '@angular/core';
 })
 export class SearchComponent implements OnInit {
 
-	allTags: Array<any>;
-  allTopics: Array<any>;
+	allTags: any;
+    allTopics: any;
 
 	tagsResponse$;
-  topicsResponse$;
+    topicsResponse$;
 
-  empty:boolean=false;
-  term:string;
+    tagGotResponse: boolean = true;
+    topicGotResponse: boolean = true;
+
     constructor( private tagService: TagService, private topicService: TopicService ) { }
 
     ngOnInit( ) {
-    	this.subscribeData( );
+
     }
 
-    subscribeData( ) {
-    	this.tagsResponse$ = this.tagService.getAllTags( );
+    subscribeData( term ) {
+
+        this.topicsResponse$ = this.topicService.getTopicsByMatch( term );
+
+        this.topicsResponse$.subscribe(
+          res => { this.allTopics = res, this.topicGotResponse = true },
+          () => {},
+          () => console.log( "OK: topics match completed!" )
+        );
+
+    	this.tagsResponse$ = this.tagService.getTagsByMatch( term );
 
     	this.tagsResponse$.subscribe(
-    		res => this.allTags = res,
+    		res => { this.allTags = res, this.tagGotResponse = true },
     		() => {},
-    		() => console.log( "OK: completed!" )
+    		() => console.log( "OK: tags match completed!" )
     	);
-
-      this.tagsResponse$ = this.topicService.getAllTopics( );
-
-      this.tagsResponse$.subscribe(
-        res => this.allTopics = res,
-        () => {},
-        () => console.log( "OK: completed!" )
-      );
     }
-    isEmpty(){
-      if (this.term.length > 0){
-        this.empty = true;
-        console.log(this.term);
-      }else{
-        this.empty = false;
-        console.log(0);
-      }
+
+    checkForTagsEmptyResponse( term ) {
+        if ( term === '' )
+            return false;
+        if ( this.allTags instanceof Array )
+            return true;
+        return false;
+    }
+
+    checkForTopicsEmptyResponse( term ) {
+        if ( term === '' )
+            return false;
+        if ( this.allTopics instanceof Array )
+            return true;
+        return false;
+    }
+
+    inputChange( term ) {
+        if ( term != '' ) {
+            this.tagGotResponse = false;
+            this.topicGotResponse = false;
+            this.subscribeData( term );
+        }
+        else {
+            this.allTopics = null;
+            this.allTags = null;
+        }
     }
 }

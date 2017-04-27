@@ -5,15 +5,18 @@
 		<div class="search">
 			<span class="fa fa-search"></span>
 			<input  class="form-control" type="text"  placeholder="Search by User"
-				[(ngModel)]="term" (ngModelChange)="isEmpty()">
+				[(ngModel)]="term" (ngModelChange)="inputChange(term)">
 		</div>
-		<div id="searchBox" *ngIf="empty" [@slideIn]>
+
+		<md-progress-bar class="unicorn-dark-theme" mode="indeterminate"
+			style="width: 90%;" *ngIf="!gotResponse"></md-progress-bar>
+		<div id="searchBox" *ngIf="checkForEmptyResponse(term)" [@slideIn]>
 			<li style="color: #538CD1;" [routerLink]="['/home','profile', u.username]"
-				*ngFor="let u of allUsers | chatFilter:term">
+ 				*ngFor="let u of allUsers">
 				{{u.username}}
 			</li>
 		</div>
-		
+
 
 		<!--
 		<md-input-container class="search">
