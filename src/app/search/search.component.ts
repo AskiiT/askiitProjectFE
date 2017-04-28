@@ -111,7 +111,7 @@ export class SearchComponent implements OnInit {
     }
 
     addTag( tag ) {
-        if ( !this.selectedTopics.includes( tag ) )
+        if ( !this.selectedTags.includes( tag ) )
             this.selectedTags.push( tag );
         this.chipClicked = true;
     }

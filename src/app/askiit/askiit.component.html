@@ -4,20 +4,20 @@
 
 <div md-dialog-content class="row divContent">
 
-  <div class="col-md-4 leftDiv text-center">
-    <div class="divTopicSearch border">
-      <md-input-container *ngIf="!StateSelectTopic" [@slideIn] >
+  <div class="col-md-3 leftDiv text-center">
+    <div class="divTopicSearch topic-border">
+      <md-input-container *ngIf="!StateSelectTopic" [@fadeInOut] >
         <input #topicInput mdInput placeholder="Topic"  formControlName="topic"  [(ngModel)]="term" (ngModelChange)="inputChange(term)"
          required>
         <md-progress-bar class="unicorn-dark-theme" mode="indeterminate"
           style="width: 90%;" *ngIf="!topicGotResponse"></md-progress-bar>
       </md-input-container>
       <div id="searchBox" *ngIf="checkForTopicsEmptyResponse(term) && !StateSelectTopic"
-  			class="center-block text-center" [@slideIn]>
+  			class="center-block text-center" [@fadeInOut]>
         <md-chip-list>
           <div id="chip" *ngIf="checkForTopicsEmptyResponse(term)">
             <md-chip class="topic-color center-block text-center"
-              *ngFor="let topic of allTopics" (click)="OnSelectTopic(topic.topic_name)">
+              *ngFor="let topic of allTopics" (click)="OnSelectTopic(topic.topic_name)" [@fadeInOut]>
               {{topic.topic_name}}
             </md-chip>
           </div>
@@ -30,41 +30,41 @@
 
     <div class="divTagSearch border">
       <div class="divSubTagSearch">
-        <md-input-container *ngIf="!StateSelectTags[0]">
-          <input id="tin" #tagInput0 mdInput placeholder="Tag 1"  formControlName="tag"
+        <md-input-container>
+          <input id="tin" #tagInput mdInput placeholder="Tags"  formControlName="tag"
           [(ngModel)]="term1" (ngModelChange)="inputChange1(term1)">
           <md-progress-bar class="unicorn-dark-theme" mode="indeterminate"
             style="width: 90%;" *ngIf="!tagGotResponse"></md-progress-bar>
         </md-input-container>
-        <md-chip selected="true" color="primary" *ngIf="StateSelectTags[0]" (click)=OnDelecteTag(0)>{{selectedTags[0]}}</md-chip>
+        <div id="searchBox" *ngIf="!chipClicked&&checkForTagsEmptyResponse(term1)"
+          class="center-block text-center" [@fadeInOut]>
+          <md-chip-list>
+            <div  *ngIf="checkForTagsEmptyResponse(term1)">
+              <md-chip class="tag-color center-block text-center"
+                *ngFor="let tag of allTags" (click)="addTag(tag.tag_name); tagInput.value=''">
+                {{tag.tag_name}}
+              </md-chip>
+            </div>
+          </md-chip-list>
+        </div>
       </div>
 
-      <!--
-      <div class="divSubTagSearch">
-        <md-input-container *ngIf="!StateSelectTags[1]">
-          <input #tagInput1 mdInput placeholder="Tag 2" list="tags" (click)="OnSelectTag(tagInput1,1)">
-        </md-input-container>
-        <md-chip selected="true" color="primary" *ngIf="StateSelectTags[1]" (click)=OnDelecteTag(1)>{{selectedTags[1]}}</md-chip>
-      </div>
-      -->
-      <div id="searchBox" *ngIf="checkForTagsEmptyResponse(term1) && !StateSelectTags[0]"
-        class="center-block text-center" [@slideIn]>
-        <md-chip-list>
-          <div  *ngIf="checkForTagsEmptyResponse(term1)">
-            <md-chip class="tag-color center-block text-center"
-              *ngFor="let tag of allTags" (click)="OnSelectTag(tag.tag_name,0)">
-              {{tag.tag_name}}
-            </md-chip>
-          </div>
-        </md-chip-list>
-      </div>
-
+      <md-chip-list>
+          <md-chip class="tag-color-selected center-block text-center"
+              *ngFor="let c of selectedTags; let i = index" [@slideIn] [@fadeInOut]
+                  [ngStyle]="{'padding-right':'4px', 'padding-left':'4px', 'padding-top':'2px', 'padding-bottom':'2px'}">
+              {{c}}
+              <md-icon (click)="removeTag(i)" class="vcenter tag-color-selected" style="border-radius: 10px">
+                  clear
+              </md-icon>
+          </md-chip>
+      </md-chip-list>
     </div>
   </div>
 
-  <div class="col-md-8 divQuestion ">
+  <div class="col-md-9 divQuestion ">
     <md-input-container class="divTitle">
-      <input #titleInput mdInput placeholder="Preguntá" formControlName="title" required>
+      <input #titleInput mdInput placeholder="Título" formControlName="title" required>
       <md-hint *ngIf="askiitForm.controls['title'].hasError('minlength')" align="end" [ngStyle]="{'color': '#B50000'}" [@fadeInOut]>
         Ingresa mínimo 12 caracteres
       </md-hint>
@@ -75,7 +75,7 @@
       <span *ngIf="askiitForm.controls['body'].hasError('maxlength')" class="alert alert-danger" id="ale">
         Ingresa máximo 500 caracteres
       </span>
-      <textarea #bodyInput name="question" rows="12" cols="83" class="inputQuestionStyle"  formControlName="body"  placeholder="¿Qué deseas saber?"></textarea>
+      <textarea #bodyInput name="question" style="resize: none" rows="12" cols="83" class="inputQuestionStyle"  formControlName="body"  placeholder="Describe tu pregunta!"></textarea>
 
   </div>
 </div>
