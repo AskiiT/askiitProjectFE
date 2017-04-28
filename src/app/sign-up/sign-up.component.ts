@@ -13,10 +13,15 @@ export class SignUpComponent implements OnInit {
   term:string;
   term1:string;
   us:string;
+  em:string;
+  ail:string;
 
   allUsers: any;
+  allUmails:any;
   response$;
+  response1$;
   gotResponse: boolean = true;
+  gotResponseE: boolean = true;
 
   availableColors: Array<string>;
   colorSelected: string;
@@ -50,7 +55,7 @@ export class SignUpComponent implements OnInit {
       this.colorSelected = '#ffffff';
   }
 
-  subscribeData( us ) {
+  subscribeData( us) {
     this.response$ = this.uService.getUserByUsername( us );
 
     this.response$.subscribe(
@@ -58,6 +63,35 @@ export class SignUpComponent implements OnInit {
       () => {},
       () => console.log( "OK: users match completed!" )
     );
+
+  }
+
+  subscribeData1(em){
+    this.response1$ = this.uService.getUsersByMail( em );
+    this.response1$.subscribe(
+      res => { this.allUmails = res, this.gotResponse = true },
+      () => {},
+      () => console.log( "OK: users match completed!" )
+    );
+  }
+
+
+  checkForEmptyResponseE( em ) {
+      if ( em === '' )
+          return false;
+      if ( this.allUmails instanceof Array )
+          return true;
+      return false;
+  }
+
+  inputChangeE( em ){
+    if ( em != '' && em != undefined) {
+      this.gotResponseE = false;
+      var re = /[.]/;
+      var newstr = em.replace(re, '*');
+      console.log( newstr )
+      this.subscribeData1(newstr);
+    }
   }
 
   checkForEmptyResponse( us ) {
@@ -71,7 +105,7 @@ export class SignUpComponent implements OnInit {
   inputChange( us ){
       if ( us != '' ) {
           this.gotResponse = false;
-          this.subscribeData( us );
+          this.subscribeData(us);
       }
   }
 

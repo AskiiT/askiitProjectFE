@@ -29,7 +29,10 @@
         </md-input-container><br>
 
     	<md-input-container class="md-block" flex-gt-sm>
-            <input mdInput placeholder="Correo" type="email"  formControlName="email" required>
+            <input mdInput placeholder="Correo" type="email"  formControlName="email" [(ngModel)]="em" (ngModelChange)="inputChangeE(em)" required>
+            <md-hint *ngIf="checkForEmptyResponseE(em) " align="center" [ngStyle]="{'color': 'red'}">
+              Este correo ya existe
+            </md-hint>
         </md-input-container>
 
     	<md-input-container class="md-block" flex-gt-sm>
