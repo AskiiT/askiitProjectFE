@@ -8,6 +8,7 @@ export interface Question {
     body?: string;
     topic?: any;
     tags?: Array<any>;
+    user?: any;
     p_users?: Array<any>;
 }
 
@@ -37,23 +38,44 @@ export class QuestionComponent implements OnInit {
 
 
   expand: boolean = false;
+  disableIKnowIt = false;
+  userId = '3';
 
   constructor(private questionService: QuestionService){ }
 
 
 
   ngOnInit(){
+    this.validateIKnowIt();
   }
 
   onChange(e){
+    console.log(this.question);
     this.expand = (this.expand == false ? this.expand = true : this.expand = false);
     this.onResize.emit(e)
   }
 
   OnIKnowIt(questionId){
-    this.questionService.postulateToQuestion(questionId, '1').subscribe(
-      res => {console.log(res)}
+    this.questionService.postulateToQuestion(questionId, this.userId).subscribe(
+      res => {this.question.p_users[this.question.p_users.length] = JSON.stringify({"id": this.userId}), console.log(this.question), this.disableIKnowIt = true}
     );
+  }
+
+  validateIKnowIt(){
+    // Valida si el usuario ya se postulo a esta pregunta
+    if(this.question.p_users != null ){
+      for(var i = 0; i < this.question.p_users.length; i++){
+        if(this.question.p_users[i].id == this.userId){
+          this.disableIKnowIt = true;
+          break;
+        }
+      }
+    }
+    // Valida si el usuario fue el que realizo esta pregunta
+    if(this.question.user.id == this.userId){
+      console.log("entro");
+      this.disableIKnowIt = true;
+    }
   }
 
 }

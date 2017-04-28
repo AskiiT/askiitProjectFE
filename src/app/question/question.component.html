@@ -1,7 +1,7 @@
 <div class="divQuestion">
   <md-card class="cardQuestion" (click) ="onChange($event)">
     <md-card-content>
-        <div id="difficulty">{{question.difficulty}}</div>
+        <div mdTooltip="Dificultad" id="difficulty">{{question.difficulty}}</div>
         <div class = "title">{{question.title}}</div>
         <span class="spacer"></span>
         <div mdTooltip="Postulados" mdTooltipPosition="right" id="postuls">{{question.p_users.length}}</div>
@@ -26,7 +26,7 @@
       </md-card-content>
 
       <md-card-actions class="divButtons col-md-2">
-        <button id="know-button" md-button class="buttons" style="margin-left: 4px;" (click)="OnIKnowIt(question.id)">
+        <button id="know-button" md-button class="buttons" style="margin-left: 4px;" (click)="OnIKnowIt(question.id)" [disabled]="disableIKnowIt">
           <i id="know" class="icon material-icons md-18">mood</i>
           I KNOW IT
         </button>
