@@ -57,7 +57,7 @@ export class AskiitComponent implements OnInit {
   selectedTopic: string;
 
   StateSelectTopic:boolean = false;
-  StateSelectTags: Array<boolean> = [false, false, false];
+  chipClicked: boolean = false;
 
   constructor(public dialogRef: MdDialogRef<AskiitComponent>, private tagService: TagService, private topicService: TopicService,
   private questionService: QuestionService,) {
@@ -120,18 +120,13 @@ export class AskiitComponent implements OnInit {
           this.topicGotResponse = false;
           this.subscribeData( term );
       }
-      else {
-          this.allTopics = null;
-      }
   }
 
   inputChange1( term1 ) {
       if ( term1 != '' ) {
           this.tagGotResponse = false;
           this.subscribeData1( term1 );
-      }
-      else {
-          this.allTags = null;
+          this.chipClicked = false;
       }
   }
 
@@ -147,15 +142,7 @@ export class AskiitComponent implements OnInit {
     this.StateSelectTopic = false;
   }
 
-  OnSelectTag(tname, index){
-    this.selectedTags[index] = tname;
-    this.StateSelectTags[index] = true;
-  }
 
-  OnDelecteTag(index){
-    this.selectedTags[index] = null;
-    this.StateSelectTags[index] = false;
-  }
 
   OnAskiit(title, body){
     const question = new Question(title.value, body.value, this.selectedTopic, "1", "1", this.selectedTags);
@@ -176,6 +163,17 @@ export class AskiitComponent implements OnInit {
 
   onSubmit(){
     console.log(this.askiitForm.value);
+  }
+
+  addTag( tag ) {
+      if ( !this.selectedTags.includes( tag ) && this.selectedTags.length < 3 )
+          this.selectedTags.push( tag );
+      this.chipClicked = true;
+  }
+
+  removeTag( index ) {
+      this.selectedTags = this.selectedTags.slice( 0, index )
+          .concat( this.selectedTags.slice( index + 1, this.selectedTags.length ) );
   }
 
 }
