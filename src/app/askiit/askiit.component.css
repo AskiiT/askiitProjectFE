@@ -83,3 +83,10 @@ md-chip:hover{
 .cancelBtn{
 	background-color: #BC1111;
 }
+
+#ale{
+  position: absolute;
+  z-index: 1000;
+}
+
+textarea.ng-invalid{border-left: 5px solid red;}
