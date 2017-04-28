@@ -1,11 +1,13 @@
 <h1 md-dialog-title class="title text-center">AskiiT</h1>
 
+<form name="askiitForm" [formGroup]="askiitForm" (ngSubmit)="onSubmit()">
+
 <div md-dialog-content class="row divContent">
 
   <div class="col-md-4 leftDiv text-center">
     <div class="divTopicSearch border">
       <md-input-container *ngIf="!StateSelectTopic" [@slideIn] >
-        <input #topicInput mdInput placeholder="Topic" list="topics" (keyup.enter)="OnSelectTopic(topicInput)">
+        <input #topicInput mdInput placeholder="Topic" list="topics" formControlName="topic" (keyup.enter)="OnSelectTopic(topicInput)" required>
       </md-input-container>
       <datalist id="topics">
         <option *ngFor="let topic of allTopics" value = {{topic.topic_name}} (keyup.enter)="OnSelectTopic(topicInput)">
@@ -43,14 +45,14 @@
 
   <div class="col-md-8 divQuestion ">
     <md-input-container class="divTitle">
-      <input #titleInput mdInput placeholder="Preguntá" >
+      <input #titleInput mdInput placeholder="Preguntá" formControlName="title" required>
     </md-input-container>
-    <textarea #bodyInput name="question" rows="12" cols="83" class="inputQuestionStyle" placeholder="¿Qué deseas saber?"></textarea>
+    <textarea #bodyInput name="question" rows="12" cols="83" class="inputQuestionStyle"  formControlName="body"  placeholder="¿Qué deseas saber?"></textarea>
   </div>
 </div>
 
 <div md-dialog-actions class="divButtons text-center">
-  <button md-button class="btn askiitBtn" (click)="OnAskiit(titleInput, bodyInput)">
+  <button md-button class="btn askiitBtn" type="submit" (click)="OnAskiit(titleInput, bodyInput)">
     <md-icon>play_for_work</md-icon>
     AskiiT
   </button>
@@ -59,3 +61,5 @@
     Cancel
   </button>
 </div>
+
+</form>

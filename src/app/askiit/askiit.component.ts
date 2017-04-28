@@ -4,7 +4,7 @@ import {TagService} from '../tag.service';
 import {TopicService} from '../topic.service';
 import {QuestionService} from '../question.service';
 import {style, state, animate, transition, trigger} from '@angular/core';
-import {FormControl} from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import {Question} from '../question';
 import 'rxjs/add/operator/startWith';
 
@@ -42,6 +42,12 @@ export class AskiitComponent implements OnInit {
   StateSelectTags: Array<boolean> = [false, false, false];
 
   constructor(public dialogRef: MdDialogRef<AskiitComponent>, private tagService: TagService, private topicService: TopicService, private questionService: QuestionService,) {  }
+
+  askiitForm = new FormGroup({
+    title: new FormControl(null,[Validators.required,Validators.minLength(12),Validators.maxLength(140)]),
+    body: new FormControl(null,[Validators.maxLength(500)]),
+    topic: new FormControl(null,[Validators.required])
+  });
 
   ngOnInit() {
     this.subscribeData();
@@ -93,6 +99,10 @@ export class AskiitComponent implements OnInit {
 
   closeAskiit(){
     this.dialogRef.close();
+  }
+
+  onSubmit(){
+    console.log(this.askiitForm.value);
   }
 
 }
