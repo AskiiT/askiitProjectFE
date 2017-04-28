@@ -77,44 +77,78 @@ input:focus {
 	margin-left: 25px;
 }
 
-#searchBox li{
-    -webkit-border-radius: 50px;
-    border: 1px solid #CDCDCD;
-    margin-top: -1px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    text-decoration: none;
-    color: black;
-    display: block;
-	width: 75%;
-	margin-left: 25px;
+md-chip{
+    margin-top: 1px;
+	width: 85%;
 	font-size: 0.8em;
 }
 
 .tag-color {
-    background-color: #A2FF9D;
+	background-color: #45C7D8;
 	-webkit-transition: background-color 400ms linear;
     -ms-transition: background-color 400ms linear;
     transition: background-color 400ms linear;
 }
 
 .topic-color {
-    background-color: #FFCF6E;
+    background-color: #FFC820;
 	-webkit-transition: background-color 400ms linear;
     -ms-transition: background-color 400ms linear;
     transition: background-color 400ms linear;
 }
 
-#searchBox li.topic-color:hover{
-  background-color: #FAAF1A;
+md-chip.topic-color:hover{
+  background-color: #EBB309;
   -webkit-transition: background-color 200ms linear;
   -ms-transition: background-color 200ms linear;
   transition: background-color 200ms linear;
   cursor: pointer;
 }
 
-#searchBox li.tag-color:hover{
-  background-color: #3DCA35;
+.topic-color-selected {
+    background-color: #FFC820;
+}
+
+.topic-color-selected:hover {
+	cursor: default;
+}
+
+.tag-color-selected {
+    background-color: #45C7D8;
+}
+
+.tag-color-selected:hover {
+	cursor: default;
+}
+
+#ttselected  {
+	max-height: 40vh;
+	overflow-y: auto;
+}
+
+md-icon {
+	margin: 0px;
+	padding: 0px;
+}
+
+md-icon.topic-color-selected:hover{
+  background-color: #EBB309;
+  -webkit-transition: background-color 200ms linear;
+  -ms-transition: background-color 200ms linear;
+  transition: background-color 200ms linear;
+  cursor: pointer;
+}
+
+md-icon.tag-color-selected:hover{
+  background-color: #38A7B5;
+  -webkit-transition: background-color 200ms linear;
+  -ms-transition: background-color 200ms linear;
+  transition: background-color 200ms linear;
+  cursor: pointer;
+}
+
+md-chip.tag-color:hover{
+  background-color: #38A7B5;
   -webkit-transition: background-color 200ms linear;
   -ms-transition: background-color 200ms linear;
   transition: background-color 200ms linear;
@@ -124,4 +158,10 @@ input:focus {
 #designDiv {
     max-height: 335px;
 	padding-top: 5px;
+}
+
+.spacer {
+	-webkit-box-flex: 1;
+	-ms-flex: 1 1 auto;
+	flex: 1 1 auto;
 }
