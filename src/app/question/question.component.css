@@ -160,7 +160,7 @@ md-card.cardQuestion:hover {
 }
 
 #know-button:hover{
-  background-color: #D9FF9F;
+  /*background-color: #D9FF9F;*/
   -webkit-transition: background-color 200ms linear;
   -ms-transition: background-color 200ms linear;
   transition: background-color 200ms linear;
@@ -170,6 +170,10 @@ md-card.cardQuestion:hover {
     -webkit-transition: background-color 400ms linear;
     -ms-transition: background-color 400ms linear;
     transition: background-color 400ms linear;
+}
+
+.knowSelected{
+  background-color: #D9FF9F;
 }
 
 #report-button:hover{

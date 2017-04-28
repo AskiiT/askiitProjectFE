@@ -25,6 +25,14 @@ export class QuestionService {
   		    .map( ( res: Response ) => res.json( ).data );
   }
 
+  postQuestion( question ){
+    const headers = new Headers({'Content-Type': 'application/json; charset=utf-8'});
+    const options = new RequestOptions({headers: headers});
+
+    return this.http.post( 'http://localhost:3000/api/v1/questions', JSON.stringify(question), options)
+          .map( ( res: Response ) => res.json( ).data );
+  }
+
   postulateToQuestion( questionId, userId ){
     const user = {"user_id": userId};
     const headers = new Headers({'Content-Type': 'application/json; charset=utf-8'});
@@ -34,11 +42,12 @@ export class QuestionService {
           .map( ( res: Response ) => res.json( ).data );
   }
 
-  postQuestion( question ){
+  unpostulateToQuestion( questionId, userId ){
+    const user = {"user_id": userId};
     const headers = new Headers({'Content-Type': 'application/json; charset=utf-8'});
     const options = new RequestOptions({headers: headers});
 
-    return this.http.post( 'http://localhost:3000/api/v1/questions', JSON.stringify(question), options)
+    return this.http.delete( 'http://localhost:3000/api/v1/questions/'+ questionId +'/unpostulate?user_id=' + userId, options)
           .map( ( res: Response ) => res.json( ).data );
   }
 

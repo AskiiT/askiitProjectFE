@@ -26,7 +26,7 @@
       </md-card-content>
 
       <md-card-actions class="divButtons col-md-2">
-        <button id="know-button" md-button class="buttons" style="margin-left: 4px;" (click)="OnIKnowIt(question.id)" [disabled]="disableIKnowIt">
+        <button id="know-button" md-button class="buttons" style="margin-left: 4px;" (click)="OnIKnowIt(question.id)" [disabled]="disableIKnowIt" [class.knowSelected] = "postulated">
           <i id="know" class="icon material-icons md-18">mood</i>
           I KNOW IT
         </button>
