@@ -1,42 +1,55 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UserService } from '../user.service';
+import {style, state, animate, transition, trigger} from '@angular/core';
 
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.css'],
-  providers: [ UserService ]
+  providers: [ UserService ],
+  animations: [
+      trigger('fadeInOut', [
+          transition(':enter', [
+            style({opacity:0}),
+            animate(200, style({opacity:1}))
+          ]),
+          transition(':leave', [
+            animate(200, style({opacity:0}))
+          ])
+      ])
+  ]
 })
 export class SignUpComponent implements OnInit {
   repass:boolean=false;
   term:string;
   term1:string;
-  us:string;
-  em:string;
+  username:string = '';
+  em:string = '';
   ail:string;
 
   allUsers: any;
   allUmails:any;
+
   response$;
   response1$;
-  gotResponse: boolean = true;
-  gotResponseE: boolean = true;
+  userPostResponse$;
+
+  gotUsernameResponse: boolean = true;
+  gotEmailResponse: boolean = true;
 
   availableColors: Array<string>;
   colorSelected: string;
 
-  constructor( private uService: UserService ) {  }
-
   signUpForm = new FormGroup({
-    name: new FormControl(null,[Validators.required,Validators.minLength(4),Validators.maxLength(30),Validators.pattern('[^0-9`!@#\$%\^&*+_=]+')]),
-    lastName: new FormControl(null,[Validators.required,Validators.minLength(4),Validators.maxLength(30),Validators.pattern('[^0-9`!@#\$%\^&*+_=]+')]),
+    first_name: new FormControl(null,[Validators.required,Validators.minLength(4),Validators.maxLength(30),Validators.pattern('[^0-9`!@#\$%\^&*+_=]+')]),
+    last_name: new FormControl(null,[Validators.required,Validators.minLength(4),Validators.maxLength(30),Validators.pattern('[^0-9`!@#\$%\^&*+_=]+')]),
     email: new FormControl(),
-    userName: new FormControl(null,[Validators.required,Validators.minLength(5),Validators.maxLength(20),Validators.pattern('[a-zA-Z][a-zA-Z0-9]+')]),
+    username: new FormControl(null,[Validators.required,Validators.minLength(5),Validators.maxLength(20),Validators.pattern('[a-zA-Z][a-zA-Z0-9]+')]),
     password: new FormControl(null,[Validators.required,Validators.minLength(8),Validators.maxLength(72)]),
-    cpassword: new FormControl(null,[Validators.required,Validators.minLength(8),Validators.maxLength(72)]),
-    color: new FormControl()
   });
+
+  constructor( private uService: UserService ) {  }
 
   ngOnInit() {
       this.availableColors = [
@@ -55,58 +68,56 @@ export class SignUpComponent implements OnInit {
       this.colorSelected = '#ffffff';
   }
 
-  subscribeData( us) {
+  subscribeUsernameData( us ) {
     this.response$ = this.uService.getUserByUsername( us );
 
     this.response$.subscribe(
-      res => { this.allUsers = res, this.gotResponse = true },
+      res => { this.allUsers = res, this.gotUsernameResponse = true },
       () => {},
       () => console.log( "OK: users match completed!" )
     );
 
   }
 
-  subscribeData1(em){
+  subscribeEmailData( em ) {
     this.response1$ = this.uService.getUsersByMail( em );
     this.response1$.subscribe(
-      res => { this.allUmails = res, this.gotResponse = true },
+      res => { this.allUmails = res, this.gotEmailResponse = true },
       () => {},
-      () => console.log( "OK: users match completed!" )
+      () => console.log( "OK: email match completed!" )
     );
   }
 
-
-  checkForEmptyResponseE( em ) {
-      if ( em === '' )
+  checkForEmailEmptyResponse( ) {
+      if ( this.em === '' )
           return false;
       if ( this.allUmails instanceof Array )
           return true;
       return false;
   }
 
-  inputChangeE( em ){
-    if ( em != '' && em != undefined) {
-      this.gotResponseE = false;
-      var re = /[.]/;
-      var newstr = em.replace(re, '*');
-      console.log( newstr )
-      this.subscribeData1(newstr);
+  inputChangeE( ){
+    if ( this.em != '' ) {
+      var re = /[.]/gi;
+      var newstr = this.em.replace( re, '*' );
+      this.subscribeEmailData( newstr );
     }
   }
 
-  checkForEmptyResponse( us ) {
-      if ( us === '' )
+  checkForUsernameValidEmptyResponse( ) {
+      if ( this.username === '' )
           return false;
-      if ( this.allUsers instanceof Array )
+      if ( !( this.allUsers instanceof Array ) )
           return true;
       return false;
   }
 
-  inputChange( us ){
-      if ( us != '' ) {
-          this.gotResponse = false;
-          this.subscribeData(us);
-      }
+  checkForUsernameInvalidEmptyResponse( ) {
+      if ( this.username === '' )
+          return false;
+      if ( this.allUsers instanceof Array )
+          return true;
+      return false;
   }
 
   updateColor( c ) {
@@ -117,16 +128,30 @@ export class SignUpComponent implements OnInit {
         console.log('Resolved captcha with response ${captchaResponse}:');
   }
 
-  onSubmit(){
-    console.log(this.signUpForm.value);
+  onSubmit( ) {
+      if ( this.term == this.term1 && this.checkForUsernameValidEmptyResponse( )
+        && !this.checkForEmailEmptyResponse( ) ) {
+        this.userPostResponse$ = this.uService.postUser( this.signUpForm.value, this.colorSelected );
+
+        this.userPostResponse$.subscribe(
+          res => { console.log( res ) },
+          () => {},
+          () => console.log( "OK: user posted!" )
+        );
+    }
   }
 
-  isPass(){
-    if (this.term == this.term1){
-      this.repass = true;
-    }else{
-      this.repass = false;
-    }
+  isPass( ) {
+      if ( this.term == '' || this.term1 == '' )
+        return false;
+      if ( this.term == this.term1 )
+        return false;
+      return true;
+  }
+
+  checkExistingUsername( username ) {
+      if( !this.signUpForm.controls['username'].hasError('minlength') )
+        this.subscribeUsernameData( username );
   }
 
 }
