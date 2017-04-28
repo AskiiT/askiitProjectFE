@@ -1,63 +1,85 @@
 <section class="unicorn-dark-theme">
     <form name="signUpForm" [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
     	<md-input-container class="md-block" flex-gt-sm>
-            <input mdInput placeholder="Nombre" #refName  formControlName="name" required>
-            <md-hint *ngIf="signUpForm.controls['name'].hasError('minlength')" align="end" [ngStyle]="{'color': 'red'}">
+            <input mdInput placeholder="Nombre" #refName  formControlName="first_name" required>
+            <md-hint *ngIf="signUpForm.controls['first_name'].hasError('minlength')" align="end"
+                [ngStyle]="{'color': '#B50000'}" [@fadeInOut]>
               Ingresa mínimo 4 caracteres
             </md-hint>
-            <md-hint *ngIf="signUpForm.controls['name'].hasError('maxlength')" align="end" [ngStyle]="{'color': 'red'}">
+            <md-hint *ngIf="signUpForm.controls['first_name'].hasError('maxlength')" align="end"
+                [ngStyle]="{'color': '#B50000'}" [@fadeInOut]>
                Ingresa máximo 30 caracteres
             </md-hint>
-            <md-hint *ngIf="signUpForm.controls['name'].hasError('pattern')"  >
+            <md-hint *ngIf="signUpForm.controls['first_name'].hasError('pattern')"
+                [ngStyle]="{'color': '#B50000'}" [@fadeInOut]>
               Ingresa un nombre valido
             </md-hint>
         </md-input-container>
 
-
         <md-input-container class="md-block" flex-gt-sm>
-            <input mdInput placeholder="Apellido" #refLastName formControlName="lastName"  required>
-            <md-hint *ngIf="signUpForm.controls['lastName'].hasError('minlength')" align="end" [ngStyle]="{'color': 'red'}">
+            <input mdInput placeholder="Apellido" #refLastName formControlName="last_name"  required>
+            <md-hint *ngIf="signUpForm.controls['last_name'].hasError('minlength')" align="end"
+                [ngStyle]="{'color': '#B50000'}" [@fadeInOut]>
               Ingresa mínimo 4 caracteres
             </md-hint>
-            <md-hint *ngIf="signUpForm.controls['lastName'].hasError('maxlength')" align="end" [ngStyle]="{'color': 'red'}">
+            <md-hint *ngIf="signUpForm.controls['last_name'].hasError('maxlength')" align="end"
+                [ngStyle]="{'color': '#B50000'}" [@fadeInOut]>
                Ingresa máximo 30 caracteres
             </md-hint>
-            <md-hint *ngIf="signUpForm.controls['lastName'].hasError('pattern')"  [ngStyle]="{'color': 'red'}">
+            <md-hint *ngIf="signUpForm.controls['last_name'].hasError('pattern')"
+                [ngStyle]="{'color': '#B50000'}" [@fadeInOut]>
               Ingresa un apellido valido
             </md-hint>
-
         </md-input-container><br>
 
     	<md-input-container class="md-block" flex-gt-sm>
-            <input mdInput placeholder="Correo" type="email"  formControlName="email" [(ngModel)]="em" (ngModelChange)="inputChangeE(em)" required>
-            <md-hint *ngIf="checkForEmptyResponseE(em) " align="center" [ngStyle]="{'color': 'red'}">
-              Este correo ya existe
+            <input mdInput placeholder="Correo" type="email" [(ngModel)]="em" formControlName="email"
+                required (ngModelChange)="inputChangeE()">
+            <md-hint *ngIf="checkForEmailEmptyResponse()" align="end"
+                [ngStyle]="{'color': '#B50000'}" [@fadeInOut]>
+              Este correo ya pertenece a otra cuenta
             </md-hint>
         </md-input-container>
 
     	<md-input-container class="md-block" flex-gt-sm>
-            <input mdInput placeholder="Usuario" #refUserName formControlName="userName" [(ngModel)]="us" (ngModelChange)="inputChange(us)" required>
-            <md-hint *ngIf="checkForEmptyResponse(us) " align="center" [ngStyle]="{'color': 'red'}">
-              Este usuario ya existe
+            <input mdInput placeholder="Usuario" #refUserName formControlName="username" required
+                [(ngModel)]="username" (ngModelChange)="checkExistingUsername(username)">
+            <md-hint *ngIf="checkForUsernameValidEmptyResponse() && !signUpForm.controls['username'].hasError('minlength')
+                && !signUpForm.controls['username'].hasError('maxlength') &&
+                    !signUpForm.controls['username'].hasError('pattern')" align="end"
+                [ngStyle]="{'color': '#129B00'}" [@fadeInOut]>
+              usuario disponible
             </md-hint>
-            <md-hint *ngIf="signUpForm.controls['userName'].hasError('minlength')" align="end" [ngStyle]="{'color': 'red'}">
+            <md-hint *ngIf="checkForUsernameInvalidEmptyResponse() && !signUpForm.controls['username'].hasError('minlength')
+                && !signUpForm.controls['username'].hasError('maxlength') &&
+                    !signUpForm.controls['username'].hasError('pattern')" align="end"
+                [ngStyle]="{'color': '#B50000'}" [@fadeInOut]>
+              usuario no disponible
+            </md-hint>
+            <md-hint *ngIf="signUpForm.controls['username'].hasError('minlength')" align="end"
+                [ngStyle]="{'color': '#B50000'}" [@fadeInOut]>
               Ingresa mínimo 5 caracteres
             </md-hint>
-            <md-hint *ngIf="signUpForm.controls['userName'].hasError('maxlength')" align="end" [ngStyle]="{'color': 'red'}">
+            <md-hint *ngIf="signUpForm.controls['username'].hasError('maxlength')" align="end"
+                [ngStyle]="{'color': '#B50000'}" [@fadeInOut]>
                Ingresa máximo 20 caracteres
             </md-hint>
-            <md-hint *ngIf="signUpForm.controls['userName'].hasError('pattern')"  [ngStyle]="{'color': 'red'}">
+            <md-hint *ngIf="signUpForm.controls['username'].hasError('pattern')"
+                [ngStyle]="{'color': '#B50000'}" [@fadeInOut]>
               Ingresa un usuario valido
             </md-hint>
         </md-input-container><br>
 
         <div class="row">
         	<md-input-container class="col-md-6" style="width: 38%; margin-right: 4%">
-                <input mdInput type="password" placeholder="Contraseña" #refPassword formControlName="password" [(ngModel)]="term"  required>
-                <md-hint *ngIf="signUpForm.controls['password'].hasError('minlength')" align="end" [ngStyle]="{'color': 'red'}">
+                <input mdInput type="password" placeholder="Contraseña" #refPassword formControlName="password"
+                    [(ngModel)]="term"  required>
+                <md-hint *ngIf="signUpForm.controls['password'].hasError('minlength')" align="end"
+                    [ngStyle]="{'color': '#B50000'}" [@fadeInOut]>
                   Ingresa mínimo 8 caracteres
                 </md-hint>
-                <md-hint *ngIf="signUpForm.controls['password'].hasError('maxlength')" align="end" [ngStyle]="{'color': 'red'}">
+                <md-hint *ngIf="signUpForm.controls['password'].hasError('maxlength')" align="end"
+                    [ngStyle]="{'color': '#B50000'}" [@fadeInOut]>
                    Ingresa máximo 72 caracteres
                 </md-hint>
             </md-input-container><br>
@@ -77,9 +99,10 @@
 
         </div>
 
-    	<md-input-container class="md-block" flex-gt-sm>
-            <input mdInput type="password" placeholder="Confirmar contraseña"  formControlName="cpassword" [(ngModel)]="term1"  (ngModelChange)="isPass()" required>
-            <md-hint *ngIf="!repass "[ngStyle]="{'color': 'red'}">
+    	<md-input-container class="md-block" style="margin-bottom: 8px;" flex-gt-sm>
+            <input mdInput type="password" placeholder="Confirmar contraseña" [(ngModel)]="term1"
+                [ngModelOptions]="{standalone: true}" required>
+            <md-hint *ngIf="isPass()" [ngStyle]="{'color': '#B50000'}" [@fadeInOut]>
                Debe ser la misma contraseña
             </md-hint>
         </md-input-container><br>
