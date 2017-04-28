@@ -16,7 +16,7 @@ export class ToolBarComponent implements OnInit {
 
   openAskiit() {
     let dialogRef = this.dialog.open(AskiitComponent,{
-      height: '420px',
+      height: '480px',
       width: '1000px'
     });
     dialogRef.afterClosed();
