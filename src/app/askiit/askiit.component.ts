@@ -119,6 +119,8 @@ export class AskiitComponent implements OnInit {
       if ( term != '' ) {
           this.topicGotResponse = false;
           this.subscribeData( term );
+      } else {
+          this.allTopics = null;
       }
   }
 
@@ -127,6 +129,8 @@ export class AskiitComponent implements OnInit {
           this.tagGotResponse = false;
           this.subscribeData1( term1 );
           this.chipClicked = false;
+      } else {
+          this.allTags = null;
       }
   }
 

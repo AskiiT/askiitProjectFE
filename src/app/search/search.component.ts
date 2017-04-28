@@ -101,6 +101,9 @@ export class SearchComponent implements OnInit {
             this.topicGotResponse = false;
             this.chipClicked = false;
             this.subscribeData( term );
+        } else {
+            this.allTags = null;
+            this.allTopics = null
         }
     }
 
