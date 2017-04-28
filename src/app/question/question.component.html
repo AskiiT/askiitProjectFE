@@ -16,11 +16,12 @@
         </div>
 
         <div class="content">
-            <div class="bodyQuestion">
+            <div class="bodyQuestion" style="color: #444444">
               <p>{{question.body}}</p>
             </div>
-
-            <span class="tag text-center" *ngFor="let tag of question.tags">{{tag.tag_name}}</span>
+            <md-chip-list>
+                <md-chip class="tag text-center" *ngFor="let tag of question.tags">{{tag.tag_name}}</md-chip>
+            </md-chip-list>
         </div>
 
       </md-card-content>

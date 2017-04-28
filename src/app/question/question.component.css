@@ -104,7 +104,6 @@ md-card.cardQuestion:hover {
 
 .topic{
   border-radius: 5px;
-  color: black;
   width: 70%;
   margin-left: 15%;
   margin-bottom: 10px;
@@ -130,15 +129,16 @@ md-card.cardQuestion:hover {
     margin-top: 5px;
 }
 
-.tag{
-  padding: 0px;
-  border-radius: 10px;
-  background: #FFA629;
-  color: black;
-  padding-left: 10px;
-  padding-right: 10px;
-  color: #333333;
+.tag {
+  background: #45C7D8;
+  padding-top: 3px;
+  padding-bottom: 3px;
   margin-right: 8px;
+  margin-top: 4px;
+}
+
+.tag:hover {
+    cursor: default;
 }
 
 .content {
