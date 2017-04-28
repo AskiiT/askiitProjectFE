@@ -41,16 +41,29 @@ export class AskiitComponent implements OnInit {
 
   stateCtrl: FormControl;
 
-  allTags: Array<any>;
-  allTopics: Array<any>;
+  allTags: any;
+  allTopics: any;
+
+  selectedTopics: Array<any>;
+  selectedTags: Array<any>;
+
+  tagsResponse$;
+  topicsResponse$;
+
+  tagGotResponse: boolean = true;
+  topicGotResponse: boolean = true;
+
 
   selectedTopic: string;
-  selectedTags: string[] = [];
 
   StateSelectTopic:boolean = false;
   StateSelectTags: Array<boolean> = [false, false, false];
 
-  constructor(public dialogRef: MdDialogRef<AskiitComponent>, private tagService: TagService, private topicService: TopicService, private questionService: QuestionService,) {  }
+  constructor(public dialogRef: MdDialogRef<AskiitComponent>, private tagService: TagService, private topicService: TopicService,
+  private questionService: QuestionService,) {
+    this.selectedTopics = new Array<any>( );
+    this.selectedTags = new Array<any>( );
+  }
 
   askiitForm = new FormGroup({
     title: new FormControl(null,[Validators.required,Validators.minLength(12),Validators.maxLength(140)]),
@@ -59,23 +72,82 @@ export class AskiitComponent implements OnInit {
   });
 
   ngOnInit() {
-    this.subscribeData();
+
   }
 
-  subscribeData( ) {
-    // Todos los tags
-    this.tagService.getAllTags( ).subscribe(
-      res => this.allTags = res,
-    );
-    // Todos los topics
-    this.topicService.getAllTopics( ).subscribe(
-      res => this.allTopics = res,
+  subscribeData( term ) {
+
+      this.topicsResponse$ = this.topicService.getTopicsByMatch( term );
+
+      this.topicsResponse$.subscribe(
+        res => { this.allTopics = res, this.topicGotResponse = true },
+        () => {},
+        () => console.log( "OK: topics match completed!" )
+      );
+
+
+  }
+
+  subscribeData1(term1){
+    this.tagsResponse$ = this.tagService.getTagsByMatch( term1 );
+
+    this.tagsResponse$.subscribe(
+      res => { this.allTags = res, this.tagGotResponse = true },
+      () => {},
+      () => console.log( "OK: tags match completed!" )
     );
   }
 
-  OnSelectTopic(input){
-    this.selectedTopic = input.value;
+  checkForTagsEmptyResponse( term ) {
+      if ( term === '' )
+          return false;
+      if ( this.allTags instanceof Array )
+          return true;
+      return false;
+  }
+
+  checkForTopicsEmptyResponse( term ) {
+      if ( term === '' )
+          return false;
+      if ( this.allTopics instanceof Array )
+          return true;
+      return false;
+  }
+
+  inputChange( term ) {
+      if ( term != '' ) {
+          this.topicGotResponse = false;
+          this.subscribeData( term );
+      }
+      else {
+          this.allTopics = null;
+      }
+  }
+
+  addTopic( topic ) {
+      if ( !this.selectedTopics.includes( topic ) )
+          this.selectedTopics.push( topic );
+  }
+
+  addTag( tag ) {
+      if ( !this.selectedTopics.includes( tag ) )
+          this.selectedTags.push( tag );
+  }
+
+  removeTopic( index ) {
+      this.selectedTopics = this.selectedTopics.slice( 0, index )
+          .concat( this.selectedTopics.slice( index + 1, this.selectedTopics.length ) );
+  }
+
+  removeTag( index ) {
+      this.selectedTags = this.selectedTags.slice( 0, index )
+          .concat( this.selectedTags.slice( index + 1, this.selectedTags.length ) );
+  }
+
+  OnSelectTopic(tname){
     this.StateSelectTopic = true;
+    this.selectedTopic = tname;
+
   }
 
   OnDelecteTopic(){

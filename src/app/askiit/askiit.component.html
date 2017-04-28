@@ -7,11 +7,22 @@
   <div class="col-md-4 leftDiv text-center">
     <div class="divTopicSearch border">
       <md-input-container *ngIf="!StateSelectTopic" [@slideIn] >
-        <input #topicInput mdInput placeholder="Topic" list="topics" formControlName="topic" (click)="OnSelectTopic(topicInput)" required>
+        <input #topicInput mdInput placeholder="Topic"  formControlName="topic"  [(ngModel)]="term" (ngModelChange)="inputChange(term)"
+         required>
+        <md-progress-bar class="unicorn-dark-theme" mode="indeterminate"
+          style="width: 90%;" *ngIf="!topicGotResponse"></md-progress-bar>
       </md-input-container>
-      <datalist id="topics">
-        <option *ngFor="let topic of allTopics" value = {{topic.topic_name}} (keyup.enter)="OnSelectTopic(topicInput)">
-      </datalist>
+      <div id="searchBox" *ngIf="checkForTopicsEmptyResponse(term) && !StateSelectTopic"
+  			class="center-block text-center" [@slideIn]>
+        <md-chip-list>
+          <div id="chip" *ngIf="checkForTopicsEmptyResponse(term)">
+            <md-chip class="topic-color center-block text-center"
+              *ngFor="let topic of allTopics" (click)="OnSelectTopic(topic.topic_name)">
+              {{topic.topic_name}}
+            </md-chip>
+          </div>
+        </md-chip-list>
+      </div>
       <div class="topicChip">
         <md-chip selected="true" color="warn" *ngIf="StateSelectTopic" (click)=OnDelecteTopic()>{{selectedTopic}}</md-chip>
       </div>
@@ -24,19 +35,16 @@
         </md-input-container>
         <md-chip selected="true" color="primary" *ngIf="StateSelectTags[0]" (click)=OnDelecteTag(0)>{{selectedTags[0]}}</md-chip>
       </div>
+
+      <!--
       <div class="divSubTagSearch">
         <md-input-container *ngIf="!StateSelectTags[1]">
           <input #tagInput1 mdInput placeholder="Tag 2" list="tags" (click)="OnSelectTag(tagInput1,1)">
         </md-input-container>
         <md-chip selected="true" color="primary" *ngIf="StateSelectTags[1]" (click)=OnDelecteTag(1)>{{selectedTags[1]}}</md-chip>
       </div>
+      -->
 
-      <div class="divSubTagSearch">
-        <md-input-container *ngIf="!StateSelectTags[2]">
-          <input #tagInput2 mdInput placeholder="Tag 3" list="tags" (click)="OnSelectTag(tagInput2,2)">
-        </md-input-container>
-        <md-chip selected="true" color="primary" *ngIf="StateSelectTags[2]" (click)=OnDelecteTag(2)>{{selectedTags[2]}}</md-chip>
-      </div>
       <datalist id="tags">
         <option *ngFor="let tag of allTags" value = {{tag.tag_name}}>
       </datalist>
