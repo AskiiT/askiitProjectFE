@@ -45,6 +45,7 @@ export class SearchComponent implements OnInit {
 
     tagGotResponse: boolean = true;
     topicGotResponse: boolean = true;
+    chipClicked: boolean = false;
 
     constructor( private tagService: TagService, private topicService: TopicService ) {
         this.selectedTopics = new Array<any>( );
@@ -74,6 +75,10 @@ export class SearchComponent implements OnInit {
     	);
     }
 
+    someChipWasClicked( ) {
+        return this.chipClicked;
+    }
+
     checkForTagsEmptyResponse( term ) {
         if ( term === '' )
             return false;
@@ -94,6 +99,7 @@ export class SearchComponent implements OnInit {
         if ( term != '' ) {
             this.tagGotResponse = false;
             this.topicGotResponse = false;
+            this.chipClicked = false;
             this.subscribeData( term );
         }
         else {
@@ -105,11 +111,13 @@ export class SearchComponent implements OnInit {
     addTopic( topic ) {
         if ( !this.selectedTopics.includes( topic ) )
             this.selectedTopics.push( topic );
+        this.chipClicked = true;
     }
 
     addTag( tag ) {
         if ( !this.selectedTopics.includes( tag ) )
             this.selectedTags.push( tag );
+        this.chipClicked = true;
     }
 
     removeTopic( index ) {
