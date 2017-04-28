@@ -130,4 +130,8 @@ export class SearchComponent implements OnInit {
             .concat( this.selectedTags.slice( index + 1, this.selectedTags.length ) );
     }
 
+    blurEvent( ) {
+        this.chipClicked = true;
+    }
+
 }
