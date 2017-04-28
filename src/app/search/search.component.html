@@ -28,7 +28,7 @@
 		<div id="ttselected">
 			<md-chip-list>
 				<md-chip class="topic-color-selected center-block text-center"
-					*ngFor="let c of selectedTopics; let i = index"
+					*ngFor="let c of selectedTopics; let i = index" [@fadeInOut]
 						[ngStyle]="{'padding-right':'4px', 'padding-left':'4px', 'padding-top':'2px', 'padding-bottom':'2px'}">
 					{{c}}
 					<md-icon (click)="removeTopic(i)" class="vcenter topic-color-selected" style="border-radius: 10px">
@@ -39,7 +39,7 @@
 
 			<md-chip-list>
 				<md-chip class="tag-color-selected center-block text-center"
-					*ngFor="let c of selectedTags; let i = index"
+					*ngFor="let c of selectedTags; let i = index" [@fadeInOut]
 						[ngStyle]="{'padding-right':'4px', 'padding-left':'4px', 'padding-top':'2px', 'padding-bottom':'2px'}">
 					{{c}}
 					<md-icon (click)="removeTag(i)" class="vcenter tag-color-selected" style="border-radius: 10px">
