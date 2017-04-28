@@ -25,6 +25,15 @@ import 'rxjs/add/operator/startWith';
             style({ height: '0' }),
             animate(150, style({ height: '*' }))
         ])
+    ]),
+    trigger('fadeInOut', [
+        transition(':enter', [
+          style({opacity:0}),
+          animate(200, style({opacity:1}))
+        ]),
+        transition(':leave', [
+          animate(200, style({opacity:0}))
+        ])
     ])
   ]
 })

@@ -46,10 +46,10 @@
   <div class="col-md-8 divQuestion ">
     <md-input-container class="divTitle">
       <input #titleInput mdInput placeholder="Preguntá" formControlName="title" required>
-      <md-hint *ngIf="askiitForm.controls['title'].hasError('minlength')" align="end" [ngStyle]="{'color': 'red'}">
+      <md-hint *ngIf="askiitForm.controls['title'].hasError('minlength')" align="end" [ngStyle]="{'color': '#B50000'}" [@fadeInOut]>
         Ingresa mínimo 12 caracteres
       </md-hint>
-      <md-hint *ngIf="askiitForm.controls['title'].hasError('maxlength')" align="end" [ngStyle]="{'color': 'red'}">
+      <md-hint *ngIf="askiitForm.controls['title'].hasError('maxlength')" align="end" [ngStyle]="{'color': '#B50000'}" [@fadeInOut]>
          Ingresa máximo 140 caracteres
       </md-hint>
     </md-input-container>
