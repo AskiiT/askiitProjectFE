@@ -2,23 +2,25 @@
 	<div id="designDiv">
 		<div class="search">
 			<span class="fa fa-search"></span>
-			<input #tagInput class="form-control tag-finder" type="text" name=""
+			<input #tagInput class="form-control tag-finder" type="text"
 				placeholder="Añade un tag..." [(ngModel)]="term" (ngModelChange)="inputChange(term)">
 			<md-progress-bar class="unicorn-dark-theme" mode="indeterminate"
 				style="width: 90%;" *ngIf="!tagGotResponse||!topicGotResponse"></md-progress-bar>
 		</div>
 		<div id="searchBox" *ngIf="!someChipWasClicked() && (checkForTopicsEmptyResponse(term)||checkForTagsEmptyResponse(term))"
-			class="center-block text-center" [@slideIn] [@fadeInOut]>
+			class="center-block text-center" [@fadeInOut]>
 			<md-chip-list>
-				<div *ngIf="checkForTopicsEmptyResponse(term)">
+				<div *ngIf="checkForTopicsEmptyResponse(term)" [@slideIn] [@fadeInOut]>
 					<md-chip class="topic-color center-block text-center"
-						*ngFor="let topic of allTopics" (click)="addTopic(topic.topic_name); tagInput.value=''">
+						*ngFor="let topic of allTopics"
+							(click)="addTopic(topic.topic_name); tagInput.value=''">
 						{{topic.topic_name}}
 					</md-chip>
 				</div>
-				<div *ngIf="checkForTagsEmptyResponse(term)">
+				<div *ngIf="checkForTagsEmptyResponse(term)" [@slideIn] [@fadeInOut]>
 					<md-chip style="" class="tag-color center-block text-center"
-						*ngFor="let tag of allTags" (click)="addTag(tag.tag_name); tagInput.value=''">
+						*ngFor="let tag of allTags"
+							(click)="addTag(tag.tag_name); tagInput.value=''">
 						{{tag.tag_name}}
 					</md-chip>
 				</div>

@@ -61,7 +61,7 @@ export class SearchComponent implements OnInit {
         this.topicsResponse$ = this.topicService.getTopicsByMatch( term );
 
         this.topicsResponse$.subscribe(
-          res => { this.allTopics = res, this.topicGotResponse = true },
+          res => { this.allTopics = res, this.topicGotResponse = true, console.log( res ) },
           () => {},
           () => console.log( "OK: topics match completed!" )
         );
@@ -69,7 +69,7 @@ export class SearchComponent implements OnInit {
     	this.tagsResponse$ = this.tagService.getTagsByMatch( term );
 
     	this.tagsResponse$.subscribe(
-    		res => { this.allTags = res, this.tagGotResponse = true },
+    		res => { this.allTags = res, this.tagGotResponse = true, console.log( res ) },
     		() => {},
     		() => console.log( "OK: tags match completed!" )
     	);
@@ -101,10 +101,6 @@ export class SearchComponent implements OnInit {
             this.topicGotResponse = false;
             this.chipClicked = false;
             this.subscribeData( term );
-        }
-        else {
-            this.allTopics = null;
-            this.allTags = null;
         }
     }
 
