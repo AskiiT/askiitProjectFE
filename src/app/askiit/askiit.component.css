@@ -115,7 +115,7 @@ textarea.ng-invalid{border-left: 5px solid red;}
 	border-left: 1.5px solid #0e445f;
 	border-bottom: 1.5px solid #0e445f;
 	border-radius: 10px;
-	max-height: 200px;
+	max-height: 100px;
 	background-color: #f0f0f0;
 	width: 80%;
 	margin-left: 25px;

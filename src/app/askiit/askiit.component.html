@@ -31,7 +31,10 @@
     <div class="divTagSearch border">
       <div class="divSubTagSearch">
         <md-input-container *ngIf="!StateSelectTags[0]">
-          <input #tagInput0 mdInput placeholder="Tag 1" list="tags" (click)="OnSelectTag(tagInput0,0)">
+          <input id="tin" #tagInput0 mdInput placeholder="Tag 1"  formControlName="tag"
+          [(ngModel)]="term1" (ngModelChange)="inputChange1(term1)">
+          <md-progress-bar class="unicorn-dark-theme" mode="indeterminate"
+            style="width: 90%;" *ngIf="!tagGotResponse"></md-progress-bar>
         </md-input-container>
         <md-chip selected="true" color="primary" *ngIf="StateSelectTags[0]" (click)=OnDelecteTag(0)>{{selectedTags[0]}}</md-chip>
       </div>
@@ -44,10 +47,18 @@
         <md-chip selected="true" color="primary" *ngIf="StateSelectTags[1]" (click)=OnDelecteTag(1)>{{selectedTags[1]}}</md-chip>
       </div>
       -->
+      <div id="searchBox" *ngIf="checkForTagsEmptyResponse(term1) && !StateSelectTags[0]"
+        class="center-block text-center" [@slideIn]>
+        <md-chip-list>
+          <div  *ngIf="checkForTagsEmptyResponse(term1)">
+            <md-chip class="tag-color center-block text-center"
+              *ngFor="let tag of allTags" (click)="OnSelectTag(tag.tag_name,0)">
+              {{tag.tag_name}}
+            </md-chip>
+          </div>
+        </md-chip-list>
+      </div>
 
-      <datalist id="tags">
-        <option *ngFor="let tag of allTags" value = {{tag.tag_name}}>
-      </datalist>
     </div>
   </div>
 

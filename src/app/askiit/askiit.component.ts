@@ -68,7 +68,8 @@ export class AskiitComponent implements OnInit {
   askiitForm = new FormGroup({
     title: new FormControl(null,[Validators.required,Validators.minLength(12),Validators.maxLength(140)]),
     body: new FormControl(null,[Validators.maxLength(500)]),
-    topic: new FormControl(null,[Validators.required])
+    topic: new FormControl(null,[Validators.required]),
+    tag: new FormControl(null)
   });
 
   ngOnInit() {
@@ -98,8 +99,8 @@ export class AskiitComponent implements OnInit {
     );
   }
 
-  checkForTagsEmptyResponse( term ) {
-      if ( term === '' )
+  checkForTagsEmptyResponse( term1 ) {
+      if ( term1 === '' )
           return false;
       if ( this.allTags instanceof Array )
           return true;
@@ -124,25 +125,16 @@ export class AskiitComponent implements OnInit {
       }
   }
 
-  addTopic( topic ) {
-      if ( !this.selectedTopics.includes( topic ) )
-          this.selectedTopics.push( topic );
+  inputChange1( term1 ) {
+      if ( term1 != '' ) {
+          this.tagGotResponse = false;
+          this.subscribeData1( term1 );
+      }
+      else {
+          this.allTags = null;
+      }
   }
 
-  addTag( tag ) {
-      if ( !this.selectedTopics.includes( tag ) )
-          this.selectedTags.push( tag );
-  }
-
-  removeTopic( index ) {
-      this.selectedTopics = this.selectedTopics.slice( 0, index )
-          .concat( this.selectedTopics.slice( index + 1, this.selectedTopics.length ) );
-  }
-
-  removeTag( index ) {
-      this.selectedTags = this.selectedTags.slice( 0, index )
-          .concat( this.selectedTags.slice( index + 1, this.selectedTags.length ) );
-  }
 
   OnSelectTopic(tname){
     this.StateSelectTopic = true;
@@ -155,8 +147,8 @@ export class AskiitComponent implements OnInit {
     this.StateSelectTopic = false;
   }
 
-  OnSelectTag(input, index){
-    this.selectedTags[index] = input.value;
+  OnSelectTag(tname, index){
+    this.selectedTags[index] = tname;
     this.StateSelectTags[index] = true;
   }
 
