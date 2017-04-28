@@ -25,6 +25,15 @@ import 'rxjs/add/operator/startWith';
             style({ height: '0' }),
             animate(150, style({ height: '*' }))
         ])
+    ]),
+    trigger('fadeInOut', [
+        transition(':enter', [
+          style({opacity:0}),
+          animate(200, style({opacity:1}))
+        ]),
+        transition(':leave', [
+          animate(200, style({opacity:0}))
+        ])
     ])
   ]
 })
@@ -32,41 +41,105 @@ export class AskiitComponent implements OnInit {
 
   stateCtrl: FormControl;
 
-  allTags: Array<any>;
-  allTopics: Array<any>;
+  allTags: any;
+  allTopics: any;
+
+  selectedTopics: Array<any>;
+  selectedTags: Array<any>;
+
+  tagsResponse$;
+  topicsResponse$;
+
+  tagGotResponse: boolean = true;
+  topicGotResponse: boolean = true;
+
 
   selectedTopic: string;
-  selectedTags: string[] = [];
 
   StateSelectTopic:boolean = false;
   StateSelectTags: Array<boolean> = [false, false, false];
 
-  constructor(public dialogRef: MdDialogRef<AskiitComponent>, private tagService: TagService, private topicService: TopicService, private questionService: QuestionService,) {  }
+  constructor(public dialogRef: MdDialogRef<AskiitComponent>, private tagService: TagService, private topicService: TopicService,
+  private questionService: QuestionService,) {
+    this.selectedTopics = new Array<any>( );
+    this.selectedTags = new Array<any>( );
+  }
 
   askiitForm = new FormGroup({
     title: new FormControl(null,[Validators.required,Validators.minLength(12),Validators.maxLength(140)]),
     body: new FormControl(null,[Validators.maxLength(500)]),
-    topic: new FormControl(null,[Validators.required])
+    topic: new FormControl(null,[Validators.required]),
+    tag: new FormControl(null)
   });
 
   ngOnInit() {
-    this.subscribeData();
+
   }
 
-  subscribeData( ) {
-    // Todos los tags
-    this.tagService.getAllTags( ).subscribe(
-      res => this.allTags = res,
-    );
-    // Todos los topics
-    this.topicService.getAllTopics( ).subscribe(
-      res => this.allTopics = res,
+  subscribeData( term ) {
+
+      this.topicsResponse$ = this.topicService.getTopicsByMatch( term );
+
+      this.topicsResponse$.subscribe(
+        res => { this.allTopics = res, this.topicGotResponse = true },
+        () => {},
+        () => console.log( "OK: topics match completed!" )
+      );
+
+
+  }
+
+  subscribeData1(term1){
+    this.tagsResponse$ = this.tagService.getTagsByMatch( term1 );
+
+    this.tagsResponse$.subscribe(
+      res => { this.allTags = res, this.tagGotResponse = true },
+      () => {},
+      () => console.log( "OK: tags match completed!" )
     );
   }
 
-  OnSelectTopic(input){
-    this.selectedTopic = input.value;
+  checkForTagsEmptyResponse( term1 ) {
+      if ( term1 === '' )
+          return false;
+      if ( this.allTags instanceof Array )
+          return true;
+      return false;
+  }
+
+  checkForTopicsEmptyResponse( term ) {
+      if ( term === '' )
+          return false;
+      if ( this.allTopics instanceof Array )
+          return true;
+      return false;
+  }
+
+  inputChange( term ) {
+      if ( term != '' ) {
+          this.topicGotResponse = false;
+          this.subscribeData( term );
+      }
+      else {
+          this.allTopics = null;
+      }
+  }
+
+  inputChange1( term1 ) {
+      if ( term1 != '' ) {
+          this.tagGotResponse = false;
+          this.subscribeData1( term1 );
+      }
+      else {
+          this.allTags = null;
+      }
+  }
+
+
+  OnSelectTopic(tname){
     this.StateSelectTopic = true;
+    this.selectedTopic = tname;
+
   }
 
   OnDelecteTopic(){
@@ -74,8 +147,8 @@ export class AskiitComponent implements OnInit {
     this.StateSelectTopic = false;
   }
 
-  OnSelectTag(input, index){
-    this.selectedTags[index] = input.value;
+  OnSelectTag(tname, index){
+    this.selectedTags[index] = tname;
     this.StateSelectTags[index] = true;
   }
 
