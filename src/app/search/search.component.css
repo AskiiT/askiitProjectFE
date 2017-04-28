@@ -66,13 +66,15 @@ input:focus {
 	position: absolute;
 	overflow: auto;
 	padding-top: 5px;
+	padding-bottom: 5px;
 	z-index:1000;
+	border-top: 1.5px solid #0e445f;
 	border-right: 1.5px solid #0e445f;
 	border-left: 1.5px solid #0e445f;
 	border-bottom: 1.5px solid #0e445f;
 	border-radius: 10px;
 	max-height: 200px;
-	background-color: #f0f0f0;
+	background-color: #FFFFFF;
 	width: 80%;
 	margin-left: 25px;
 }

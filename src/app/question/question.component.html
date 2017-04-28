@@ -8,7 +8,7 @@
     </md-card-content>
   </md-card>
 
-  <md-card class="cardBodyQuestion center-block row" *ngIf="expand" [@slideIn]>
+  <md-card class="cardBodyQuestion center-block row" *ngIf="expand" [@fadeInOut] [@slideIn]>
 
       <md-card-content class="bodyContain col-md-10">
         <div class="topic text-center" [ngStyle]="{'background-color': question.topic.color }">
@@ -27,7 +27,8 @@
       </md-card-content>
 
       <md-card-actions class="divButtons col-md-2">
-        <button id="know-button" md-button class="buttons" style="margin-left: 4px;" (click)="OnIKnowIt(question.id)" [disabled]="disableIKnowIt" [class.knowSelected] = "postulated">
+        <button id="know-button" md-button class="buttons" style="margin-left: 4px;" (click)="OnIKnowIt(question.id)"
+            [disabled]="disableIKnowIt" [class.knowSelected] = "postulated">
           <i id="know" class="icon material-icons md-18">mood</i>
           I KNOW IT
         </button>
