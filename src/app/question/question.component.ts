@@ -39,7 +39,8 @@ export class QuestionComponent implements OnInit {
 
   expand: boolean = false;
   disableIKnowIt = false;
-  userId = '3';
+  userId = '1';
+  postulated: boolean = false;
 
   constructor(private questionService: QuestionService){ }
 
@@ -50,15 +51,20 @@ export class QuestionComponent implements OnInit {
   }
 
   onChange(e){
-    console.log(this.question);
     this.expand = (this.expand == false ? this.expand = true : this.expand = false);
     this.onResize.emit(e)
   }
 
   OnIKnowIt(questionId){
-    this.questionService.postulateToQuestion(questionId, this.userId).subscribe(
-      res => {this.question.p_users[this.question.p_users.length] = JSON.stringify({"id": this.userId}), console.log(this.question), this.disableIKnowIt = true}
-    );
+    if(this.postulated == false){
+      this.questionService.postulateToQuestion(questionId, this.userId).subscribe(
+        res => {this.question = res, this.postulated = true}
+      );
+    }else{
+      this.questionService.unpostulateToQuestion(questionId, this.userId).subscribe(
+        res => {this.question = res, this.postulated = false}
+      );
+    }
   }
 
   validateIKnowIt(){
@@ -66,16 +72,21 @@ export class QuestionComponent implements OnInit {
     if(this.question.p_users != null ){
       for(var i = 0; i < this.question.p_users.length; i++){
         if(this.question.p_users[i].id == this.userId){
-          this.disableIKnowIt = true;
+          this.postulated = true;
           break;
         }
       }
     }
     // Valida si el usuario fue el que realizo esta pregunta
     if(this.question.user.id == this.userId){
-      console.log("entro");
       this.disableIKnowIt = true;
     }
+  }
+
+  deletePostulate(){
+    // for(var i = 0; i < this.question.p_users.length){
+    //
+    // }
   }
 
 }
