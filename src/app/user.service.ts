@@ -18,4 +18,10 @@ export class UserService {
       return this.http.get( 'http://localhost:3000/api/v1/users/search/username/' + subString )
         .map( ( res: Response ) => res.json( ).data );
   }
+
+  getUsersByMail( subString ) {
+      return this.http.get( 'http://localhost:3000/api/v1/users/search/email/' + subString )
+        .map( ( res: Response ) => res.json( ).data );
+  }
+
 }
