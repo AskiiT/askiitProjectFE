@@ -35,3 +35,4 @@ Run `npm install --save-dev @types/hammerjs`
 Run `npm install --save ng2-recaptcha`  
 Run `npm install --save ng2-filter-pipe`  
 Run `npm install --save angular2-virtual-scroll`  
+Run `npm install redux ng2-redux --save`

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-//import { LandingService } from './landing/landing.service';
+import { NgRedux } from 'ng2-redux';
+import { IAppState } from '../store';
+import { INCREMENT } from '../actions';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-banner',
@@ -8,20 +11,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BannerComponent implements OnInit {
   public title = 'AskiiT';
-  public sign = true;
-  public siteHome = false;
 
-  constructor() { }
+  counter$: Observable<any>;
+  num: any;
+
+  constructor( private ngRedux: NgRedux<IAppState> ) {
+      this.counter$ = ngRedux.select( 'counter' );
+      this.counter$.subscribe(
+          value => this.num = value
+      )
+  }
 
   ngOnInit() {
   }
 
-  buttonSignIn(){
-    this.sign = true;
+  increment( ) {
+      this.ngRedux.dispatch( { type: INCREMENT, payload: { amount: 3 } } );
   }
-
-  buttonSignUp(){
-    this.sign = false;
-  }
-
 }

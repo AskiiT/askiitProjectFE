@@ -31,6 +31,8 @@ import { ChatFilterPipe } from './chat-filter.pipe';
 import { QuestionComponent } from './question/question.component';
 import { TopicFilterPipe } from './topic-filter.pipe';
 import { AskiitComponent } from './askiit/askiit.component';
+import { NgRedux, NgReduxModule } from 'ng2-redux';
+import { IAppState, rootReducer, INITIAL_STATE } from './store';
 
 export const appRoutes: Routes = [
   { path: 'home',
@@ -99,7 +101,8 @@ export const appRoutes: Routes = [
     MaterialModule.forRoot( ),
     RecaptchaModule.forRoot( ),
     Ng2FilterPipeModule,
-    VirtualScrollModule
+    VirtualScrollModule,
+    NgReduxModule
   ],
   entryComponents: [
     AskiitComponent
@@ -107,4 +110,9 @@ export const appRoutes: Routes = [
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+
+export class AppModule {
+    constructor( ngRedux: NgRedux<IAppState> ) {
+        ngRedux.configureStore( rootReducer, INITIAL_STATE );
+    }
+}
