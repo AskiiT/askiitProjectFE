@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from "../auth.service";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-in',
@@ -7,13 +9,37 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SignInComponent implements OnInit {
 
-  constructor() { }
+    signInUser = {
+    email: '',
+    password: ''
+    };
 
-  ngOnInit() {
-  }
+    constructor( private authService: AuthService, private router: Router ) { }
 
-  resolved( captchaResponse: string ) {
+    ngOnInit() {
+    }
+
+    resolved( captchaResponse: string ) {
         console.log('Resolved captcha with response ${captchaResponse}:');
-  }
+    }
+
+    onSignInSubmit( email, password ) {
+
+        this.signInUser.email = email;
+        this.signInUser.password = password;
+
+        this.authService.logInUser( this.signInUser ).subscribe(
+            res => {
+              if( res.status == 200 ){
+                  console.log( 'Successfull log in.' );
+                  this.router.navigate( ['/home'] );
+              }
+            },
+            err => {
+              alert( err );
+            }
+        );
+
+    }
 
 }

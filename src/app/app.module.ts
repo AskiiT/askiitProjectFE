@@ -34,6 +34,9 @@ import { AskiitComponent } from './askiit/askiit.component';
 import { NgRedux, NgReduxModule } from 'ng2-redux';
 import { IAppState, rootReducer, INITIAL_STATE } from './store';
 
+import { Angular2TokenService } from 'angular2-token';
+import { AuthService } from "./auth.service";
+
 export const appRoutes: Routes = [
   { path: 'home',
     component: HomeComponent,
@@ -107,7 +110,7 @@ export const appRoutes: Routes = [
   entryComponents: [
     AskiitComponent
   ],
-  providers: [],
+  providers: [ Angular2TokenService, AuthService ],
   bootstrap: [AppComponent]
 })
 

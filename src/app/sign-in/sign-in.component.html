@@ -1,9 +1,9 @@
 <div class="unicorn-dark-theme">
     <md-input-container class="md-block">
-        <input mdInput placeholder="Usuario/Correo" ng-model="user.firstName">
+        <input mdInput #email placeholder="Correo" ng-model="user.firstName" >
     </md-input-container><br>
     <md-input-container class="md-block">
-        <input mdInput placeholder="Contraseña" type="password" ng-model="user.firstName">
+        <input mdInput #password placeholder="Contraseña" type="password" ng-model="user.firstName">
     </md-input-container><br>
 
     <div class="row top">
@@ -12,10 +12,10 @@
     	</div> -->
     	<div>
     		<button md-button class="btn center-block"
-    			type="button"
+    			type="submit"
     			name="buttonSignUp"
     			style="color: white; margin-left: 24%; margin-top: 20px; background-color: #3DA867"
-    			routerLink='home'>
+    			(click)="onSignInSubmit( email.value, password.value )">
     			Ingresar
     		</button>
     	</div>
