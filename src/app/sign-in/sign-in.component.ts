@@ -1,11 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from "../auth.service";
 import { Router } from '@angular/router';
+import {style, state, animate, transition, trigger} from '@angular/core';
 
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
-  styleUrls: ['./sign-in.component.css']
+  styleUrls: ['./sign-in.component.css'],
+  animations: [
+      trigger('fadeInOut', [
+          transition(':enter', [
+            style({opacity:0}),
+            animate(200, style({opacity:1}))
+          ]),
+          transition(':leave', [
+            animate(200, style({opacity:0}))
+          ])
+      ])
+  ]
 })
 export class SignInComponent implements OnInit {
 
@@ -13,6 +25,8 @@ export class SignInComponent implements OnInit {
     email: '',
     password: ''
     };
+
+    invalidCredentials = false;
 
     constructor( private authService: AuthService, private router: Router ) { }
 
@@ -32,11 +46,12 @@ export class SignInComponent implements OnInit {
             res => {
               if( res.status == 200 ){
                   console.log( 'Successfull log in.' );
+                  this.invalidCredentials = false;
                   this.router.navigate( ['/home'] );
               }
             },
             err => {
-              alert( err );
+              this.invalidCredentials = true;
             }
         );
 
