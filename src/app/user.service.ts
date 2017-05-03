@@ -35,13 +35,11 @@ export class UserService {
           "color": color
       }
 
-      console.log( user );
-
     const headers = new Headers( { 'Content-Type': 'application/json; charset=utf-8' } );
     const options = new RequestOptions( { headers: headers } );
 
     return this.http.post( 'http://localhost:3000/api/v1/auth', JSON.stringify( user ), options )
-          .map( ( res: Response ) => res.json( ).data );
+          .map( ( res: Response ) => res );
   }
 
 }

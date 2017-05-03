@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UserService } from '../user.service';
 import {style, state, animate, transition, trigger} from '@angular/core';
+import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-up',
@@ -49,7 +51,7 @@ export class SignUpComponent implements OnInit {
     password: new FormControl(null,[Validators.required,Validators.minLength(8),Validators.maxLength(72)]),
   });
 
-  constructor( private uService: UserService ) {  }
+  constructor( private uService: UserService, private authService: AuthService, private router: Router ) {  }
 
   ngOnInit() {
       this.availableColors = [
@@ -131,10 +133,28 @@ export class SignUpComponent implements OnInit {
   onSubmit( ) {
       if ( this.term == this.term1 && this.checkForUsernameValidEmptyResponse( )
         && !this.checkForEmailEmptyResponse( ) ) {
+
         this.userPostResponse$ = this.uService.postUser( this.signUpForm.value, this.colorSelected );
 
         this.userPostResponse$.subscribe(
-          res => { console.log( res ) },
+          res => {
+              if ( res.status == 200 )
+              {
+                  this.authService.logInUser( { email: this.signUpForm.value.email,
+                      password: this.signUpForm.value.password } ).subscribe(
+                          res => {
+                            if( res.status == 200 ){
+                                console.log( 'Successfull log in.' );
+                                this.router.navigate( ['/home'] );
+                            }
+                          },
+                          err => {
+                            alert( err );
+                          }
+                      );
+
+              }
+          },
           () => {},
           () => console.log( "OK: user posted!" )
         );
