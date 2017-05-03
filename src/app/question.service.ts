@@ -1,10 +1,22 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { Http, Response, Headers, RequestOptions } from '@angular/http'
+import { NgRedux } from 'ng2-redux';
+import { IAppState } from './store';;
 
 @Injectable()
 export class QuestionService {
 
-  constructor( private http: Http,) { }
+  headers: any;
+
+  constructor( private http: Http, private ngRedux: NgRedux<IAppState> ) {
+      ngRedux.select( 'headers' ).subscribe(
+          value => {
+              this.headers = value;
+              if ( this.headers === undefined )
+                console.log( 'There are no headers :(' )
+            }
+      )
+  }
 
   log ( ) {
   	  console.log( "I am the question service." );
@@ -25,16 +37,8 @@ export class QuestionService {
   		    .map( ( res: Response ) => res.json( ).data );
   }
 
-  postQuestion( question, authHeaders ) {
-    const headers = new Headers( {
-            'Content-Type': 'application/json; charset=utf-8',
-            'access-token': authHeaders.accessToken,
-            'client': authHeaders.client,
-            'expiry': authHeaders.expiry,
-            'token-type': authHeaders.tokenType,
-            'uid': authHeaders.uid
-        }
-    );
+  postQuestion( question ) {
+    const headers = new Headers( this.headers );
     const options = new RequestOptions({headers: headers});
 
     return this.http.post( 'http://localhost:3000/api/v1/questions', JSON.stringify(question), options )

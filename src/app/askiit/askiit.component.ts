@@ -7,7 +7,6 @@ import {style, state, animate, transition, trigger} from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import {Question} from '../question';
 import 'rxjs/add/operator/startWith';
-import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-askiit',
@@ -61,7 +60,7 @@ export class AskiitComponent implements OnInit {
   chipClicked: boolean = false;
 
   constructor(public dialogRef: MdDialogRef<AskiitComponent>, private tagService: TagService, private topicService: TopicService,
-      private questionService: QuestionService, private authService: AuthService ) {
+      private questionService: QuestionService ) {
     this.selectedTopics = new Array<any>( );
     this.selectedTags = new Array<any>( );
   }
@@ -151,7 +150,7 @@ export class AskiitComponent implements OnInit {
 
   OnAskiit(title, body){
     const question = new Question(title.value, body.value, this.selectedTopic, "1", "1", this.selectedTags);
-    this.questionService.postQuestion(question, this.authService.headers( ) ).subscribe(
+    this.questionService.postQuestion( question ).subscribe(
       res => {console.log(res), this.responseValidation(res)}
     );
   }
