@@ -7,6 +7,7 @@ import { IAppState } from './store';;
 export class QuestionService {
 
   headers: any;
+  userData: any;
 
   constructor( private http: Http, private ngRedux: NgRedux<IAppState> ) {
       ngRedux.select( 'headers' ).subscribe(
@@ -14,6 +15,14 @@ export class QuestionService {
               this.headers = value;
               if ( this.headers === undefined )
                 console.log( 'There are no headers :(' )
+            }
+      );
+
+      ngRedux.select( 'authUserData' ).subscribe(
+          value => {
+              this.userData = value;
+              if ( this.userData === undefined )
+                console.log( 'There is not user data :(' )
             }
       )
   }
@@ -45,22 +54,22 @@ export class QuestionService {
           .map( ( res: Response ) => res.json( ).data );
   }
 
-  postulateToQuestion( questionId, userId ){
-    const user = {"user_id": userId};
-    const headers = new Headers({'Content-Type': 'application/json; charset=utf-8'});
+  postulateToQuestion( questionId ){
+    const user = {"user_id": this.userData.id};
+    const headers = new Headers( this.headers );
     const options = new RequestOptions({headers: headers});
 
     return this.http.post( 'http://localhost:3000/api/v1/questions/'+ questionId +'/postulate', JSON.stringify(user), options)
           .map( ( res: Response ) => res.json( ).data );
   }
 
-  unpostulateToQuestion( questionId, userId ){
-    const user = {"user_id": userId};
-    const headers = new Headers({'Content-Type': 'application/json; charset=utf-8'});
+  unpostulateToQuestion( questionId ){
+    const user = {"user_id": this.userData.id};
+    const headers = new Headers( this.headers );
     const options = new RequestOptions({headers: headers});
 
-    return this.http.delete( 'http://localhost:3000/api/v1/questions/'+ questionId +'/unpostulate?user_id=' + userId, options)
-          .map( ( res: Response ) => res.json( ).data );
+    return this.http.delete( 'http://localhost:3000/api/v1/questions/'+ questionId +'/unpostulate?user_id=' + this.userData.id,
+        options ).map( ( res: Response ) => res.json( ).data );
   }
 
 }
