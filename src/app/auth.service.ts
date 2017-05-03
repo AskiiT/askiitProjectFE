@@ -8,7 +8,7 @@ export class AuthService {
 
   userSignedIn$:Subject<boolean> = new Subject();
 
-  constructor( private authService:Angular2TokenService ) {
+  constructor( private authService: Angular2TokenService ) {
 
     // this.authService.validateToken().subscribe(
     //     res => res.status == 200 ? this.userSignedIn$.next(res.json().success) : this.userSignedIn$.next(false),
@@ -34,6 +34,7 @@ export class AuthService {
     return this.authService.signIn( signInData ).map(
         res => {
           this.userSignedIn$.next( true );
+          //console.log( this.authService.currentUserData )
           return res
         }
     );

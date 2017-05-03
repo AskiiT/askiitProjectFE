@@ -167,7 +167,7 @@ export class AskiitComponent implements OnInit {
   }
 
   onSubmit(){
-    console.log(this.askiitForm.value);
+    //console.log(this.askiitForm.value);
   }
 
   addTag( tag ) {

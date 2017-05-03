@@ -37,9 +37,13 @@ import { IAppState, rootReducer, INITIAL_STATE } from './store';
 import { Angular2TokenService } from 'angular2-token';
 import { AuthService } from "./auth.service";
 
+import { AuthGuard } from "./guards/auth.guards";
+import { LoggedGuard } from "./guards/logged.guard";
+
 export const appRoutes: Routes = [
   { path: 'home',
     component: HomeComponent,
+    canActivate: [ AuthGuard ],
     children: [
       {
         path: '',
@@ -57,6 +61,7 @@ export const appRoutes: Routes = [
   },
   { path: '',
     component: LandingComponent,
+    canActivate: [ LoggedGuard ],
     children: [
       { path: '',
         component: SignInComponent,
@@ -110,7 +115,7 @@ export const appRoutes: Routes = [
   entryComponents: [
     AskiitComponent
   ],
-  providers: [ Angular2TokenService, AuthService ],
+  providers: [ Angular2TokenService, AuthService, AuthGuard, LoggedGuard ],
   bootstrap: [AppComponent]
 })
 
