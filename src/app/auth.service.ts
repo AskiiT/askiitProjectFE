@@ -25,6 +25,10 @@ export class AuthService {
     );
   }
 
+  headers( ) {
+      return this.authService.currentAuthData;
+  }
+
   logInUser( signInData: { email: string, password: string } ): Observable<Response> {
 
     return this.authService.signIn( signInData ).map(
