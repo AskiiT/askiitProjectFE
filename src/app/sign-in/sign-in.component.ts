@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from "../auth.service";
 import { Router } from '@angular/router';
 import {style, state, animate, transition, trigger} from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -27,6 +29,13 @@ export class SignInComponent implements OnInit {
     };
 
     invalidCredentials = false;
+
+
+    signInForm = new FormGroup({
+      email: new FormControl(null,[Validators.required]),
+      password: new FormControl(null,[Validators.required,Validators.minLength(8),Validators.maxLength(72)]),
+    });
+
 
     constructor( private authService: AuthService, private router: Router ) { }
 

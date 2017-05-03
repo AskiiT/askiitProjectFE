@@ -1,11 +1,23 @@
 <div class="unicorn-dark-theme">
+  <form name="signInForm" [formGroup]="signInForm">
     <md-input-container class="md-block">
-        <input mdInput #email placeholder="Correo" ng-model="user.firstName" >
+        <input mdInput #email placeholder="Correo" ng-model="user.firstName" formControlName="email" type="email" required>
     </md-input-container><br>
     <md-input-container class="md-block">
-        <input mdInput #password placeholder="Contraseña" type="password" ng-model="user.firstName">
-        <md-hint *ngIf="invalidCredentials" [ngStyle]="{'color':'red'}" [@fadeInOut]>Usuario o correo inválido</md-hint>
+        <input mdInput #password placeholder="Contraseña" type="password" ng-model="user.firstName"
+        formControlName="password" required>
+        <md-hint *ngIf="invalidCredentials" [ngStyle]="{'color':'red'}" [@fadeInOut]>correo o contraseña inválido</md-hint>
+        <md-hint *ngIf="signInForm.controls['password'].hasError('minlength')" align="end"
+            [ngStyle]="{'color': '#B50000'}" [@fadeInOut]>
+          Ingresa mínimo 8 caracteres
+        </md-hint>
+        <md-hint *ngIf="signInForm.controls['password'].hasError('maxlength')" align="end"
+            [ngStyle]="{'color': '#B50000'}" [@fadeInOut]>
+           Ingresa máximo 72 caracteres
+        </md-hint>
     </md-input-container><br>
+
+
 
     <div class="row top">
     	<div>
@@ -18,4 +30,5 @@
     		</button>
     	</div>
     </div>
+  </form>
 </div>
