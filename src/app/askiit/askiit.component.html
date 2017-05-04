@@ -72,16 +72,23 @@
          Ingresa máximo 140 caracteres
       </md-hint>
     </md-input-container>
-      <span *ngIf="askiitForm.controls['body'].hasError('maxlength')" class="alert alert-danger" id="ale">
+    <span style="margin-left: 30px; color: #555555">Tiempo de vida (minutos): </span>
+    <md-slider
+		showTicks="true"  #slider max="180" min="10" step="1" thumbLabel="true" value="60" style="width: 68%"
+            class="unicorn-dark-theme">
+	</md-slider>
+      <textarea #bodyInput name="question" style="resize: none" rows="11" cols="83" class="inputQuestionStyle"
+        formControlName="body"  placeholder="Describe tu pregunta!"></textarea><br>
+      <span style="margin-left: 30px" *ngIf="askiitForm.controls['body'].hasError('maxlength')"
+        class="alert alert-danger" id="ale" [@fadeInOut]>
         Ingresa máximo 500 caracteres
       </span>
-      <textarea #bodyInput name="question" style="resize: none" rows="12" cols="83" class="inputQuestionStyle"  formControlName="body"  placeholder="Describe tu pregunta!"></textarea>
 
   </div>
 </div>
 
 <div md-dialog-actions class="divButtons text-center">
-  <button md-button class="btn askiitBtn" type="submit" (click)="OnAskiit(titleInput, bodyInput)">
+  <button md-button class="btn askiitBtn" type="submit" (click)="OnAskiit(titleInput, bodyInput, slider.value)">
     <md-icon>play_for_work</md-icon>
     AskiiT
   </button>

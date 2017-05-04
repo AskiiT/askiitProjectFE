@@ -42,8 +42,8 @@ md-chip.tag-color-selected {
   padding-right: 5px;
   overflow-y: hidden;
   background-color: #6CA9E6;
-  min-height: 340px;
-  max-height: 340px;
+  min-height: 350px;
+  max-height: 350px;
   box-shadow: inset 0px 0px 5px 0px rgba(0,0,0,0.8);
   padding: 10px;
 
@@ -82,11 +82,9 @@ md-chip.tag-color-selected {
 .divTitle{
   width: 90%;
   margin-left: 30px;
-  margin-bottom: 10px;
 }
 .inputQuestionStyle{
   width: 90%;
-  height: 80%;
   border-radius: 6px;
   box-sizing: border-box;
   padding: 10px;
