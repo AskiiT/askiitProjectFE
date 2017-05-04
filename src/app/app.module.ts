@@ -39,6 +39,7 @@ import { AuthService } from "./auth.service";
 
 import { AuthGuard } from "./guards/auth.guards";
 import { LoggedGuard } from "./guards/logged.guard";
+import { NotificationsComponent } from './notifications/notifications.component';
 
 export const appRoutes: Routes = [
   { path: 'home',
@@ -98,7 +99,8 @@ export const appRoutes: Routes = [
     TagFilterPipe,
     QuestionComponent,
     TopicFilterPipe,
-    AskiitComponent
+    AskiitComponent,
+    NotificationsComponent
   ],
   imports: [
     BrowserModule,
@@ -113,7 +115,8 @@ export const appRoutes: Routes = [
     NgReduxModule
   ],
   entryComponents: [
-    AskiitComponent
+    AskiitComponent,
+    NotificationsComponent
   ],
   providers: [ Angular2TokenService, AuthService, AuthGuard, LoggedGuard ],
   bootstrap: [AppComponent]

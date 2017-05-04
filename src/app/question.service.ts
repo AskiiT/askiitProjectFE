@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http'
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { NgRedux } from 'ng2-redux';
 import { IAppState } from './store';;
 
