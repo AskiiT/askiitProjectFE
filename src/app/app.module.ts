@@ -40,6 +40,7 @@ import { AuthService } from "./auth.service";
 import { AuthGuard } from "./guards/auth.guards";
 import { LoggedGuard } from "./guards/logged.guard";
 import { NotificationsComponent } from './notifications/notifications.component';
+import { ReportComponent } from './report/report.component';
 
 export const appRoutes: Routes = [
   { path: 'home',
@@ -100,7 +101,8 @@ export const appRoutes: Routes = [
     QuestionComponent,
     TopicFilterPipe,
     AskiitComponent,
-    NotificationsComponent
+    NotificationsComponent,
+    ReportComponent
   ],
   imports: [
     BrowserModule,
@@ -116,7 +118,8 @@ export const appRoutes: Routes = [
   ],
   entryComponents: [
     AskiitComponent,
-    NotificationsComponent
+    NotificationsComponent,
+    ReportComponent
   ],
   providers: [ Angular2TokenService, AuthService, AuthGuard, LoggedGuard ],
   bootstrap: [AppComponent]

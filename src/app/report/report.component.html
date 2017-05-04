@@ -1,0 +1,15 @@
+<div style="color: #555555; margin-bottom: 4px;">¿Por qué reportas esta pregunta?</div>
+
+<textarea #reason style="resize: none" rows="8" cols="83" class="inputReportStyle"
+    placeholder="Describe tu reporte."></textarea>
+
+<div md-dialog-actions class="divButtons text-center">
+  <button md-button class="btn reportBtn" type="submit" (click)="postReport(reason.value)">
+    <md-icon>sentiment_very_dissatisfied</md-icon>
+    Report
+  </button>
+  <button md-button class="btn cancelBtn" (click)="closeReportDialog()">
+  <md-icon>close</md-icon>
+    Cancel
+  </button>
+</div>

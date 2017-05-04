@@ -1,0 +1,23 @@
+.divButtons{
+  float: right;
+  padding: 0;
+}
+
+.reportBtn {
+	background-color: #F9781C;
+    color: #0A1E0B;
+    width: 150px;
+    margin-right: 20px;
+}
+
+.cancelBtn {
+    background-color: #BC1111;
+    color: #FFDFDF;
+    width: 150px;
+}
+
+.inputReportStyle{
+  width: 100%;
+  border-radius: 6px;
+  padding: 10px;
+}
