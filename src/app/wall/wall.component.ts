@@ -47,11 +47,6 @@ export class WallComponent implements OnInit {
     );
   }
 
-  showData( ) {
-      console.log( this.filters.tags )
-      console.log( this.filters.topics )
-  }
-
   protected fetchMore(event: ChangeEvent) {
     this.indices = event;
     if (event.end === this.buffer.length) {

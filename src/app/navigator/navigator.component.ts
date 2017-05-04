@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NgRedux } from 'ng2-redux';
 import { IAppState } from '../store';
 import { Observable } from 'rxjs/Observable';
+import { MdDialog, MdDialogRef } from '@angular/material';
+import { NotificationsComponent } from '../notifications/notifications.component';
 
 @Component({
   selector: 'app-navigator',
@@ -10,27 +12,17 @@ import { Observable } from 'rxjs/Observable';
 })
 export class NavigatorComponent implements OnInit {
 
-    userData$: Observable<any>;
-
-    userDataDic: any;
-    authHeaders: any;
-
-    constructor( private ngRedux: NgRedux<IAppState> ) {
-        ngRedux.select( 'authUserData' ).subscribe(
-            value => this.userDataDic = value
-        );
-
-        ngRedux.select( 'headers' ).subscribe(
-            value => this.authHeaders = value
-        );
-    }
+    constructor( public dialog: MdDialog ) { }
 
     ngOnInit() {
     }
 
-    showCurrentUserData( ) {
-        console.log( this.userDataDic )
-        console.log( this.authHeaders )
+    openNotifications() {
+      let dialogRef = this.dialog.open(NotificationsComponent,{
+        height: '385px',
+        width: '300px'
+      });
+      dialogRef.afterClosed();
     }
 
 }

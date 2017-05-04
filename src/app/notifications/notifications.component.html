@@ -1,0 +1,8 @@
+<div *ngIf="array != undefined && array.message != null">{{array.message}}</div>
+<div *ngIf="validateResponse()">
+    <div *ngFor="let n of array">
+        <div class="notification">
+            <div class="child">{{n.body}}</div>
+        </div>
+    </div>
+</div>

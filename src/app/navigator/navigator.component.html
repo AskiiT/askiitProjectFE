@@ -4,7 +4,7 @@
         Rank
     </div>
     <!--button md-button [routerLink]="['/home','profile', user]" class="nav-btn text-center">Mi perfil</button>-->
-    <button md-button class="nav-btn" (click)="showCurrentUserData()">
+    <button md-button class="nav-btn">
         <md-icon style="margin-right: 12px;">person</md-icon>
         Mi perfil
     </button>
@@ -12,6 +12,11 @@
     <button md-button class="nav-btn">
         <md-icon style="margin-right: 12px;">school</md-icon>
         Mis preguntas
+    </button>
+
+    <button md-button class="nav-btn" (click)="openNotifications()">
+        <md-icon style="margin-right: 12px;">notifications</md-icon>
+        Notificaciones
     </button>
 
     <app-search></app-search>
