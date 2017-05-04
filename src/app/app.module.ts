@@ -41,6 +41,7 @@ import { AuthGuard } from "./guards/auth.guards";
 import { LoggedGuard } from "./guards/logged.guard";
 import { NotificationsComponent } from './notifications/notifications.component';
 import { ReportComponent } from './report/report.component';
+import { MyProfileComponent } from './my-profile/my-profile.component';
 
 export const appRoutes: Routes = [
   { path: 'home',
@@ -58,6 +59,10 @@ export const appRoutes: Routes = [
       {
         path: 'questions',
         component: MyQuestionsComponent,
+      },
+      {
+        path: 'myProfile',
+        component: MyProfileComponent,
       },
     ]
   },
@@ -102,7 +107,8 @@ export const appRoutes: Routes = [
     TopicFilterPipe,
     AskiitComponent,
     NotificationsComponent,
-    ReportComponent
+    ReportComponent,
+    MyProfileComponent
   ],
   imports: [
     BrowserModule,
