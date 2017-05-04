@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { TagService } from '../tag.service';
 import { TopicService } from '../topic.service';
 import {style, state, animate, transition, trigger} from '@angular/core';
+import { NgRedux } from 'ng2-redux';
+import { IAppState } from '../store';
+import { UPDATE_QUESTION_FILTER } from '../actions';
 
 @Component({
   selector: 'app-search',
@@ -47,7 +50,7 @@ export class SearchComponent implements OnInit {
     topicGotResponse: boolean = true;
     chipClicked: boolean = false;
 
-    constructor( private tagService: TagService, private topicService: TopicService ) {
+    constructor( private tagService: TagService, private topicService: TopicService, private ngRedux: NgRedux<IAppState> ) {
         this.selectedTopics = new Array<any>( );
         this.selectedTags = new Array<any>( );
     }
@@ -61,7 +64,7 @@ export class SearchComponent implements OnInit {
         this.topicsResponse$ = this.topicService.getTopicsByMatch( term );
 
         this.topicsResponse$.subscribe(
-          res => { this.allTopics = res, this.topicGotResponse = true, console.log( res ) },
+          res => { this.allTopics = res, this.topicGotResponse = true },
           () => {},
           () => console.log( "OK: topics match completed!" )
         );
@@ -69,7 +72,7 @@ export class SearchComponent implements OnInit {
     	this.tagsResponse$ = this.tagService.getTagsByMatch( term );
 
     	this.tagsResponse$.subscribe(
-    		res => { this.allTags = res, this.tagGotResponse = true, console.log( res ) },
+    		res => { this.allTags = res, this.tagGotResponse = true },
     		() => {},
     		() => console.log( "OK: tags match completed!" )
     	);
@@ -109,24 +112,56 @@ export class SearchComponent implements OnInit {
 
     addTopic( topic ) {
         if ( !this.selectedTopics.includes( topic ) )
+        {
             this.selectedTopics.push( topic );
+            this.ngRedux.dispatch({
+                type: UPDATE_QUESTION_FILTER,
+                payload: {
+                    topics: this.selectedTopics,
+                    tags: this.selectedTags
+                }
+            });
+        }
         this.chipClicked = true;
     }
 
     addTag( tag ) {
         if ( !this.selectedTags.includes( tag ) )
+        {
             this.selectedTags.push( tag );
+            this.ngRedux.dispatch({
+                type: UPDATE_QUESTION_FILTER,
+                payload: {
+                    topics: this.selectedTopics,
+                    tags: this.selectedTags
+                }
+            });
+        }
         this.chipClicked = true;
     }
 
     removeTopic( index ) {
         this.selectedTopics = this.selectedTopics.slice( 0, index )
             .concat( this.selectedTopics.slice( index + 1, this.selectedTopics.length ) );
+        this.ngRedux.dispatch({
+            type: UPDATE_QUESTION_FILTER,
+            payload: {
+                topics: this.selectedTopics,
+                tags: this.selectedTags
+            }
+        });
     }
 
     removeTag( index ) {
         this.selectedTags = this.selectedTags.slice( 0, index )
             .concat( this.selectedTags.slice( index + 1, this.selectedTags.length ) );
+        this.ngRedux.dispatch({
+            type: UPDATE_QUESTION_FILTER,
+            payload: {
+                topics: this.selectedTopics,
+                tags: this.selectedTags
+            }
+        });
     }
 
     blurEvent( ) {

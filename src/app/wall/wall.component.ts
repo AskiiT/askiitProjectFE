@@ -3,6 +3,8 @@ import { ChangeEvent } from 'angular2-virtual-scroll';
 import { Question } from '../question/question.component';
 import { QuestionService } from '../question.service';
 import { VirtualScrollComponent } from 'angular2-virtual-scroll';
+import { NgRedux } from 'ng2-redux';
+import { IAppState } from '../store';
 
 @Component({
   selector: 'app-wall',
@@ -11,6 +13,11 @@ import { VirtualScrollComponent } from 'angular2-virtual-scroll';
   providers: [ QuestionService ]
 })
 export class WallComponent implements OnInit {
+
+    filters = {
+        topics: [],
+        tags: []
+    }
 
   @ViewChild(VirtualScrollComponent)
   private virtualScroll: VirtualScrollComponent;
@@ -25,13 +32,24 @@ export class WallComponent implements OnInit {
    protected initialResponse = false;
    protected page: number = 1;
 
-  constructor(private qService: QuestionService) { }
+  constructor(private qService: QuestionService, private ngRedux: NgRedux<IAppState>) {
+      ngRedux.select( 'filters' ).subscribe(
+          value => {
+              this.filters = <{ tags: Array<any>, topics: Array<any> }> value;
+          }
+      )
+  }
 
 
   ngOnInit() {
     this.qService.getAllQuestionsByPage(this.page).subscribe(
-      (dataQuestions) => {this.buffer = dataQuestions, this.initialResponse = true} 
+      (dataQuestions) => {this.buffer = dataQuestions, this.initialResponse = true}
     );
+  }
+
+  showData( ) {
+      console.log( this.filters.tags )
+      console.log( this.filters.topics )
   }
 
   protected fetchMore(event: ChangeEvent) {
