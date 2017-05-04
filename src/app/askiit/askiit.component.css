@@ -106,11 +106,13 @@ md-chip.tag-color-selected {
 }
 
 .askiitBtn{
-	background-color: #1FC129;
+    background-color: #1FC129;
+	color: #0A1E0B;
 }
 
 .cancelBtn{
-	background-color: #BC1111;
+    background-color: #BC1111;
+	color: #FFDFDF;
 }
 
 #ale{

@@ -2,7 +2,9 @@ import { Component, Input, Output, EventEmitter, OnInit} from '@angular/core';
 import {style, state, animate, transition, trigger} from '@angular/core';
 import { QuestionService } from '../question.service';
 import { NgRedux } from 'ng2-redux';
-import { IAppState } from '../store';;
+import { IAppState } from '../store';
+import { MdDialog, MdDialogRef } from '@angular/material';
+import { ReportComponent } from '../report/report.component';
 
 export interface Question {
     id?: number;
@@ -55,7 +57,7 @@ export class QuestionComponent implements OnInit {
 
   userData: any;
 
-  constructor(private questionService: QuestionService, private ngRedux: NgRedux<IAppState> ) {
+  constructor(private questionService: QuestionService, private ngRedux: NgRedux<IAppState>, public dialog: MdDialog ) {
       ngRedux.select( 'authUserData' ).subscribe(
           value => {
               this.userData = value;
@@ -106,6 +108,15 @@ export class QuestionComponent implements OnInit {
     // for(var i = 0; i < this.question.p_users.length){
     //
     // }
+  }
+
+  openReportDialog( id ) {
+      let dialogRef = this.dialog.open(ReportComponent,{
+        height: '285px',
+        width: '500px'
+      });
+      dialogRef.componentInstance.questionId = id;
+      dialogRef.afterClosed();
   }
 
 }
