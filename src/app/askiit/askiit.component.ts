@@ -148,8 +148,8 @@ export class AskiitComponent implements OnInit {
 
 
 
-  OnAskiit(title, body){
-    const question = new Question(title.value, body.value, this.selectedTopic, "1", "1", this.selectedTags);
+  OnAskiit(title, body, time){
+    const question = new Question(title.value, body.value, this.selectedTopic, "1", "1", this.selectedTags, time);
     this.questionService.postQuestion( question ).subscribe(
       res => {console.log(res), this.responseValidation(res)}
     );
