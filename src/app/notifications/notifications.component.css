@@ -22,6 +22,10 @@
     transition: background-color 400ms linear;
 }
 
+.read {
+    background-color: #EBEBEB;
+}
+
 .child {
     display: table-cell;
     vertical-align: middle;

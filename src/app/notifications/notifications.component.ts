@@ -14,7 +14,7 @@ export class NotificationsComponent implements OnInit {
 
     constructor( public dialogRef: MdDialogRef<NotificationsComponent>, private nService: NotificationService ) {
         nService.getNotifications( ).subscribe(
-            res => { this.array = res.notifications, console.log( res ) },
+            res => { this.array = res.notifications },
             () => {},
             () => console.log( 'Ok: notifications received.')
         )
@@ -25,6 +25,20 @@ export class NotificationsComponent implements OnInit {
 
     validateResponse( ) {
         return this.array instanceof Array;
+    }
+
+    markNotificationAsReaded( index ) {
+        this.nService.markNotificationAsReaded( this.array[ index ].id ).subscribe(
+            res => {
+                this.nService.getNotifications( ).subscribe(
+                    res => { this.array = res.notifications },
+                    () => {},
+                    () => console.log( 'Ok: notifications received.')
+                )
+            },
+            () => {},
+            () => console.log( "OK: Notification readed." )
+        )
     }
 
 }

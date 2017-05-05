@@ -26,4 +26,12 @@ export class NotificationService {
             .map( ( res: Response ) => res.json( ).data );
     }
 
+    markNotificationAsReaded( id ) {
+        const headers = new Headers( this.headers );
+        const options = new RequestOptions( { headers: headers } );
+
+        return this.http.get( 'http://localhost:3000/api/v1/notifications/' + id + '/read', options )
+            .map( ( res: Response ) => res.json( ).data );
+    }
+
 }
