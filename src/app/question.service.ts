@@ -72,4 +72,12 @@ export class QuestionService {
         options ).map( ( res: Response ) => res.json( ).data );
   }
 
+  deleteQuestion( id ) {
+      const headers = new Headers( this.headers );
+      const options = new RequestOptions({headers: headers});
+
+      return this.http.delete( 'http://localhost:3000/api/v1/questions/'+ id,
+          options ).map( ( res: Response ) => res.json( ) );
+  }
+
 }
