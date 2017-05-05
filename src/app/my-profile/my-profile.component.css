@@ -1,7 +1,7 @@
 .c img{
   border: 3px solid #0084B4;
   align-self: center;
-  -webkit-border-radius: 12px;
+  -webkit-border-radius: 50px;
 }
 
 .c-username {
@@ -13,7 +13,6 @@
     color: #666;
 }
 .c-name{
-  color: white;
   text-align: center;
   font-size: 29px;
 }
@@ -25,13 +24,31 @@
   background-color: #0084B4;
 }
 
+.b3{
+  max-width: 200px;
+  background-color: #BC1111;
+}
+
+.b2{
+  max-width: 200px;
+  background-color: #0084B4;
+  margin-right: 20px;
+}
+
 .b-actions{
   text-align: center;
 }
+
 .de{
   border: 1px solid #0084B4;
   background-color: #00635D;
   -webkit-border-radius: 12px;
   text-indent: 10px;
   margin-bottom: 20px;
+}
+
+.i2{
+  border: 1px solid #0084B4;
+  min-width: 512px;
+  margin-bottom: 10px;
 }

@@ -17,6 +17,7 @@ export class MyProfileComponent implements OnInit {
   percente:string;
   percentc:string;
   response$;
+  edit:boolean=false;
   public usernameParam: String;
 
   constructor( private ngRedux: NgRedux<IAppState>,private uService: UserService) {
@@ -49,6 +50,18 @@ export class MyProfileComponent implements OnInit {
       () => {},
       () => console.log( "OK: user completed!" )
     );
+  }
+
+  onEdit(){
+    this.edit=true;
+  }
+
+  onSave(){
+    this.edit=false;
+  }
+
+  onCancel(){
+    this.edit=false;
   }
 
 }

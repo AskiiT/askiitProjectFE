@@ -3,15 +3,23 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-4">
-          <md-card class="c" style="background-color: #0E1112">
+          <md-card class="c">
               <img src="http://localhost:3000{{userData1.avatar.avatars.avatars.url}}"
                 alt="leyend" class="md-card-image img-responsive center-block" width="200" height="200"
                 [ngStyle]="{'background-color': userData.color}">
               <md-card-content>
-                <div class="c-name">{{userData.first_name}} {{userData.last_name}}</div>
+                <div  *ngIf="!edit" class="c-name">{{userData.first_name}} {{userData.last_name}}</div>
+                <div *ngIf="edit" class="col-md-offset-2">
+                  <md-input-container>
+                      <input mdInput  name="name" placeholder={{userData.first_name}}>
+                  </md-input-container>
+                  <md-input-container>
+                      <input mdInput  name="name" placeholder={{userData.last_name}}>
+                  </md-input-container>
+                </div>
                 <div class="c-username">@{{userData.username}}</div>
-                <div class="b-actions">
-                  <button md-button class="btn center-block btn-responsive b1"type="submit" name="buttonSChanges">
+                <div class="b-actions" *ngIf="!edit" (click)="onEdit()">
+                  <button md-button class="btn center-block btn-responsive b1"type="submit" name="buttonEdit">
                     Editar
                   </button>
                 </div>
@@ -20,10 +28,18 @@
         </div>
         <div class="col-md-8">
           <md-card class="c2" style="background-color: #15191B; color:white;">
-            <div class="de">
+            <div *ngIf="!edit" class="de">
               <h4>Descripción:</h4>
               <p>{{userData.description}}</p>
             </div>
+
+            <div *ngIf="edit" class="">
+              <div class="input-group">
+                <label for="inputlg">Descripción</label>
+                <textarea class="form-control i2"  style="resize: none" placeholder={{userData.description}}></textarea><br>
+              </div>
+            </div>
+
             <div *ngIf="userData1!=undefined">
               <div id="es">Efectividad: {{userData1.rank.efectiveness}} </div>
               <div class="progress">
@@ -49,6 +65,14 @@
                   {{percentq.slice(0, 4)}}
               </div>
            </div>
+           </div>
+           <div class="b-actions" *ngIf="edit">
+             <button md-button class="btn center-block btn-responsive b2" type="submit" name="buttonSave" (click)="onSave()">
+               Guardar
+             </button>
+             <button md-button class="btn center-block btn-responsive b3"  name="buttonCancel" (click)="onCancel()">
+               Cancelar
+             </button>
            </div>
           </md-card>
         </div>
