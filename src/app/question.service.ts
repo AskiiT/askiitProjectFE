@@ -55,7 +55,7 @@ export class QuestionService {
     var stopics = "";
     if(topics.length > 0)
       stopics = ",to_" + topics.join(",to_");
-    return this.http.get( 'http://localhost:3000/api/v1/questions/tagsearch/' + tags.join() + stopics)
+    return this.http.get( 'http://localhost:3000/api/v1/questions/tagsearch/' + tags.join() + stopics + '?page=' + page )
           .map( ( res: Response ) => res.json( ).data );
   }
 

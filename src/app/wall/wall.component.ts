@@ -37,8 +37,8 @@ export class WallComponent implements OnInit {
       ngRedux.select( 'filters' ).subscribe(
           value => {
               this.filters = <{ tags: Array<any>, topics: Array<any> }> value;
-              this.filterUpdateQuestions();
               this.page = 1;
+              this.filterUpdateQuestions();
               this.initialResponse = true;
           }
       )
@@ -49,19 +49,19 @@ export class WallComponent implements OnInit {
 
   filterUpdateQuestions(){
     if(this.filters.topics.length > 0 || this.filters.tags.length > 0){
-      this.qService.getAllQuestionsFilter( this.filters.tags, this.filters.topics, 1 ).subscribe(
-        (dataQuestions)  =>  {this.validateQuestions(dataQuestions);
+      this.qService.getAllQuestionsFilter( this.filters.tags, this.filters.topics, this.page ).subscribe(
+        (dataQuestions)  =>  {this.validateUpdateQuestions(dataQuestions);
                               this.buffer = dataQuestions}
       )
     }else{
       this.qService.getAllQuestionsByPage(this.page).subscribe(
-        (dataQuestions) => {this.validateQuestions(dataQuestions);
+        (dataQuestions) => {this.validateUpdateQuestions(dataQuestions);
                             this.buffer = dataQuestions}
       )
     }
   }
 
-  validateQuestions(dataQuestions){
+  validateUpdateQuestions(dataQuestions){
     if(dataQuestions.error != null){
       this.scrollState = 0;
     }else if(dataQuestions.length < 20){
@@ -75,7 +75,6 @@ export class WallComponent implements OnInit {
     this.indices = event;
     if (event.end === this.buffer.length) {
       this.loading = true;
-      this.page = this.page + 1;
       this.timer = setTimeout(() => {
         this.filterFetchQuestions();
       }, 1000 + Math.random() * 1000);
@@ -84,13 +83,22 @@ export class WallComponent implements OnInit {
 
   filterFetchQuestions(){
     if(this.filters.topics.length > 0 || this.filters.tags.length > 0){
-      this.qService.getAllQuestionsFilter( this.filters.tags, this.filters.topics, 1 ).subscribe(
-        (dataQuestions)  =>  {this.buffer = this.buffer.concat(dataQuestions), this.loading = false}
+      this.qService.getAllQuestionsFilter( this.filters.tags, this.filters.topics, this.page + 1).subscribe(
+        (dataQuestions)  =>  {this.validateFetchQuestions(dataQuestions);
+                              this.loading = false}
       )
     }else{
       this.qService.getAllQuestionsByPage(this.page).subscribe(
-        (dataQuestions)   => {this.buffer = this.buffer.concat(dataQuestions), this.loading = false}
+        (dataQuestions)   => {this.validateFetchQuestions(dataQuestions);
+                              this.loading = false}
       )
+    }
+  }
+
+  validateFetchQuestions(dataQuestions){
+    if(dataQuestions.error == null){
+      this.page++;
+      this.buffer = this.buffer.concat(dataQuestions);
     }
   }
 
