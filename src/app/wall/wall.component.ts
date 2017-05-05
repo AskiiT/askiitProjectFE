@@ -14,10 +14,10 @@ import { IAppState } from '../store';
 })
 export class WallComponent implements OnInit {
 
-    filters = {
-        topics: [],
-        tags: []
-    }
+  filters = {
+      topics: [],
+      tags: []
+  }
 
   @ViewChild(VirtualScrollComponent)
   private virtualScroll: VirtualScrollComponent;
@@ -48,34 +48,34 @@ export class WallComponent implements OnInit {
   }
 
   filterUpdateQuestions(){
-    if(this.filters.topics.length > 0 || this.filters.tags.length > 0){
-      this.qService.getAllQuestionsFilter( this.filters.tags, this.filters.topics, this.page ).subscribe(
-        (dataQuestions)  =>  {this.validateUpdateQuestions(dataQuestions);
-                              this.buffer = dataQuestions}
-      )
-    }else{
-      this.qService.getAllQuestionsByPage(this.page).subscribe(
-        (dataQuestions) => {this.validateUpdateQuestions(dataQuestions);
-                            this.buffer = dataQuestions}
-      )
-    }
+      if(this.filters.topics.length > 0 || this.filters.tags.length > 0){
+          this.qService.getAllQuestionsFilter( this.filters.tags, this.filters.topics, this.page ).subscribe(
+            (dataQuestions)  =>  {this.validateUpdateQuestions(dataQuestions);
+                                  this.buffer = dataQuestions}
+          )
+      }else{
+          this.qService.getAllQuestionsByPage(this.page).subscribe(
+            (dataQuestions) => {this.validateUpdateQuestions(dataQuestions);
+                                this.buffer = dataQuestions}
+          )
+      }
   }
 
   validateUpdateQuestions(dataQuestions){
-    if(dataQuestions.error != null){
-      this.scrollState = 0;
-    }else if(dataQuestions.length < 20){
-      this.scrollState = 1;
-    }else{
-      this.scrollState = 2;
-    }
+      if(dataQuestions.error != null){
+          this.scrollState = 0;
+      }else if(dataQuestions.length < 20){
+          this.scrollState = 1;
+      }else{
+          this.scrollState = 2;
+      }
   }
 
   protected fetchMore(event: ChangeEvent) {
     this.indices = event;
     if (event.end === this.buffer.length) {
-      this.loading = true;
-      this.timer = setTimeout(() => {
+        this.loading = true;
+        this.timer = setTimeout(() => {
         this.filterFetchQuestions();
       }, 1000 + Math.random() * 1000);
     }
@@ -83,27 +83,27 @@ export class WallComponent implements OnInit {
 
   filterFetchQuestions(){
     if(this.filters.topics.length > 0 || this.filters.tags.length > 0){
-      this.qService.getAllQuestionsFilter( this.filters.tags, this.filters.topics, this.page + 1).subscribe(
-        (dataQuestions)  =>  {this.validateFetchQuestions(dataQuestions);
-                              this.loading = false}
+        this.qService.getAllQuestionsFilter( this.filters.tags, this.filters.topics, this.page + 1).subscribe(
+          (dataQuestions)  =>  {this.validateFetchQuestions(dataQuestions);
+                                this.loading = false}
       )
     }else{
-      this.qService.getAllQuestionsByPage(this.page).subscribe(
-        (dataQuestions)   => {this.validateFetchQuestions(dataQuestions);
-                              this.loading = false}
+        this.qService.getAllQuestionsByPage(this.page).subscribe(
+          (dataQuestions)   => {this.validateFetchQuestions(dataQuestions);
+                                this.loading = false}
       )
     }
   }
 
   validateFetchQuestions(dataQuestions){
     if(dataQuestions.error == null){
-      this.page++;
-      this.buffer = this.buffer.concat(dataQuestions);
+        this.page++;
+        this.buffer = this.buffer.concat(dataQuestions);
     }
   }
 
   refresh(e){
-    this.virtualScroll.refresh();
+      this.virtualScroll.refresh();
   }
 
 }

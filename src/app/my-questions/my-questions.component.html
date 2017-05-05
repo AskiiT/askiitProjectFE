@@ -1,5 +1,23 @@
-<div style="margin-left: 30px; margin-top: 10px">
-	<p>
-	  my-questions works!
-	</p>
+<h1 *ngIf = "scrollState == 0">No has realizado ninguna pregunta</h1>
+<div *ngIf = "scrollState == 1" style = "padding = 0">
+  <app-my-question  *ngFor="let question of buffer"
+    [myQuestion]="question"
+    [scrollState]="scrollState"
+    (onResize)="refresh($event)"> </app-my-question>
 </div>
+
+<virtual-scroll
+  *ngIf = "scrollState == 2"
+  [childHeight]="63"
+  [items]="buffer"
+  (update)="scrollItems = $event"
+  (end)="fetchMore($event)">
+  <md-spinner class="center-block" style="margin-top: 25%" *ngIf="initialResponse==false"></md-spinner>
+  <app-my-question *ngFor="let question of scrollItems"
+    [myQuestion]="question"
+    [scrollState]="scrollState"
+    (onResize)="refresh($event)"> </app-my-question>
+
+  <md-progress-bar class="unicorn-dark-theme" mode="indeterminate"
+    style="margin-top: 15px;" color="warn" *ngIf="loading"></md-progress-bar>
+</virtual-scroll>

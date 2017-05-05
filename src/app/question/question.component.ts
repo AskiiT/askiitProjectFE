@@ -106,8 +106,6 @@ export class QuestionComponent implements OnInit {
     }
   }
 
-
-
   openReportDialog( id ) {
       let dialogRef = this.dialog.open(ReportComponent,{
         height: '285px',

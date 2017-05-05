@@ -41,6 +41,11 @@ export class QuestionService {
         .map( ( res: Response ) => res.json( ).data );
   }
 
+  getAllUserQuestionsByPage( userID, page ){
+    return this.http.get( 'http://localhost:3000/api/v1/users/' + userID + '/my-questions?page=' + page )
+        .map( ( res: Response ) => res.json( ).data );
+  }
+
   getAllQuestionsByTag( tagName ) {
   	  return this.http.get( 'http://localhost:3000/api/v1/questions/tagsearch/' + tagName )
   		    .map( ( res: Response ) => res.json( ).data );
