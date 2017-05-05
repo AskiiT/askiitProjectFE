@@ -64,16 +64,21 @@ export class UserService {
   }
 
   updateUser(formData){
-    var user = {
-      "first_name": formData.first_name
-
+    var user:any;
+    user = {
+      "first_name": formData.first_name,
+      "last_name": formData.last_name,
+      "description": formData.body
     };
+
+
 
     const headers = new Headers( this.headers );
     const options = new RequestOptions({headers: headers});
+    console.log(formData.first_name);
 
-    return this.http.patch( 'http://localhost:3000/api/v1/users/'+ this.userData.id,JSON.stringify( user ),
-        options ).map( ( res: Response ) => res.json( ).data );
+    return this.http.patch( 'http://localhost:3000/api/v1/users/'+ this.userData.id, JSON.stringify( user ),
+        options ).map( ( res: Response ) => res);
   }
 
 }

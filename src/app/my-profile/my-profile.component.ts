@@ -22,6 +22,8 @@ export class MyProfileComponent implements OnInit {
   edit:boolean=false;
   public usernameParam: String;
   firstName:string;
+  lastName:string;
+  descriptionName:string;
 
   profileForm = new FormGroup({
     first_name: new FormControl(null,[Validators.required,Validators.minLength(4),Validators.maxLength(30),Validators.pattern('[^0-9`!@#\$%\^&*+_=]+')]),
@@ -30,6 +32,7 @@ export class MyProfileComponent implements OnInit {
   });
 
   constructor( private ngRedux: NgRedux<IAppState>,private uService: UserService) {
+
     ngRedux.select( 'authUserData' ).subscribe(
         value => {
             this.userData = value;
@@ -66,23 +69,20 @@ export class MyProfileComponent implements OnInit {
   }
 
   onSave(){
-    this.edit=false;
-    console.log(this.profileForm.value.first_name);
-
-      if ( this.firstNameValid( )) {
-        this.userUpdateResponse$ = this.uService.updateUser( this.profileForm.value.first_name);
+      if ( this.firstNameValid( ) || this.lastNameValid( ) || this.descriptionValid() ) {
+        this.userUpdateResponse$ = this.uService.updateUser( this.profileForm.value);
         this.userUpdateResponse$.subscribe(
           res => {
               if ( res.status == 200 ){
                 console.log( "OK: user updated!" )
               }
           },
-          () => {},
-          () => console.log( "OK: user u!" )
+          () => {}
         );
-
+        location.reload();
     }
     this.firstName = '';
+    this.edit=false;
   }
 
   onCancel(){
@@ -90,9 +90,22 @@ export class MyProfileComponent implements OnInit {
   }
 
   firstNameValid(){
-    if ( this.firstName == '' )
+    if ( this.firstName === '' || this.firstName === undefined)
       return false;
     return true;
   }
+
+  lastNameValid(){
+    if ( this.lastName === '' || this.lastName === undefined)
+      return false;
+    return true;
+  }
+
+  descriptionValid(){
+    if ( this.descriptionName === '' || this.descriptionName === undefined)
+      return false;
+    return true;
+  }
+
 
 }
