@@ -52,3 +52,7 @@
   min-width: 512px;
   margin-bottom: 10px;
 }
+
+.form-control{
+  border-radius: 6px !important;
+}
