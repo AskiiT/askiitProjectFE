@@ -42,6 +42,7 @@ import { LoggedGuard } from "./guards/logged.guard";
 import { NotificationsComponent } from './notifications/notifications.component';
 import { ReportComponent } from './report/report.component';
 import { MyProfileComponent } from './my-profile/my-profile.component';
+import { MyQuestionComponent } from './my-question/my-question.component';
 
 export const appRoutes: Routes = [
   { path: 'home',
@@ -109,6 +110,7 @@ export const appRoutes: Routes = [
     NotificationsComponent,
     ReportComponent,
     MyProfileComponent
+    MyQuestionComponent
   ],
   imports: [
     BrowserModule,
