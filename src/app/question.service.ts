@@ -46,6 +46,19 @@ export class QuestionService {
   		    .map( ( res: Response ) => res.json( ).data );
   }
 
+  getAllQuestionsByTopic( topicName ) {
+      return this.http.get( 'http://localhost:3000/api/v1/questions/topicsearch/' + topicName )
+          .map( ( res: Response ) => res.json( ).data );
+  }
+
+  getAllQuestionsFilter( tags, topics, page){
+    var stopics = "";
+    if(topics.length > 0)
+      stopics = ",to_" + topics.join(",to_");
+    return this.http.get( 'http://localhost:3000/api/v1/questions/tagsearch/' + tags.join() + stopics + '?page=' + page )
+          .map( ( res: Response ) => res.json( ).data );
+  }
+
   postQuestion( question ) {
     const headers = new Headers( this.headers );
     const options = new RequestOptions({headers: headers});

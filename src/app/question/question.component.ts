@@ -48,6 +48,7 @@ export interface Question {
 export class QuestionComponent implements OnInit {
 
   @Input() question: Question;
+  @Input() scrollState: number;
   @Output() onResize = new EventEmitter();
 
 
@@ -73,7 +74,8 @@ export class QuestionComponent implements OnInit {
 
   onChange(e){
     this.expand = (this.expand == false ? this.expand = true : this.expand = false);
-    this.onResize.emit(e)
+    if (this.scrollState == 2)
+      this.onResize.emit(e)
   }
 
   OnIKnowIt(questionId){
@@ -104,11 +106,7 @@ export class QuestionComponent implements OnInit {
     }
   }
 
-  deletePostulate(){
-    // for(var i = 0; i < this.question.p_users.length){
-    //
-    // }
-  }
+
 
   openReportDialog( id ) {
       let dialogRef = this.dialog.open(ReportComponent,{
