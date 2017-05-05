@@ -39,7 +39,7 @@ export class WallComponent implements OnInit {
               this.filters = <{ tags: Array<any>, topics: Array<any> }> value;
               this.page = 1;
               this.filterUpdateQuestions();
-              this.initialResponse = true;
+              this.initialResponse = false;
           }
       )
   }
@@ -51,11 +51,13 @@ export class WallComponent implements OnInit {
     if(this.filters.topics.length > 0 || this.filters.tags.length > 0){
       this.qService.getAllQuestionsFilter( this.filters.tags, this.filters.topics, this.page ).subscribe(
         (dataQuestions)  =>  {this.validateUpdateQuestions(dataQuestions);
+                                this.initialResponse = true;
                               this.buffer = dataQuestions}
       )
     }else{
       this.qService.getAllQuestionsByPage(this.page).subscribe(
         (dataQuestions) => {this.validateUpdateQuestions(dataQuestions);
+                            this.initialResponse = true;
                             this.buffer = dataQuestions}
       )
     }
