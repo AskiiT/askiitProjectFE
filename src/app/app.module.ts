@@ -109,7 +109,7 @@ export const appRoutes: Routes = [
     AskiitComponent,
     NotificationsComponent,
     ReportComponent,
-    MyProfileComponent
+    MyProfileComponent,
     MyQuestionComponent
   ],
   imports: [
