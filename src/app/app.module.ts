@@ -31,10 +31,23 @@ import { ChatFilterPipe } from './chat-filter.pipe';
 import { QuestionComponent } from './question/question.component';
 import { TopicFilterPipe } from './topic-filter.pipe';
 import { AskiitComponent } from './askiit/askiit.component';
+import { NgRedux, NgReduxModule } from 'ng2-redux';
+import { IAppState, rootReducer, INITIAL_STATE } from './store';
+
+import { Angular2TokenService } from 'angular2-token';
+import { AuthService } from "./auth.service";
+
+import { AuthGuard } from "./guards/auth.guards";
+import { LoggedGuard } from "./guards/logged.guard";
+import { NotificationsComponent } from './notifications/notifications.component';
+import { ReportComponent } from './report/report.component';
+import { MyProfileComponent } from './my-profile/my-profile.component';
+import { MyQuestionComponent } from './my-question/my-question.component';
 
 export const appRoutes: Routes = [
   { path: 'home',
     component: HomeComponent,
+    canActivate: [ AuthGuard ],
     children: [
       {
         path: '',
@@ -48,10 +61,15 @@ export const appRoutes: Routes = [
         path: 'questions',
         component: MyQuestionsComponent,
       },
+      {
+        path: 'myProfile',
+        component: MyProfileComponent,
+      },
     ]
   },
   { path: '',
     component: LandingComponent,
+    canActivate: [ LoggedGuard ],
     children: [
       { path: '',
         component: SignInComponent,
@@ -88,7 +106,11 @@ export const appRoutes: Routes = [
     TagFilterPipe,
     QuestionComponent,
     TopicFilterPipe,
-    AskiitComponent
+    AskiitComponent,
+    NotificationsComponent,
+    ReportComponent,
+    MyProfileComponent,
+    MyQuestionComponent
   ],
   imports: [
     BrowserModule,
@@ -99,12 +121,20 @@ export const appRoutes: Routes = [
     MaterialModule.forRoot( ),
     RecaptchaModule.forRoot( ),
     Ng2FilterPipeModule,
-    VirtualScrollModule
+    VirtualScrollModule,
+    NgReduxModule
   ],
   entryComponents: [
-    AskiitComponent
+    AskiitComponent,
+    NotificationsComponent,
+    ReportComponent
   ],
-  providers: [],
+  providers: [ Angular2TokenService, AuthService, AuthGuard, LoggedGuard ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+
+export class AppModule {
+    constructor( ngRedux: NgRedux<IAppState> ) {
+        ngRedux.configureStore( rootReducer, INITIAL_STATE );
+    }
+}

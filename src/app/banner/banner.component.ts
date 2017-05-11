@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-//import { LandingService } from './landing/landing.service';
 
 @Component({
   selector: 'app-banner',
@@ -8,20 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BannerComponent implements OnInit {
   public title = 'AskiiT';
-  public sign = true;
-  public siteHome = false;
 
-  constructor() { }
+  constructor( ) { }
 
   ngOnInit() {
   }
 
-  buttonSignIn(){
-    this.sign = true;
-  }
+  increment( ) {
 
-  buttonSignUp(){
-    this.sign = false;
   }
-
 }

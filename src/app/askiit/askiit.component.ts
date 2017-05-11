@@ -7,6 +7,7 @@ import {style, state, animate, transition, trigger} from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import {Question} from '../question';
 import 'rxjs/add/operator/startWith';
+import { MdSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-askiit',
@@ -42,7 +43,9 @@ export class AskiitComponent implements OnInit {
   stateCtrl: FormControl;
 
   allTags: any;
-  allTopics: any;
+  allTopics: any
+
+  mostRecentPostedQuestionId: number;
 
   selectedTopics: Array<any>;
   selectedTags: Array<any>;
@@ -60,7 +63,7 @@ export class AskiitComponent implements OnInit {
   chipClicked: boolean = false;
 
   constructor(public dialogRef: MdDialogRef<AskiitComponent>, private tagService: TagService, private topicService: TopicService,
-  private questionService: QuestionService,) {
+      private questionService: QuestionService, public snackBar: MdSnackBar ) {
     this.selectedTopics = new Array<any>( );
     this.selectedTags = new Array<any>( );
   }
@@ -146,11 +149,21 @@ export class AskiitComponent implements OnInit {
     this.StateSelectTopic = false;
   }
 
+  openSnack( ) {
+      this.snackBar.open( 'Pregunta publicada', 'Deshacer', {
+          duration: 5000
+      } ).onAction( ).subscribe(
+          () => {
+              this.questionService.deleteQuestion( this.mostRecentPostedQuestionId ).subscribe(
+                  res => console.log( "Question deleted." )
+              )
+          }
+      )
+  }
 
-
-  OnAskiit(title, body){
-    const question = new Question(title.value, body.value, this.selectedTopic, "1", "1", this.selectedTags);
-    this.questionService.postQuestion(question).subscribe(
+  OnAskiit(title, body, time){
+    const question = new Question(title.value, body.value, this.selectedTopic, "1", "1", this.selectedTags, time);
+    this.questionService.postQuestion( question ).subscribe(
       res => {console.log(res), this.responseValidation(res)}
     );
   }
@@ -158,6 +171,8 @@ export class AskiitComponent implements OnInit {
   responseValidation(res){
     if(res.error == null){
       this.dialogRef.close();
+      this.mostRecentPostedQuestionId = res.id;
+      this.openSnack( );
     }
   }
 
@@ -166,7 +181,7 @@ export class AskiitComponent implements OnInit {
   }
 
   onSubmit(){
-    console.log(this.askiitForm.value);
+    //console.log(this.askiitForm.value);
   }
 
   addTag( tag ) {

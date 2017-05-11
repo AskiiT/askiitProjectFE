@@ -1,40 +1,40 @@
 <div class="divQuestion">
   <md-card class="cardQuestion" (click) ="onChange($event)">
     <md-card-content>
-        <div mdTooltip="Dificultad" id="difficulty">{{question.difficulty}}</div>
-        <div class = "title">{{question.title}}</div>
+        <div mdTooltip="Dificultad" id="difficulty">{{myQuestion.difficulty}}</div>
+        <div class = "title">{{myQuestion.title}}</div>
         <span class="spacer"></span>
-        <div mdTooltip="Postulados" mdTooltipPosition="right" id="postuls">{{question.p_users.length}}</div>
+        <div mdTooltip="Postulados" mdTooltipPosition="right" id="postuls">{{myQuestion.p_users.length}}</div>
     </md-card-content>
   </md-card>
 
   <md-card class="cardBodyQuestion center-block row" *ngIf="expand" [@fadeInOut] [@slideIn]>
 
       <md-card-content class="bodyContain col-md-10">
-        <div class="topic text-center" [ngStyle]="{'background-color': question.topic.color }">
-          {{question.topic.topic_name}}
+        <div class="topic text-center" [ngStyle]="{'background-color': myQuestion.topic.color }">
+          {{myQuestion.topic.topic_name}}
         </div>
 
         <div class="content">
             <div class="bodyQuestion" style="color: #444444">
-              <p>{{question.body}}</p>
+              <p>{{myQuestion.body}}</p>
             </div>
             <md-chip-list>
-                <md-chip class="tag text-center" *ngFor="let tag of question.tags">{{tag.tag_name}}</md-chip>
+                <md-chip class="tag text-center" *ngFor="let tag of myQuestion.tags">{{tag.tag_name}}</md-chip>
             </md-chip-list>
         </div>
 
       </md-card-content>
 
       <md-card-actions class="divButtons col-md-2">
-        <button id="know-button" md-button class="buttons" style="margin-left: 4px;" (click)="OnIKnowIt(question.id)"
+        <button id="know-button" md-button class="buttons" style="margin-left: 4px;"
             [disabled]="disableIKnowIt" [class.knowSelected] = "postulated">
-          <i id="know" class="icon material-icons md-18">mood</i>
-          I KNOW IT
+          <i id="know" class="icon material-icons md-18">mode_edit</i>
+          EDIT
         </button>
-        <button id="report-button" md-button class="buttons" style="margin-top: 5px" (click)="openReportDialog(question.id)">
-          <i id="report" class="icon material-icons md-18">report</i>
-          REPORT
+        <button id="report-button" md-button class="buttons" style="margin-top: 5px" (click)="onDelete()">
+          <i id="report" class="icon material-icons md-18">close</i>
+          DELETE
         </button>
         <button id="up-button" md-button class="buttons" style="margin-top: 5px">
           <i id="up" style="margin-right: 20px;" class="icon material-icons md-18">vertical_align_top</i>

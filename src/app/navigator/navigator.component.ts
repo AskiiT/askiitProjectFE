@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { NgRedux } from 'ng2-redux';
+import { IAppState } from '../store';
+import { Observable } from 'rxjs/Observable';
+import { MdDialog, MdDialogRef } from '@angular/material';
+import { NotificationsComponent } from '../notifications/notifications.component';
 
 @Component({
   selector: 'app-navigator',
@@ -7,11 +12,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavigatorComponent implements OnInit {
 
-  user = "jsviveron";
+    constructor( public dialog: MdDialog ) { }
 
-  constructor() { }
+    ngOnInit() {
+    }
 
-  ngOnInit() {
-  }
+    openNotifications() {
+      let dialogRef = this.dialog.open(NotificationsComponent,{
+        height: '385px',
+        width: '300px'
+      });
+      dialogRef.afterClosed();
+    }
 
 }

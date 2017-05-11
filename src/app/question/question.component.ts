@@ -1,6 +1,10 @@
 import { Component, Input, Output, EventEmitter, OnInit} from '@angular/core';
 import {style, state, animate, transition, trigger} from '@angular/core';
 import { QuestionService } from '../question.service';
+import { NgRedux } from 'ng2-redux';
+import { IAppState } from '../store';
+import { MdDialog, MdDialogRef } from '@angular/material';
+import { ReportComponent } from '../report/report.component';
 
 export interface Question {
     id?: number;
@@ -44,17 +48,25 @@ export interface Question {
 export class QuestionComponent implements OnInit {
 
   @Input() question: Question;
+  @Input() scrollState: number;
   @Output() onResize = new EventEmitter();
 
 
   expand: boolean = false;
   disableIKnowIt = false;
-  userId = '1';
   postulated: boolean = false;
 
-  constructor(private questionService: QuestionService){ }
+  userData: any;
 
-
+  constructor(private questionService: QuestionService, private ngRedux: NgRedux<IAppState>, public dialog: MdDialog ) {
+      ngRedux.select( 'authUserData' ).subscribe(
+          value => {
+              this.userData = value;
+              if ( this.userData === undefined )
+                console.log( 'There is not user data :(' )
+            }
+      )
+  }
 
   ngOnInit(){
     this.validateIKnowIt();
@@ -62,16 +74,17 @@ export class QuestionComponent implements OnInit {
 
   onChange(e){
     this.expand = (this.expand == false ? this.expand = true : this.expand = false);
-    this.onResize.emit(e)
+    if (this.scrollState == 2)
+      this.onResize.emit(e)
   }
 
   OnIKnowIt(questionId){
     if(this.postulated == false){
-      this.questionService.postulateToQuestion(questionId, this.userId).subscribe(
+      this.questionService.postulateToQuestion(questionId).subscribe(
         res => {this.question = res, this.postulated = true}
       );
     }else{
-      this.questionService.unpostulateToQuestion(questionId, this.userId).subscribe(
+      this.questionService.unpostulateToQuestion(questionId).subscribe(
         res => {this.question = res, this.postulated = false}
       );
     }
@@ -81,22 +94,25 @@ export class QuestionComponent implements OnInit {
     // Valida si el usuario ya se postulo a esta pregunta
     if(this.question.p_users != null ){
       for(var i = 0; i < this.question.p_users.length; i++){
-        if(this.question.p_users[i].id == this.userId){
+        if(this.question.p_users[i].id == this.userData.id){
           this.postulated = true;
           break;
         }
       }
     }
     // Valida si el usuario fue el que realizo esta pregunta
-    if(this.question.user.id == this.userId){
+    if(this.question.user.id == this.userData.id){
       this.disableIKnowIt = true;
     }
   }
 
-  deletePostulate(){
-    // for(var i = 0; i < this.question.p_users.length){
-    //
-    // }
+  openReportDialog( id ) {
+      let dialogRef = this.dialog.open(ReportComponent,{
+        height: '285px',
+        width: '500px'
+      });
+      dialogRef.componentInstance.questionId = id;
+      dialogRef.afterClosed();
   }
 
 }

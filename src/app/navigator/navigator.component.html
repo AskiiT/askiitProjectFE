@@ -3,15 +3,20 @@
         <i class="material-icons vcenter" style="color: yellow;">star</i>
         Rank
     </div>
-    <!--button md-button [routerLink]="['/home','profile', user]" class="nav-btn text-center">Mi perfil</button>-->
-    <button md-button class="nav-btn">
+    <!--button md-button [routerLink]="['/home','myProfile']" class="nav-btn text-center">Mi perfil</button>-->
+    <button md-button class="nav-btn" [routerLink]="['/home','myProfile']">
         <md-icon style="margin-right: 12px;">person</md-icon>
         Mi perfil
     </button>
-    <!--button md-button [routerLink]="['/home','questions']" class="nav-btn text-center">Mis preguntas</button>-->
-    <button md-button class="nav-btn">
+
+    <button md-button class="nav-btn" [routerLink]="['/home','questions']">
         <md-icon style="margin-right: 12px;">school</md-icon>
         Mis preguntas
+    </button>
+
+    <button md-button class="nav-btn" (click)="openNotifications()">
+        <md-icon style="margin-right: 12px;">notifications</md-icon>
+        Notificaciones
     </button>
 
     <app-search></app-search>

@@ -1,14 +1,27 @@
-<virtual-scroll style=""
+
+<h1 *ngIf = "scrollState == 0">No existen preguntas con estas caractaristicas</h1>
+<div *ngIf = "scrollState == 1" style = "padding = 0">
+  <app-question  *ngFor="let question of buffer"
+    [question]="question"
+    [scrollState]="scrollState"
+    (onResize)="refresh($event)"> </app-question>
+</div>
+
+<virtual-scroll
+  *ngIf = "scrollState == 2"
   [childHeight]="63"
   [items]="buffer"
   (update)="scrollItems = $event"
   (end)="fetchMore($event)">
-  <md-spinner class="center-block" style="margin-top: 25%" *ngIf="initialResponse==false"></md-spinner>
-  <app-question *ngFor="let question of scrollItems"
-    [question]="question"
-    (onResize)="refresh($event)"> </app-question>
+  <md-spinner class="center-block" style="margin-top: 25%" *ngIf="!initialResponse"></md-spinner>
+  <div *ngIf="initialResponse">
+      <app-question *ngFor="let question of scrollItems"
+        [question]="question"
+        [scrollState]="scrollState"
+        (onResize)="refresh($event)">
+      </app-question>
+  </div>
 
-  <!--div *ngIf="loading" class="loader">Loading...</div>-->
   <md-progress-bar class="unicorn-dark-theme" mode="indeterminate"
     style="margin-top: 15px;" color="warn" *ngIf="loading"></md-progress-bar>
 </virtual-scroll>
