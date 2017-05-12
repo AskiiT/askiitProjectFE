@@ -9,12 +9,14 @@
 
 		<md-progress-bar class="unicorn-dark-theme" mode="indeterminate"
 			style="width: 90%;" *ngIf="!gotResponse"></md-progress-bar>
-		<div id="searchBox" *ngIf="checkForEmptyResponse(term)" [@slideIn]>
+
+		<div id="searchBox" *ngIf="checkForEmptyResponse(term)" [@fadeInOut]>
 			<li style="color: #538CD1;" [routerLink]="['/home','profile', u.username]"
  				*ngFor="let u of allUsers">
 				{{u.username}}
 			</li>
 		</div>
+
 	</div>
 	<h5 style="margin-top: 10px; color: #0E445F">Tus conversaciones</h5>
 </nav>

@@ -5,6 +5,7 @@ import {style, state, animate, transition, trigger} from '@angular/core';
 import { NgRedux } from 'ng2-redux';
 import { IAppState } from '../store';
 import { UPDATE_QUESTION_FILTER } from '../actions';
+import { NgZone } from '@angular/core';
 
 @Component({
   selector: 'app-search',
@@ -50,7 +51,12 @@ export class SearchComponent implements OnInit {
     topicGotResponse: boolean = true;
     chipClicked: boolean = false;
 
-    constructor( private tagService: TagService, private topicService: TopicService, private ngRedux: NgRedux<IAppState> ) {
+    term: string = '';
+    catchedTerm: string = '';
+    _timeout: any = null;
+
+    constructor( private tagService: TagService, private topicService: TopicService, private ngRedux: NgRedux<IAppState>,
+            public lc: NgZone ) {
         this.selectedTopics = new Array<any>( );
         this.selectedTags = new Array<any>( );
     }
@@ -98,16 +104,26 @@ export class SearchComponent implements OnInit {
         return false;
     }
 
-    inputChange( term ) {
-        if ( term != '' ) {
-            this.tagGotResponse = false;
-            this.topicGotResponse = false;
-            this.chipClicked = false;
-            this.subscribeData( term );
-        } else {
-            this.allTags = null;
-            this.allTopics = null
+    inputChange( input ) {
+
+        this.allTags = null;
+        this.allTopics = null;
+
+        if( this._timeout != null ) {
+            window.clearTimeout( this._timeout );
         }
+
+        this._timeout = window.setTimeout( () => {
+            this._timeout = null;
+            this.lc.run( () => this.catchedTerm = this.term );
+            if ( this.catchedTerm.search( ' ' ) == -1 && this.catchedTerm != '' )
+            {
+                this.tagGotResponse = false;
+                this.topicGotResponse = false;
+                this.chipClicked = false;
+                this.subscribeData( this.catchedTerm );
+            }
+        }, 600 );
     }
 
     addTopic( topic ) {
