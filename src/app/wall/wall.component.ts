@@ -6,6 +6,8 @@ import { VirtualScrollComponent } from 'angular2-virtual-scroll';
 import { NgRedux } from 'ng2-redux';
 import { IAppState } from '../store';
 
+declare var firebase: any;
+
 @Component({
   selector: 'app-wall',
   templateUrl: './wall.component.html',
@@ -44,7 +46,8 @@ export class WallComponent implements OnInit {
       )
   }
 
-  ngOnInit() {
+  ngOnInit( ) {
+      
   }
 
   filterUpdateQuestions(){

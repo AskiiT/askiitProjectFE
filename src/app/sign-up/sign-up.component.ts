@@ -140,6 +140,8 @@ export class SignUpComponent implements OnInit {
           res => {
               if ( res.status == 200 )
               {
+                  this.uService.postUserToFirebase( this.signUpForm.value );
+
                   this.authService.logInUser( { email: this.signUpForm.value.email,
                       password: this.signUpForm.value.password } ).subscribe(
                           res => {
