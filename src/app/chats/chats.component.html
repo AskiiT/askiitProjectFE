@@ -1,5 +1,4 @@
 <nav class="col-md-2 chat-box" style="margin-top: 10px;">
-	<h5 style="margin-top: 10px; color: #0E445F">Tus conversaciones</h5>
 	<div id="designDiv">
 
 		<div class="search">
@@ -16,19 +15,6 @@
 				{{u.username}}
 			</li>
 		</div>
-
-
-		<!--
-		<md-input-container class="search">
-			<span class="fa fa-search"></span>
-   		<input  type="text" mdInput [(ngModel)]="term" [mdAutocomplete]="auto" placeholder="Search by User">
-		</md-input-container>
-
-		<md-autocomplete #auto="mdAutocomplete"  id="searchBox">
-   		<md-option id="searchBox" *ngFor="let u of allUsers | chatFilter:term " [value]="u.username"  [routerLink]="['/home','profile', u.username]">
-      	{{u.username}}
-   		</md-option>
-		</md-autocomplete>
-		 -->
 	</div>
+	<h5 style="margin-top: 10px; color: #0E445F">Tus conversaciones</h5>
 </nav>

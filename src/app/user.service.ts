@@ -66,15 +66,27 @@ export class UserService {
   }
 
   logInToFirebase( user ) {
-      firebase.auth( ).signInWithEmailAndPassword( user.email, user.password ).catch(
+      firebase.auth( ).signInWithEmailAndPassword( user.email, user.password ).then(
+          (userInfo) => {
+              console.log( 'Succesfull Sign in at Firebase.' )
+          }
+      ).catch(
           (error) => {
               console.log( error )
           }
       )
   }
 
+  logoutToFirebase( ) {
+      firebase.auth( ).signOut( );
+  }
+
   postUserToFirebase( formData ) {
-      firebase.auth( ).createUserWithEmailAndPassword( formData.email, formData.password ).catch(
+      firebase.auth( ).createUserWithEmailAndPassword( formData.email, formData.password ).then(
+          (userInfo) => {
+              console.log( 'Succesfull Sign up at Firebase.' )
+          }
+      ).catch(
           (error) => {
               console.log( error )
           }
