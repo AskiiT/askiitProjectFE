@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
-import {style, state, animate, transition, trigger} from '@angular/core';
-import {MdAutocompleteModule} from '@angular/material';
-import {FormControl} from '@angular/forms';
+import { style, state, animate, transition, trigger } from '@angular/core';
+import { MdAutocompleteModule } from '@angular/material';
+import { FormControl } from '@angular/forms';
+import { NgZone } from '@angular/core';
 
 @Component({
   selector: 'app-chats',
@@ -31,8 +32,11 @@ export class ChatsComponent implements OnInit {
 	response$;
     gotResponse: boolean = true;
 
+    term: string = '';
+    catchedTerm: string = '';
+    _timeout: any = null;
 
-    constructor( private uService: UserService ) { }
+    constructor( private uService: UserService, public lc: NgZone ) { }
 
     ngOnInit( ) {
 
@@ -56,11 +60,23 @@ export class ChatsComponent implements OnInit {
         return false;
     }
 
-    inputChange( term ){
-        if ( term != '' ) {
-            this.gotResponse = false;
-            this.subscribeData( term );
+    inputChange( term ) {
+
+        this.allUsers = null;
+
+        if( this._timeout != null ) {
+            window.clearTimeout( this._timeout );
         }
+
+        this._timeout = window.setTimeout( () => {
+            this._timeout = null;
+            this.lc.run( () => this.catchedTerm = this.term );
+            if ( this.catchedTerm.search( ' ' ) == -1 && this.catchedTerm != '' )
+            {
+                this.gotResponse = false;
+                this.subscribeData( this.catchedTerm );
+            }
+        }, 600 );
     }
 
 }

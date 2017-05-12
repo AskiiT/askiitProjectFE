@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UserService } from '../user.service';
-import {style, state, animate, transition, trigger} from '@angular/core';
+import { style, state, animate, transition, trigger } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
+import { NgZone } from '@angular/core';
 
 @Component({
   selector: 'app-sign-up',
@@ -43,6 +44,12 @@ export class SignUpComponent implements OnInit {
   availableColors: Array<string>;
   colorSelected: string;
 
+  catchedEm: string = '';
+  _timeout: any = null;
+
+  catchedUn: string = '';
+  _secondTimeout: any = null;
+
   signUpForm = new FormGroup({
     first_name: new FormControl(null,[Validators.required,Validators.minLength(4),Validators.maxLength(30),Validators.pattern('[^0-9`!@#\$%\^&*+_=]+')]),
     last_name: new FormControl(null,[Validators.required,Validators.minLength(4),Validators.maxLength(30),Validators.pattern('[^0-9`!@#\$%\^&*+_=]+')]),
@@ -51,7 +58,8 @@ export class SignUpComponent implements OnInit {
     password: new FormControl(null,[Validators.required,Validators.minLength(8),Validators.maxLength(72)]),
   });
 
-  constructor( private uService: UserService, private authService: AuthService, private router: Router ) {  }
+  constructor( private uService: UserService, private authService: AuthService, private router: Router,
+    public lc: NgZone ) { }
 
   ngOnInit() {
       this.availableColors = [
@@ -99,11 +107,22 @@ export class SignUpComponent implements OnInit {
   }
 
   inputChangeE( ){
-    if ( this.em != '' ) {
-      var re = /[.]/gi;
-      var newstr = this.em.replace( re, '*' );
-      this.subscribeEmailData( newstr );
+
+    if( this._timeout != null ) {
+        window.clearTimeout( this._timeout );
     }
+
+    this._timeout = window.setTimeout( () => {
+        this._timeout = null;
+        this.lc.run( () => this.catchedEm = this.em );
+        if ( this.catchedEm.search( ' ' ) == -1 && this.catchedEm != '' )
+        {
+            var re = /[.]/gi;
+            var newstr = this.catchedEm.replace( re, '*' );
+            this.subscribeEmailData( newstr );
+        }
+    }, 600 );
+
   }
 
   checkForUsernameValidEmptyResponse( ) {
@@ -172,8 +191,21 @@ export class SignUpComponent implements OnInit {
   }
 
   checkExistingUsername( username ) {
-      if( !this.signUpForm.controls['username'].hasError('minlength') )
-        this.subscribeUsernameData( username );
+    if( !this.signUpForm.controls['username'].hasError('minlength') )
+    {
+        if( this._secondTimeout != null ) {
+            window.clearTimeout( this._secondTimeout );
+        }
+
+        this._secondTimeout = window.setTimeout( () => {
+            this._secondTimeout = null;
+            this.lc.run( () => this.catchedUn = username );
+            if ( this.catchedUn.search( ' ' ) == -1 && this.catchedUn != '' )
+            {
+                this.subscribeUsernameData( this.catchedUn );
+            }
+        }, 600 );
+    }
   }
 
 }
