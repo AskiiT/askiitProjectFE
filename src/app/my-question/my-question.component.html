@@ -4,7 +4,9 @@
         <div mdTooltip="Dificultad" id="difficulty">{{myQuestion.difficulty}}</div>
         <div class = "title">{{myQuestion.title}}</div>
         <span class="spacer"></span>
-        <div mdTooltip="Postulados" mdTooltipPosition="right" id="postuls">{{myQuestion.p_users.length}}</div>
+        <div mdTooltip="Postulados" mdTooltipPosition="right" id="postuls" (click)="openPostulatedDialog()">
+            {{myQuestion.p_users.length}}
+        </div>
     </md-card-content>
   </md-card>
 
