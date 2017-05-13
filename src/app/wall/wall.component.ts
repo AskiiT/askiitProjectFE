@@ -47,7 +47,6 @@ export class WallComponent implements OnInit {
   }
 
   ngOnInit( ) {
-      
   }
 
   filterUpdateQuestions(){

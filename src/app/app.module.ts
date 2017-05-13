@@ -43,6 +43,7 @@ import { NotificationsComponent } from './notifications/notifications.component'
 import { ReportComponent } from './report/report.component';
 import { MyProfileComponent } from './my-profile/my-profile.component';
 import { MyQuestionComponent } from './my-question/my-question.component';
+import { ChatWindowComponent } from './chat-window/chat-window.component';
 
 export const appRoutes: Routes = [
   { path: 'home',
@@ -110,7 +111,8 @@ export const appRoutes: Routes = [
     NotificationsComponent,
     ReportComponent,
     MyProfileComponent,
-    MyQuestionComponent
+    MyQuestionComponent,
+    ChatWindowComponent
   ],
   imports: [
     BrowserModule,
@@ -127,7 +129,8 @@ export const appRoutes: Routes = [
   entryComponents: [
     AskiitComponent,
     NotificationsComponent,
-    ReportComponent
+    ReportComponent,
+    ChatWindowComponent
   ],
   providers: [ Angular2TokenService, AuthService, AuthGuard, LoggedGuard ],
   bootstrap: [AppComponent]

@@ -4,6 +4,8 @@ import { style, state, animate, transition, trigger } from '@angular/core';
 import { MdAutocompleteModule } from '@angular/material';
 import { FormControl } from '@angular/forms';
 import { NgZone } from '@angular/core';
+import { MdDialog, MdDialogRef } from '@angular/material';
+import { ChatWindowComponent } from '../chat-window/chat-window.component';
 
 @Component({
   selector: 'app-chats',
@@ -45,7 +47,7 @@ export class ChatsComponent implements OnInit {
     catchedTerm: string = '';
     _timeout: any = null;
 
-    constructor( private uService: UserService, public lc: NgZone ) { }
+    constructor( private uService: UserService, public lc: NgZone, public dialog: MdDialog ) { }
 
     ngOnInit( ) {
 
@@ -86,6 +88,14 @@ export class ChatsComponent implements OnInit {
                 this.subscribeData( this.catchedTerm );
             }
         }, 600 );
+    }
+
+    openChat( ) {
+        let dialogRef = this.dialog.open( ChatWindowComponent, {
+          height: '530px',
+          width: '600px'
+        });
+        dialogRef.afterClosed( );
     }
 
 }
