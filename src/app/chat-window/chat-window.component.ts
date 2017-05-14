@@ -29,6 +29,7 @@ export class ChatWindowComponent implements OnInit, AfterViewChecked {
     messages = [];
 
     userData;
+    messagesPath: string = '/';
 
     constructor( public dialogRef: MdDialogRef<ChatWindowComponent>, private ngRedux: NgRedux<IAppState> ) {
         ngRedux.select( 'authUserData' ).subscribe(
@@ -55,14 +56,17 @@ export class ChatWindowComponent implements OnInit, AfterViewChecked {
 
     fbGetData( )
     {
-      firebase.database( ).ref( '/conversationTest' ).on( 'child_added', ( snapshot ) => {
-        this.messages.push( snapshot.val( ) )
-      });
+        console.log( this.messagesPath )
+        firebase.database( ).ref( this.messagesPath ).on( 'child_added', ( snapshot ) => {
+            this.messages.push( snapshot.val( ) )
+        });
     }
 
     sendMessage( msg ) {
-      if ( msg != '' )
-        firebase.database( ).ref( '/conversationTest' ).push( { name: this.userData.first_name, msg: msg } );
+        if ( msg != '' ) {
+            console.log( this.messagesPath )
+            firebase.database( ).ref( this.messagesPath ).push( { name: this.userData.first_name, msg: msg } );
+        }
     }
 
 }

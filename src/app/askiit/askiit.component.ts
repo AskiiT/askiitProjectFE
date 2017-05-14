@@ -164,12 +164,13 @@ export class AskiitComponent implements OnInit {
   OnAskiit(title, body, time){
     const question = new Question(title.value, body.value, this.selectedTopic, "1", "1", this.selectedTags, time);
     this.questionService.postQuestion( question ).subscribe(
-      res => {console.log(res), this.responseValidation(res)}
+      //res => {console.log(res), this.responseValidation(res)}
+      res => this.dialogRef.close()
     );
   }
 
   responseValidation(res){
-    if(res.error == null){
+    if(res.error != undefined){
       this.dialogRef.close();
       this.mostRecentPostedQuestionId = res.id;
       this.openSnack( );

@@ -55,12 +55,18 @@ export class SignInComponent implements OnInit {
         this.authService.logInUser( this.signInUser ).subscribe(
             res => {
               if( res.status == 200 ){
-
-                  this.uService.logInToFirebase( this.signInUser );
-
                   console.log( 'Successfull log in.' );
                   this.invalidCredentials = false;
-                  this.router.navigate( ['/home'] );
+                  this.uService.logInToFirebase( this.signInUser ).then(
+                      (userInfo) => {
+                          console.log( 'Succesfull Sign in at Firebase.' );
+                          this.router.navigate( ['/home'] );
+                      }
+                  ).catch(
+                      (error) => {
+                          console.log( error )
+                      }
+                  );
               }
             },
             err => {

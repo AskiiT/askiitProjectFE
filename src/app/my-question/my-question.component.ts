@@ -85,7 +85,7 @@ export class MyQuestionComponent implements OnInit {
           height: '385px',
           width: '300px'
       });
-      //dialogRef.componentInstance.questionId = id;
+      dialogRef.componentInstance.p_users = this.myQuestion.p_users;
       dialogRef.afterClosed();
   }
 }

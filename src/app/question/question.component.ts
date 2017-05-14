@@ -81,7 +81,8 @@ export class QuestionComponent implements OnInit {
   OnIKnowIt(questionId){
     if(this.postulated == false){
       this.questionService.postulateToQuestion(questionId).subscribe(
-        res => {this.question = res, this.postulated = true}
+        //res => {this.question = res, this.postulated = true}
+        res => {this.postulated = true}
       );
     }else{
       this.questionService.unpostulateToQuestion(questionId).subscribe(
