@@ -15,10 +15,12 @@ export class PostulatedComponent implements OnInit {
 
     p_users: Array<any> = [];
     chats = [];
+    currentChats = [];
     userData;
 
     userChatPath: string;
     chatRequestPath: string = '/chatRequests';
+    liveChatsPath: string  = '/liveChats';
 
     constructor( public dialogRef: MdDialogRef<PostulatedComponent>, private ngRedux: NgRedux<IAppState> ) {
         ngRedux.select( 'authUserData' ).subscribe(
@@ -35,9 +37,14 @@ export class PostulatedComponent implements OnInit {
 
     fbGetData( )
     {
-      firebase.database( ).ref( this.userChatPath ).on( 'child_added', ( snapshot ) => {
-        this.chats.push( snapshot.val( ) )
-      });
+        firebase.database( ).ref( this.userChatPath ).on( 'child_added', ( snapshot ) => {
+            this.chats.push( snapshot.val( ) )
+        });
+
+        firebase.database( ).ref( this.liveChatsPath ).on( 'child_added', ( snapshot ) => {
+            if ( snapshot.val( ).adviser_id == this.userData.id || snapshot.val( ).asker_id == this.userData.id )
+                this.currentChats.push( snapshot.val( ) )
+        })
     }
 
     emptyUsers( ) {
@@ -47,6 +54,10 @@ export class PostulatedComponent implements OnInit {
     requestChat( index ) {
         for ( var i = 0; i < this.chats.length; i++ )
             if ( this.chats[ i ].id == this.p_users[ index ].id )
+                return;
+
+        for ( var i = 0; i < this.currentChats.length; i++ )
+            if( this.currentChats[ i ].asker_id == this.p_users[ index ].id || this.currentChats[ i ].adviser_id == this.p_users[ index ].id )
                 return;
 
         firebase.database( ).ref( this.userChatPath ).child( this.p_users[ index ].id ).set({
