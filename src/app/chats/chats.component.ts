@@ -51,7 +51,11 @@ export class ChatsComponent implements OnInit {
     catchedTerm: string = '';
     _timeout: any = null;
 
+    dialogRef;
+
     currentChats = [];
+    toReadCurrentChats = [];
+
     requestChats = [];
     acceptChats = [];
 
@@ -61,6 +65,11 @@ export class ChatsComponent implements OnInit {
     alreadyListeningFirebase: boolean = false;
 
     chatRequestPath: string = '/chatRequests';
+
+    dialogOpened = {
+        opened: false,
+        index: -1
+    };
 
     constructor( private uService: UserService, public lc: NgZone, public dialog: MdDialog, private ngRedux: NgRedux<IAppState> ) {
         ngRedux.select( 'authUserData' ).subscribe(
@@ -110,15 +119,87 @@ export class ChatsComponent implements OnInit {
 
             firebase.database( ).ref( '/liveChats' ).on( 'child_added', ( snapshot ) => {
                 if ( snapshot.val( ).adviser_id == this.userData.id ) {
+                    var index = this.currentChats.length;
+
                     this.currentChats.push({
                         username: snapshot.val( ).asker_username,
-                        path: snapshot.val( ).path
+                        path: snapshot.val( ).path,
+                        unreadMsgs: 0,
+                        msgs: []
                     })
+
+                    this.toReadCurrentChats.push([])
+
+                    firebase.database( ).ref( this.currentChats[ index ].path )
+                        .on( 'child_added', ( snapshot ) => {
+
+                            var msgPath = "";
+                            for ( var i = 0; i < snapshot.V.path.o.length - 1; i++ )
+                                msgPath += '/' + snapshot.V.path.o[ i ]
+
+                            this.currentChats[ index ].msgs.push(
+                                snapshot.val( )
+                            );
+
+                            if ( ( snapshot.val( ).id != this.userData.id && !snapshot.val( ).read && !this.dialogOpened.opened )
+                                || ( snapshot.val( ).id != this.userData.id && !snapshot.val( ).read && this.dialogOpened.opened &&
+                                    this.dialogOpened.index != index ) ) {
+
+                                    this.currentChats[ index ].unreadMsgs++;
+
+                                    this.toReadCurrentChats[ index ].push({
+                                        msgPath: msgPath,
+                                        child: String( snapshot.V.path.o[ snapshot.V.path.o.length - 1 ] )
+                                    })
+                                }
+                            else if ( snapshot.val( ).id != this.userData.id && !snapshot.val( ).read && this.dialogOpened.opened ) {
+                                firebase.database( ).ref( msgPath )
+                                    .child( String( snapshot.V.path.o[ snapshot.V.path.o.length - 1 ] ) )
+                                        .child( 'read' )
+                                            .set( 'true' )
+                            }
+                        })
+
                 } else if ( snapshot.val( ).asker_id == this.userData.id ) {
+                    var index = this.currentChats.length;
                     this.currentChats.push({
                         username: snapshot.val( ).adviser_username,
-                        path: snapshot.val( ).path
+                        path: snapshot.val( ).path,
+                        unreadMsgs: 0,
+                        msgs: []
                     })
+
+                    this.toReadCurrentChats.push([])
+
+                    firebase.database( ).ref( this.currentChats[ index ].path )
+                        .on( 'child_added', ( snapshot ) => {
+
+                            var msgPath = "";
+                            for ( var i = 0; i < snapshot.V.path.o.length - 1; i++ )
+                                msgPath += '/' + snapshot.V.path.o[ i ]
+
+                            this.currentChats[ index ].msgs.push(
+                                snapshot.val( )
+                            );
+
+                            if ( ( snapshot.val( ).id != this.userData.id && !snapshot.val( ).read && !this.dialogOpened.opened )
+                                || ( snapshot.val( ).id != this.userData.id && !snapshot.val( ).read && this.dialogOpened.opened &&
+                                    this.dialogOpened.index != index ) ) {
+
+                                    this.currentChats[ index ].unreadMsgs++;
+
+                                    this.toReadCurrentChats[ index ].push({
+                                        msgPath: msgPath,
+                                        child: String( snapshot.V.path.o[ snapshot.V.path.o.length - 1 ] )
+                                    })
+                                }
+                            else if ( snapshot.val( ).id != this.userData.id && !snapshot.val( ).read && this.dialogOpened.opened ) {
+                                firebase.database( ).ref( msgPath )
+                                    .child( String( snapshot.V.path.o[ snapshot.V.path.o.length - 1 ] ) )
+                                        .child( 'read' )
+                                            .set( 'true' )
+                            }
+                        })
                 }
             });
          }
@@ -162,12 +243,43 @@ export class ChatsComponent implements OnInit {
     }
 
     openChat( index ) {
-        let dialogRef = this.dialog.open( ChatWindowComponent, {
+
+        this.dialogOpened = {
+            opened: true,
+            index: index
+        };
+
+        for ( var i = 0; i < this.toReadCurrentChats[ index ].length; i++ ) {
+            firebase.database( ).ref( this.toReadCurrentChats[ index ][ i ].msgPath )
+                .child( this.toReadCurrentChats[ index ][ i ].child )
+                    .child( 'read' )
+                        .set( 'true' )
+        }
+
+        this.toReadCurrentChats[ index ] = []
+
+        this.dialogRef = this.dialog.open( ChatWindowComponent, {
           height: '530px',
           width: '600px'
         });
-        dialogRef.componentInstance.messagesPath = this.currentChats[ index ].path;
-        dialogRef.afterClosed( );
+        this.currentChats[ index ].unreadMsgs = 0;
+
+        this.dialogRef.componentInstance.messages = this.currentChats[ index ].msgs;
+        this.dialogRef.componentInstance.messagesPath = this.currentChats[ index ].path;
+        this.dialogRef.afterClosed( ).subscribe(
+            result => {
+                this.dialogOpened = {
+                    opened: false,
+                    index: -1
+                };
+            }
+
+        );
+    }
+
+    checkIfDialogOpen( ) {
+        if ( this.dialogRef != undefined )
+            console.log( this.dialogRef.isOpen( ) )
     }
 
     acceptChatRequest( index ) {

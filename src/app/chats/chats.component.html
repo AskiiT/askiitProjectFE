@@ -26,8 +26,13 @@
 	<div class="current-container" *ngIf="currentChats.length > 0" [@fadeInOut]>
 		<h6 style="color: #0E445F">Ahora!</h6>
 		<div *ngFor="let c of currentChats; let i = index" class="chat-bubble" (click)="openChat(i)">
-			<div class="child" [@fadeInOut]>
-				{{c.username}}
+			<div class="child row" [@fadeInOut]>
+				<div class="col-md-8">
+					{{c.username}}
+				</div>
+				<div class="new-msg vcenter">
+					<div *ngIf="c.unreadMsgs > 0" [@fadeInOut]>{{c.unreadMsgs}}</div>
+				</div>
 			</div>
 		</div>
 	</div>
