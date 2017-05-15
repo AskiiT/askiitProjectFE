@@ -26,7 +26,7 @@ export class ChatWindowComponent implements OnInit, AfterViewChecked {
 
     @ViewChild('chatContainer') private myScrollContainer: ElementRef;
 
-    messages = [];
+    messages;
 
     userData;
     messagesPath: string = '/';

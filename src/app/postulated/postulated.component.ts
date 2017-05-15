@@ -14,6 +14,8 @@ declare var firebase: any;
 export class PostulatedComponent implements OnInit {
 
     p_users: Array<any> = [];
+    question_id: number;
+    question_title: string;
     chats = [];
     currentChats = [];
     userData;
@@ -71,7 +73,9 @@ export class PostulatedComponent implements OnInit {
             from_id: this.userData.id,
             from_username: this.userData.username,
             from_first_name: this.userData.first_name,
-            to: this.p_users[ index ].id
+            to: this.p_users[ index ].id,
+            question_id: this.question_id,
+            question_title: this.question_title
         })
     }
 

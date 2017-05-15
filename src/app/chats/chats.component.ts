@@ -112,7 +112,9 @@ export class ChatsComponent implements OnInit {
                     this.acceptChats.push({
                         username: snapshot.val( ).from_username,
                         user_id: snapshot.val( ).from_id,
-                        name: snapshot.val( ).from_first_name
+                        name: snapshot.val( ).from_first_name,
+                        question_id: snapshot.val( ).question_id,
+                        question_title: snapshot.val( ).question_title
                     })
                 }
             });
@@ -124,6 +126,7 @@ export class ChatsComponent implements OnInit {
                     this.currentChats.push({
                         username: snapshot.val( ).asker_username,
                         path: snapshot.val( ).path,
+                        question_title: snapshot.val( ).question_title,
                         unreadMsgs: 0,
                         msgs: []
                     })
@@ -165,6 +168,7 @@ export class ChatsComponent implements OnInit {
                     this.currentChats.push({
                         username: snapshot.val( ).adviser_username,
                         path: snapshot.val( ).path,
+                        question_title: snapshot.val( ).question_title,
                         unreadMsgs: 0,
                         msgs: []
                     })
@@ -264,7 +268,7 @@ export class ChatsComponent implements OnInit {
         });
         this.currentChats[ index ].unreadMsgs = 0;
 
-        this.dialogRef.componentInstance.messages = this.currentChats[ index ].msgs;
+        this.dialogRef.componentInstance.messages = this.currentChats[ index ];
         this.dialogRef.componentInstance.messagesPath = this.currentChats[ index ].path;
         this.dialogRef.afterClosed( ).subscribe(
             result => {
@@ -290,7 +294,9 @@ export class ChatsComponent implements OnInit {
             adviser_id: this.userData.id,
             asker_username: this.acceptChats[ index ].username,
             adviser_username: this.userData.username,
-            path: '/liveChats/' + this.acceptChats[ index ].user_id + '-' + this.userData.id + '/messages'
+            path: '/liveChats/' + this.acceptChats[ index ].user_id + '-' + this.userData.id + '/messages',
+            question_id: this.acceptChats[ index ].question_id,
+            question_title: this.acceptChats[ index ].question_title
         });
 
         firebase.database( ).ref( this.acceptChats[ index ].user_id + '/myChatRequests' )

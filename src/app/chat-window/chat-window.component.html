@@ -1,5 +1,6 @@
+<div class="title">{{messages.question_title}}</div>
 <div #chatContainer class="chat-container" *ngIf="userData!=undefined">
-    <div *ngFor="let m of messages">
+    <div *ngFor="let m of messages.msgs">
         <div #msgContainer class="msg" [class.received]="m.name!=userData.first_name" [class.sent]="m.name==userData.first_name"
             [@fadeInOut]>
             <div style="font-size: 0.8em; margin-bottom: 2px">{{m.name}}</div>

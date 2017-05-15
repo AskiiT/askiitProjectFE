@@ -1,18 +1,21 @@
 .chat-container {
-    background: #FAFAFA;
+    background: #F0F6FF;
     width: 100%;
-    min-height: 430px;
-    max-height: 430px;
-    border: 1px solid #0E445F;
+    min-height: 385px;
+    max-height: 385px;
     margin-bottom: 15px;
-    -webkit-border-radius: 50px;
-    -moz-border-radius: 50px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
     border-radius: 5px;
     padding: 20px;
     padding-top: 10px;
 
     overflow-y: scroll;
     overflow-x: hidden;
+
+    box-shadow: inset 0px 0px 5px 0px rgba(116,120,127,0.75),
+		0 1px 3px 0 rgba(0,0,0,0.2),0 1px 1px 0 rgba(0,0,0,0.14),
+			0 2px 1px -1px rgba(0,0,0,0.12);
 }
 
 ::-webkit-scrollbar {
@@ -86,4 +89,16 @@ div.msg {
 .received {
     background: #A3ADB7;
     float: left;
+}
+
+.title {
+    background: #588CC0;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+    padding: 5px;
+    padding-left: 15px;
+    color: #FFFFFF;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
 }
