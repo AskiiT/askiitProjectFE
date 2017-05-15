@@ -31,7 +31,8 @@
 					{{c.username}}
 				</div>
 				<div class="new-msg vcenter">
-					<div *ngIf="c.unreadMsgs > 0" [@fadeInOut]>{{c.unreadMsgs}}</div>
+					<div *ngIf="c.unreadMsgs > 0 && c.unreadMsgs < 100" [@fadeInOut]>{{c.unreadMsgs}}</div>
+					<div *ngIf="c.unreadMsgs > 99" [@fadeInOut]>99+</div>
 				</div>
 			</div>
 		</div>

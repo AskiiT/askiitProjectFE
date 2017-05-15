@@ -6,6 +6,8 @@ import { IAppState } from '../store';
 import { MdDialog, MdDialogRef } from '@angular/material';
 import { ReportComponent } from '../report/report.component';
 
+declare var firebase: any;
+
 export interface Question {
     id?: number;
     title?: string;
@@ -82,11 +84,28 @@ export class QuestionComponent implements OnInit {
     if(this.postulated == false){
       this.questionService.postulateToQuestion(questionId).subscribe(
         //res => {this.question = res, this.postulated = true}
-        res => {this.postulated = true}
+        res => {
+            if ( res.notifications != undefined || res.notifications != null ) {
+                this.postulated = true
+                console.log( res )
+
+                var data = res.notifications[ 0 ];
+
+                firebase.database( ).ref( '/' + data.user_id + '/notifications' ).child( data.id ).set({
+                    question_id: data.question_id,
+                    body: data.body,
+                    read: data.read,
+                    notification_id: data.id
+                })
+            }
+        }
       );
     }else{
       this.questionService.unpostulateToQuestion(questionId).subscribe(
-        res => {this.question = res, this.postulated = false}
+        res => {
+            if ( res.data != undefined || res.data != null )
+                this.postulated = false
+        }
       );
     }
   }

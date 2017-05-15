@@ -78,7 +78,7 @@ export class QuestionService {
     const options = new RequestOptions({headers: headers});
 
     return this.http.post( 'http://localhost:3000/api/v1/questions/'+ questionId +'/postulate', JSON.stringify(user), options)
-          .map( ( res: Response ) => res.json( ).data );
+          .map( ( res: Response ) => res.json( ) );
   }
 
   unpostulateToQuestion( questionId ){
@@ -87,7 +87,7 @@ export class QuestionService {
     const options = new RequestOptions({headers: headers});
 
     return this.http.delete( 'http://localhost:3000/api/v1/questions/'+ questionId +'/unpostulate?user_id=' + this.userData.id,
-        options ).map( ( res: Response ) => res.json( ).data );
+        options ).map( ( res: Response ) => res.json( ) );
   }
 
   deleteQuestion( id ) {
