@@ -4,14 +4,16 @@ import { Http, Response } from '@angular/http';
 @Injectable()
 export class TagService {
 
+  backPath: string = 'https://askiit.herokuapp.com/api/v1';
+
   constructor( private http: Http ) { }
 
   getAllTags( ) {
-  	return this.http.get( 'http://localhost:3000/api/v1/tags' ).map( ( res: Response ) => res.json( ).data );
+  	return this.http.get( this.backPath + '/tags' ).map( ( res: Response ) => res.json( ).data );
   }
 
   getTagsByMatch( subString ) {
-    return this.http.get( 'http://localhost:3000/api/v1/tags/search/' + subString )
+    return this.http.get( this.backPath + '/tags/search/' + subString )
         .map( ( res: Response ) => res.json( ).data );
   }
 

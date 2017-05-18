@@ -11,6 +11,8 @@ export class UserService {
   headers: any;
   userData: any;
 
+  backPath: string = 'https://askiit.herokuapp.com/api/v1';
+
   constructor( private http: Http, private ngRedux: NgRedux<IAppState> ) {
     ngRedux.select( 'headers' ).subscribe(
         value => {
@@ -30,20 +32,20 @@ export class UserService {
   }
 
   getAllUsers( ) {
-  	return this.http.get( 'http://localhost:3000/api/v1/users' ).map( ( res: Response ) => res.json( ).data );
+  	return this.http.get( this.backPath + '/users' ).map( ( res: Response ) => res.json( ).data );
   }
 
   getUserByUsername( username ) {
-  	return this.http.get( 'http://localhost:3000/api/v1/users/' + username).map( ( res: Response ) => res.json( ).data );
+  	return this.http.get( this.backPath + '/users/' + username ).map( ( res: Response ) => res.json( ).data );
   }
 
   getUsersByMatch( subString ) {
-      return this.http.get( 'http://localhost:3000/api/v1/users/search/username/' + subString )
+      return this.http.get( this.backPath + '/users/search/username/' + subString )
         .map( ( res: Response ) => res.json( ).data );
   }
 
   getUsersByMail( subString ) {
-      return this.http.get( 'http://localhost:3000/api/v1/users/search/email/' + subString )
+      return this.http.get( this.backPath + '/users/search/email/' + subString )
         .map( ( res: Response ) => res.json( ).data );
   }
 
@@ -61,7 +63,7 @@ export class UserService {
     const headers = new Headers( { 'Content-Type': 'application/json; charset=utf-8' } );
     const options = new RequestOptions( { headers: headers } );
 
-    return this.http.post( 'http://localhost:3000/api/v1/auth', JSON.stringify( user ), options )
+    return this.http.post( this.backPath + '/auth', JSON.stringify( user ), options )
           .map( ( res: Response ) => res );
   }
 
@@ -99,7 +101,7 @@ export class UserService {
     const options = new RequestOptions({headers: headers});
     console.log(formData.first_name);
 
-    return this.http.patch( 'http://localhost:3000/api/v1/users/'+ this.userData.id, JSON.stringify( user ),
+    return this.http.patch( this.backPath + '/users/'+ this.userData.id, JSON.stringify( user ),
         options ).map( ( res: Response ) => res);
   }
 

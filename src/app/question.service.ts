@@ -8,6 +8,7 @@ export class QuestionService {
 
   headers: any;
   userData: any;
+  backPath: string = 'https://askiit.herokuapp.com/api/v1';
 
   constructor( private http: Http, private ngRedux: NgRedux<IAppState> ) {
       ngRedux.select( 'headers' ).subscribe(
@@ -32,27 +33,27 @@ export class QuestionService {
   }
 
   getAllQuestions( ) {
-  	  return this.http.get( 'http://localhost:3000/api/v1/questions' )
+  	  return this.http.get( this.backPath + '/questions' )
   	      .map( ( res: Response ) => res.json( ).data );
   }
 
   getAllQuestionsByPage( page ){
-    return this.http.get( 'http://localhost:3000/api/v1/questions?page=' + page )
+    return this.http.get( this.backPath + '/questions?page=' + page )
         .map( ( res: Response ) => res.json( ).data );
   }
 
   getAllUserQuestionsByPage( userID, page ){
-    return this.http.get( 'http://localhost:3000/api/v1/users/' + userID + '/my-questions?page=' + page )
+    return this.http.get( this.backPath + '/users/' + userID + '/my-questions?page=' + page )
         .map( ( res: Response ) => res.json( ).data );
   }
 
   getAllQuestionsByTag( tagName ) {
-  	  return this.http.get( 'http://localhost:3000/api/v1/questions/tagsearch/' + tagName )
+  	  return this.http.get( this.backPath + '/questions/tagsearch/' + tagName )
   		    .map( ( res: Response ) => res.json( ).data );
   }
 
   getAllQuestionsByTopic( topicName ) {
-      return this.http.get( 'http://localhost:3000/api/v1/questions/topicsearch/' + topicName )
+      return this.http.get( this.backPath + '/questions/topicsearch/' + topicName )
           .map( ( res: Response ) => res.json( ).data );
   }
 
@@ -60,7 +61,7 @@ export class QuestionService {
     var stopics = "";
     if(topics.length > 0)
       stopics = ",to_" + topics.join(",to_");
-    return this.http.get( 'http://localhost:3000/api/v1/questions/tagsearch/' + tags.join() + stopics + '?page=' + page )
+    return this.http.get( this.backPath + '/questions/tagsearch/' + tags.join() + stopics + '?page=' + page )
           .map( ( res: Response ) => res.json( ).data );
   }
 
@@ -68,8 +69,8 @@ export class QuestionService {
     const headers = new Headers( this.headers );
     const options = new RequestOptions({headers: headers});
 
-    return this.http.post( 'http://localhost:3000/api/v1/questions', JSON.stringify(question), options )
-          .map( ( res: Response ) => res.json( ).data );
+    return this.http.post( this.backPath + '/questions', JSON.stringify(question), options )
+          .map( ( res: Response ) => res.json( ) );
   }
 
   postulateToQuestion( questionId ){
@@ -77,7 +78,7 @@ export class QuestionService {
     const headers = new Headers( this.headers );
     const options = new RequestOptions({headers: headers});
 
-    return this.http.post( 'http://localhost:3000/api/v1/questions/'+ questionId +'/postulate', JSON.stringify(user), options)
+    return this.http.post( this.backPath + '/questions/'+ questionId +'/postulate', JSON.stringify(user), options)
           .map( ( res: Response ) => res.json( ) );
   }
 
@@ -86,7 +87,7 @@ export class QuestionService {
     const headers = new Headers( this.headers );
     const options = new RequestOptions({headers: headers});
 
-    return this.http.delete( 'http://localhost:3000/api/v1/questions/'+ questionId +'/unpostulate?user_id=' + this.userData.id,
+    return this.http.delete( this.backPath + '/questions/'+ questionId +'/unpostulate?user_id=' + this.userData.id,
         options ).map( ( res: Response ) => res.json( ) );
   }
 
@@ -94,7 +95,7 @@ export class QuestionService {
       const headers = new Headers( this.headers );
       const options = new RequestOptions({headers: headers});
 
-      return this.http.delete( 'http://localhost:3000/api/v1/questions/'+ id,
+      return this.http.delete( this.backPath + '/questions/'+ id,
           options ).map( ( res: Response ) => res.json( ) );
   }
 
