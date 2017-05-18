@@ -69,7 +69,7 @@ export class QuestionService {
     const options = new RequestOptions({headers: headers});
 
     return this.http.post( 'http://localhost:3000/api/v1/questions', JSON.stringify(question), options )
-          .map( ( res: Response ) => res.json( ).data );
+          .map( ( res: Response ) => res.json( ) );
   }
 
   postulateToQuestion( questionId ){
