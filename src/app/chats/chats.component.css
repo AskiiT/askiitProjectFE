@@ -179,13 +179,12 @@
     width: 100%;
   	text-align: center;
 
-    border: 1px solid #336C1E;
-    background: #B5FF9A;
+    background: #D3FFCB;
   	box-shadow: 0 1px 3px 0 rgba(0,0,0,0.2),0 1px 1px 0 rgba(0,0,0,0.14),0 2px 1px -1px rgba(0,0,0,0.12);
 
-  	-webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
+  	-webkit-border-radius: 1px;
+    -moz-border-radius: 1px;
+    border-radius: 1px;
 
     padding: 5px;
     margin-top: 10px;
@@ -195,13 +194,12 @@
     width: 100%;
   	text-align: center;
 
-    border: 1px solid #1B2B51;
-    background: #B7CDFF;
+    background: #D3E1FF;
   	box-shadow: 0 1px 3px 0 rgba(0,0,0,0.2),0 1px 1px 0 rgba(0,0,0,0.14),0 2px 1px -1px rgba(0,0,0,0.12);
 
-  	-webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
+    -webkit-border-radius: 1px;
+    -moz-border-radius: 1px;
+    border-radius: 1px;
 
     padding: 5px;
     margin-top: 10px;
@@ -211,13 +209,12 @@
     width: 100%;
   	text-align: center;
 
-    border: 1px solid #611E1E;
-    background: #FFB7B7;
+    background: #FFD3D3;
   	box-shadow: 0 1px 3px 0 rgba(0,0,0,0.2),0 1px 1px 0 rgba(0,0,0,0.14),0 2px 1px -1px rgba(0,0,0,0.12);
 
-  	-webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
+    -webkit-border-radius: 1px;
+    -moz-border-radius: 1px;
+    border-radius: 1px;
 
     padding: 5px;
     margin-top: 10px;
