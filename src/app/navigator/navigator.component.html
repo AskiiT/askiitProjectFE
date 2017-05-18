@@ -15,7 +15,8 @@
     </button>
 
     <button md-button class="nav-btn" (click)="openNotifications()">
-        <md-icon style="margin-right: 12px;">notifications</md-icon>
+        <md-icon *ngIf="notReaded < 1" style="margin-right: 12px;">notifications</md-icon>
+        <md-icon *ngIf="notReaded > 0" style="margin-right: 12px; color: green">notifications_active</md-icon>
         Notificaciones
     </button>
 

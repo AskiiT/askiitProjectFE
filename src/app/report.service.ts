@@ -25,7 +25,7 @@ export class ReportService {
 
         return this.http.post( 'http://localhost:3000/api/v1/questions/' + questionId + '/report',
             JSON.stringify( content ), options )
-                .map( ( res: Response ) => res.json( ).data );
+                .map( ( res: Response ) => res.json( ) );
     }
 
 }

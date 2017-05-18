@@ -1,0 +1,20 @@
+<div class="title">{{messages.question_title}}</div>
+<div #chatContainer class="chat-container" *ngIf="userData!=undefined">
+    <div *ngFor="let m of messages.msgs">
+        <div #msgContainer class="msg" [class.received]="m.id!=userData.id" [class.sent]="m.id==userData.id"
+            [@fadeInOut]>
+            <div style="font-size: 0.8em; margin-bottom: 2px">{{m.name}}</div>
+            {{m.msg}}
+        </div>
+    </div>
+</div>
+
+<div>
+    <textarea #textA rows="1" cols="5" class="te-area col-md-9" placeholder="Escribe algo..."
+        (keydown.enter)="sendMessage(textA.value);textA.value='';false;"></textarea>
+    <button md-button class="col-md-3 send-btn" style="text-align: left"
+        (click)="sendMessage(textA.value);textA.value=''">
+      <md-icon style="margin-right: 5px">send</md-icon>
+      Enviar
+    </button>
+</div>

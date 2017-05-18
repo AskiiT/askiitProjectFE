@@ -9,6 +9,7 @@ import { UserService } from '../user.service';
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.css'],
+  providers: [ UserService ],
   animations: [
       trigger('fadeInOut', [
           transition(':enter', [
@@ -37,7 +38,7 @@ export class SignInComponent implements OnInit {
     });
 
 
-    constructor( private authService: AuthService, private router: Router ) { }
+    constructor( private authService: AuthService, private uService: UserService, private router: Router ) { }
 
     ngOnInit() {
     }
@@ -56,7 +57,16 @@ export class SignInComponent implements OnInit {
               if( res.status == 200 ){
                   console.log( 'Successfull log in.' );
                   this.invalidCredentials = false;
-                  this.router.navigate( ['/home'] );
+                  this.uService.logInToFirebase( this.signInUser ).then(
+                      (userInfo) => {
+                          console.log( 'Succesfull Sign in at Firebase.' );
+                          this.router.navigate( ['/home'] );
+                      }
+                  ).catch(
+                      (error) => {
+                          console.log( error )
+                      }
+                  );
               }
             },
             err => {

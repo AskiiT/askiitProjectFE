@@ -1,12 +1,15 @@
 <nav class="tags">
 	<div id="designDiv">
-		<div class="search">
+
+		<div class="search" style="margin-left: 10%">
 			<span class="fa fa-search"></span>
-			<input #tagInput class="form-control tag-finder" type="text"
-				placeholder="Añade un tag..." [(ngModel)]="term" (ngModelChange)="inputChange(term)">
-			<md-progress-bar class="unicorn-dark-theme" mode="indeterminate"
-				style="width: 90%;" *ngIf="!tagGotResponse||!topicGotResponse"></md-progress-bar>
+			<input #tagInput class="form-control tag-finder" type="text"  placeholder="Añade un tag..."
+				(ngModelChange)="inputChange(tagInput);" [(ngModel)]="term">
 		</div>
+
+		<md-progress-bar class="unicorn-dark-theme" mode="indeterminate"
+			style="width: 80%; margin-left: 10%" *ngIf="!tagGotResponse||!topicGotResponse"></md-progress-bar>
+
 		<div id="searchBox" *ngIf="!someChipWasClicked() && (checkForTopicsEmptyResponse(term)||checkForTagsEmptyResponse(term))"
 			class="center-block text-center" [@fadeInOut]>
 			<md-chip-list>
@@ -14,7 +17,7 @@
 					<md-chip class="topic-color center-block text-center"
 						*ngFor="let topic of allTopics"
 							(click)="addTopic(topic.topic_name); tagInput.value=''">
-						{{topic.topic_name}}
+							{{topic.topic_name}}
 					</md-chip>
 				</div>
 				<div *ngIf="checkForTagsEmptyResponse(term)" [@slideIn] [@fadeInOut]>
@@ -29,20 +32,24 @@
 
 		<div id="ttselected">
 			<md-chip-list>
-				<md-chip class="topic-color-selected center-block text-center"
+				<md-chip class="topic-color-selected center-block text-center row"
 					*ngFor="let c of selectedTopics; let i = index" [@slideIn] [@fadeInOut]
 						[ngStyle]="{'padding-right':'4px', 'padding-left':'4px', 'padding-top':'2px', 'padding-bottom':'2px'}">
-					{{c}}
-					<md-icon (click)="removeTopic(i)" class="vcenter topic-color-selected" style="border-radius: 10px">
+					<div class="col-md-9 vcenter">
+						{{c}}
+					</div>
+					<md-icon (click)="removeTopic(i)" class="vcenter topic-color-selected col-md-3center-block" style="border-radius: 10px">
 						clear
 					</md-icon>
 				</md-chip>
 
-				<md-chip class="tag-color-selected center-block text-center"
+				<md-chip class="tag-color-selected center-block text-center row"
 					*ngFor="let c of selectedTags; let i = index" [@slideIn] [@fadeInOut]
 						[ngStyle]="{'padding-right':'4px', 'padding-left':'4px', 'padding-top':'2px', 'padding-bottom':'2px'}">
-					{{c}}
-					<md-icon (click)="removeTag(i)" class="vcenter tag-color-selected" style="border-radius: 10px">
+					<div class="col-md-9 vcenter">
+						{{c}}
+					</div>
+					<md-icon (click)="removeTag(i)" class="vcenter tag-color-selected col-md-3 center-block" style="border-radius: 10px">
 						clear
 					</md-icon>
 				</md-chip>

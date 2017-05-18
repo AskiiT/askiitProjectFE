@@ -1,0 +1,13 @@
+<div *ngIf="emptyUsers()">No hay usuarios postulados.</div>
+<div *ngIf="!emptyUsers()">
+    <div *ngFor="let p of p_users; let i = index">
+        <div class="notification">
+            <div class="child col-md-9 vcenter">
+                {{p.username}}: {{p.first_name}} {{p.last_name}}
+            </div>
+            <div class="col-md-3 vcenter chat-btn" (click)="requestChat(i)">
+                Chat
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,8 +1,8 @@
-<div *ngIf="!validateResponse()">No tienes notificaciones para mostrar.</div>
-<div *ngIf="validateResponse()">
+<div *ngIf="array.length < 1">No tienes notificaciones para mostrar.</div>
+<div *ngIf="array.length > 0">
     <div *ngFor="let n of array; let i = index" (click)="markNotificationAsReaded(i)">
-        <div class="notification" [class.read]="n.read==1">
-            <div class="child">{{n.body}}</div>
+        <div class="notification" [class.read]="n.val.read==1">
+            <div class="child">{{n.val.body}}</div>
         </div>
     </div>
 </div>

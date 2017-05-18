@@ -4,7 +4,7 @@ import { QuestionService } from '../question.service';
 import { NgRedux } from 'ng2-redux';
 import { IAppState } from '../store';
 import { MdDialog, MdDialogRef } from '@angular/material';
-import { ReportComponent } from '../report/report.component';
+import { PostulatedComponent } from '../postulated/postulated.component';
 import { MdSnackBar } from '@angular/material';
 
 export interface MyQuestion {
@@ -60,7 +60,7 @@ export class MyQuestionComponent implements OnInit {
 
   userData: any;
 
-  constructor(private questionService: QuestionService, public snackBar: MdSnackBar) { }
+  constructor(private questionService: QuestionService, public snackBar: MdSnackBar, public dialog: MdDialog) { }
 
   ngOnInit() {
   }
@@ -78,5 +78,16 @@ export class MyQuestionComponent implements OnInit {
     this.snackBar.open( 'Pregunta eliminada', 'Cerrar', {
         duration: 5000
     } )
+  }
+
+  openPostulatedDialog( ) {
+      let dialogRef = this.dialog.open( PostulatedComponent, {
+          height: '385px',
+          width: '300px'
+      });
+      dialogRef.componentInstance.p_users = this.myQuestion.p_users;
+      dialogRef.componentInstance.question_id = this.myQuestion.id;
+      dialogRef.componentInstance.question_title = this.myQuestion.title;
+      dialogRef.afterClosed();
   }
 }

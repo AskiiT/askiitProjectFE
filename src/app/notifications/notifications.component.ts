@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MdDialog, MdDialogRef } from '@angular/material';
 import { NotificationService } from '../notification.service';
 
+declare var firebase: any;
+
 @Component({
   selector: 'app-notifications',
   templateUrl: './notifications.component.html',
@@ -10,14 +12,14 @@ import { NotificationService } from '../notification.service';
 })
 export class NotificationsComponent implements OnInit {
 
-    array: any;
+    array = [];
 
     constructor( public dialogRef: MdDialogRef<NotificationsComponent>, private nService: NotificationService ) {
-        nService.getNotifications( ).subscribe(
-            res => { this.array = res.notifications },
-            () => {},
-            () => console.log( 'Ok: notifications received.')
-        )
+        // nService.getNotifications( ).subscribe(
+        //     res => { this.array = res.notifications },
+        //     () => {},
+        //     () => console.log( 'Ok: notifications received.')
+        // )
     }
 
     ngOnInit() {
@@ -28,13 +30,11 @@ export class NotificationsComponent implements OnInit {
     }
 
     markNotificationAsReaded( index ) {
-        this.nService.markNotificationAsReaded( this.array[ index ].id ).subscribe(
+        this.nService.markNotificationAsReaded( this.array[ index ].child ).subscribe(
             res => {
-                this.nService.getNotifications( ).subscribe(
-                    res => { this.array = res.notifications },
-                    () => {},
-                    () => console.log( 'Ok: notifications received.')
-                )
+                firebase.database( ).ref( this.array[ index ].path ).child( this.array[ index ].child )
+                    .child( 'read' )
+                        .set( 1 )
             },
             () => {},
             () => console.log( "OK: Notification readed." )

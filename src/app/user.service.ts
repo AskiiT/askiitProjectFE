@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { NgRedux } from 'ng2-redux';
-import { IAppState } from './store';;
+import { IAppState } from './store';
+
+declare var firebase: any;
 
 @Injectable()
 export class UserService {
@@ -61,6 +63,26 @@ export class UserService {
 
     return this.http.post( 'http://localhost:3000/api/v1/auth', JSON.stringify( user ), options )
           .map( ( res: Response ) => res );
+  }
+
+  logInToFirebase( user ) {
+      return firebase.auth( ).signInWithEmailAndPassword( user.email, user.password );
+  }
+
+  logoutToFirebase( ) {
+      firebase.auth( ).signOut( );
+  }
+
+  postUserToFirebase( formData ) {
+      firebase.auth( ).createUserWithEmailAndPassword( formData.email, formData.password ).then(
+          (userInfo) => {
+              console.log( 'Succesfull Sign up at Firebase.' )
+          }
+      ).catch(
+          (error) => {
+              console.log( error )
+          }
+      );
   }
 
   updateUser(formData){

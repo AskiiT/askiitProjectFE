@@ -28,7 +28,7 @@ export function rootReducer( state: IAppState, action ): IAppState {
                     'token-type': action.payload.authHeaders.tokenType,
                     'uid': action.payload.authHeaders.uid
             },
-            filters: state.filters
+            filters: state.filters,
         }
 
         case UPDATE_QUESTION_FILTER: return {
@@ -37,7 +37,7 @@ export function rootReducer( state: IAppState, action ): IAppState {
             filters: {
                 topics: action.payload.topics,
                 tags: action.payload.tags
-            }
+            },
         }
     }
     return state;
