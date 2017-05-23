@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { MdDialog, MdDialogRef } from '@angular/material';
 import { NotificationsComponent } from '../notifications/notifications.component';
 import { style, state, animate, transition, trigger } from '@angular/core';
+import { UserService } from '../user.service';
 
 declare var firebase: any;
 
@@ -12,6 +13,7 @@ declare var firebase: any;
   selector: 'app-navigator',
   templateUrl: './navigator.component.html',
   styleUrls: ['./navigator.component.css'],
+  providers: [ UserService ],
   animations: [
       trigger('fadeInOut', [
           transition(':enter', [
@@ -30,18 +32,31 @@ export class NavigatorComponent implements OnInit {
     notifications = [];
     notReaded: number = 0;
 
+    imageURL: string;
+    color: string;
+
     alreadyListeningFirebase: boolean = false;
 
-    constructor( public dialog: MdDialog, private ngRedux: NgRedux<IAppState> ) {
+    constructor( public dialog: MdDialog, private ngRedux: NgRedux<IAppState>, private uService: UserService ) {
         ngRedux.select( 'authUserData' ).subscribe(
             res => {
                     this.userData = res;
                     this.fbGetData( );
+
+                    if ( this.userData.id != undefined )
+                        this.uService.getUserByUsername( this.userData.username ).subscribe(
+                          res => {
+                                  this.imageURL = "url('http://askiit.herokuapp.com" + res[ 0 ].avatar.avatars.avatars.url + "')",
+                                  this.color = res[ 0 ].color
+                              },
+                          () => {},
+                          () => console.log( "OK: profile pic path completed." )
+                        );
             }
         )
     }
 
-    ngOnInit() {
+    ngOnInit( ) {
         this.fbGetData( );
     }
 

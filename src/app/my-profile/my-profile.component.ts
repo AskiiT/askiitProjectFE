@@ -31,7 +31,7 @@ export class MyProfileComponent implements OnInit {
     body: new FormControl(null,[Validators.maxLength(500)]),
   });
 
-  constructor( private ngRedux: NgRedux<IAppState>,private uService: UserService) {
+  constructor( private ngRedux: NgRedux<IAppState>, private uService: UserService ) {
 
     ngRedux.select( 'authUserData' ).subscribe(
         value => {

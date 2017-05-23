@@ -1,7 +1,10 @@
 <nav class="col-md-2 nav-box" style="margin-top: 5px;">
+
     <div class="nav-rank">
-        <i class="material-icons vcenter" style="color: yellow;">star</i>
-        Rank
+        <div *ngIf="imageURL!=undefined" class="user child" [ngStyle]="{'background-image':imageURL, 'background-color': color}">
+        </div>
+        <i class="material-icons child" style="color: yellow; text-align: right">star</i>
+        <div style="text-align: left">Rank</div>
     </div>
 
     <div class="nav-button" [routerLink]="['/home','myProfile']">
