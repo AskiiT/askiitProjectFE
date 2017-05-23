@@ -99,7 +99,7 @@ md-card.cardQuestion:hover {
   padding: 20px;
   padding-top: 25px;
   height: 100%;
-  width: 85%
+  width: 85%;
 }
 
 .topic{
@@ -107,7 +107,8 @@ md-card.cardQuestion:hover {
   width: 70%;
   margin-left: 15%;
   margin-bottom: 10px;
-  color: #707070;
+  color: #000000;
+  background: #FFC820;
 }
 
 .bodyQuestion{

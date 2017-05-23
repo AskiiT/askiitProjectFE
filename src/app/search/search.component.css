@@ -1,5 +1,5 @@
 .tags {
-	background-color: #F0F6FF;
+	background-color: #C5CCDB;
 	margin-top: 30px;
 	min-height: 50vh;
 
@@ -7,9 +7,9 @@
 		0 1px 3px 0 rgba(0,0,0,0.2),0 1px 1px 0 rgba(0,0,0,0.14),
 			0 2px 1px -1px rgba(0,0,0,0.12);
 
-  	-webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
+  	-webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
 }
 
 .tag-finder {
@@ -17,18 +17,22 @@
 }
 
 .search input {
-	min-width: 150px;
     margin: 8px 0;
     box-sizing: border-box;
-    border: 2px solid #408345;
+
+    border: 1px solid #000000;
+
     -webkit-transition: 0.5s;
     transition: 0.5s;
     outline: none;
-    -webkit-border-radius: 50px;
-    border-radius: 50px;
+
+	-webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+
     padding-right: 10px;
     padding-left: 30px;
-    width: 97%;
+    width: 100%;
     background-position: 2px 3px;
     background-repeat: no-repeat;
 }
@@ -44,7 +48,7 @@
 }
 
 .search input:focus {
-    border: 2px solid #0E445F;
+    border: 1px solid #2E2E2E;
 }
 
 ::-webkit-scrollbar {

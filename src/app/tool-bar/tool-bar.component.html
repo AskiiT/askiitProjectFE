@@ -4,6 +4,10 @@
       <span class="white-font vcenter">AskiiT Home</span>
   </div>
 
+  <div *ngIf="userData.id!=undefined" style="margin-left:60px; font-size: 0.8em; color: #B8CEF0">
+      Hola {{userData.first_name}}
+  </div>
+
   <span class="spacer"></span>
 
   <button md-button class="col-md-3 askiit-btn" style="text-align: left"

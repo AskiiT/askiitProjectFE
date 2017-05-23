@@ -26,7 +26,7 @@ export class ChatWindowComponent implements OnInit, AfterViewChecked {
 
     @ViewChild('chatContainer') private myScrollContainer: ElementRef;
 
-    messages;
+    messages = [];
 
     userData;
     messagesPath: string = '/';
@@ -53,27 +53,8 @@ export class ChatWindowComponent implements OnInit, AfterViewChecked {
         } catch( err ) { }
     }
 
-    fbGetData( )
-    {
-        firebase.database( ).ref( this.messagesPath ).on( 'child_added', ( snapshot ) => {
-            if ( snapshot.val( ).id != this.userData.id && !snapshot.val( ).read ) {
-                //firebase.database( ).ref(  )
-                var msgPath = "";
-                for ( var i = 0; i < snapshot.V.path.o.length - 1; i++ )
-                    msgPath += '/' + snapshot.V.path.o[ i ]
-
-                firebase.database( ).ref( msgPath )
-                    .child( String( snapshot.V.path.o[ snapshot.V.path.o.length - 1 ] ) )
-                        .child( 'read' )
-                            .set( 'true' )
-            }
-            this.messages.push( snapshot.val( ) )
-        });
-    }
-
     sendMessage( msg ) {
         if ( msg != '' ) {
-            console.log( this.messagesPath )
             firebase.database( ).ref( this.messagesPath ).push({
                 id: this.userData.id,
                 name: this.userData.first_name,

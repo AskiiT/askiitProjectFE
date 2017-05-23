@@ -5,10 +5,6 @@ import { VirtualScrollComponent, ChangeEvent } from 'angular2-virtual-scroll';
 import { NgRedux } from 'ng2-redux';
 import { IAppState } from '../store';
 
-interface User {
-    id?: number;
-}
-
 @Component({
   selector: 'app-my-questions',
   templateUrl: './my-questions.component.html',
@@ -20,7 +16,7 @@ export class MyQuestionsComponent implements OnInit {
   @ViewChild(VirtualScrollComponent)
   private virtualScroll: VirtualScrollComponent;
 
-  protected user : User;
+  user;
   public filters = {
       topics: [],
       tags: []
@@ -33,38 +29,41 @@ export class MyQuestionsComponent implements OnInit {
   protected loading: boolean;
   protected initialResponse = false;
   protected page: number = 1;
-  scrollState = 2;
+  scrollState: number = 2;
 
   constructor(private qService: QuestionService, private ngRedux: NgRedux<IAppState>) {
     ngRedux.select('authUserData').subscribe(
       userData => {
           this.user = userData;
-          ngRedux.select('filters').subscribe(
-              filterData => {
-                  this.filters = <{ tags: Array<any>, topics: Array<any> }> filterData;
-                  this.page = 1;
-                  this.filterUpdateQuestions();
-                  this.initialResponse = true;
-              }
-          )
+          if ( this.user.id != undefined )
+              ngRedux.select('filters').subscribe(
+                  filterData => {
+                      this.filters = <{ tags: Array<any>, topics: Array<any> }> filterData;
+                      this.page = 1
+                      this.filterUpdateQuestions();
+                      this.initialResponse = true;
+                  }
+              )
       }
     )
-
   }
 
-  ngOnInit() {
+  ngOnInit( ) {
+      this.filterUpdateQuestions( );
   }
 
   filterUpdateQuestions(){
-      this.qService.getAllUserQuestionsByPage(this.user.id, this.page).subscribe(
-        (dataQuestions)   =>  { this.validateUpdateQuestions(dataQuestions),
-                                this.buffer = dataQuestions
-                              }
-      )
+      if ( this.user.id != undefined )
+        this.qService.getAllUserQuestionsByPage(this.user.id, this.page).subscribe(
+            (dataQuestions)   =>  {
+                this.validateUpdateQuestions(dataQuestions),
+                this.buffer = dataQuestions
+            }
+        )
   }
 
   validateUpdateQuestions(dataQuestions){
-    if(dataQuestions.error != null){
+    if(dataQuestions.error != undefined){
       this.scrollState = 0;
     }else if(dataQuestions.length < 20){
       this.scrollState = 1;
@@ -85,8 +84,10 @@ export class MyQuestionsComponent implements OnInit {
 
   filterFetchQuestions(){
     this.qService.getAllQuestionsByPage(this.page).subscribe(
-        (dataQuestions)   => {this.validateFetchQuestions(dataQuestions);
-                              this.loading = false}
+        (dataQuestions)   => {
+            this.validateFetchQuestions(dataQuestions);
+            this.loading = false
+        }
     )
   }
 

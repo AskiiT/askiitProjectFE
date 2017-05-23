@@ -4,6 +4,8 @@ import { MdDialog, MdDialogRef } from '@angular/material';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { UserService } from  '../user.service';
+import { NgRedux } from 'ng2-redux';
+import { IAppState } from '../store';
 
 @Component({
   selector: 'app-tool-bar',
@@ -13,8 +15,16 @@ import { UserService } from  '../user.service';
 })
 export class ToolBarComponent implements OnInit {
 
+    userData;
+
   constructor( public dialog: MdDialog, private authService: AuthService, private router: Router,
-    private uService: UserService ) { }
+    private uService: UserService, private ngRedux: NgRedux<IAppState> ) {
+        this.ngRedux.select( 'authUserData' ).subscribe(
+            ( val ) => {
+                this.userData = val;
+            }
+        )
+    }
 
   ngOnInit() {
   }

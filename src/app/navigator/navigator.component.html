@@ -1,24 +1,30 @@
-<nav class="col-md-2 nav-box" style="margin-top: 10px;">
+<nav class="col-md-2 nav-box" style="margin-top: 5px;">
     <div class="nav-rank">
         <i class="material-icons vcenter" style="color: yellow;">star</i>
         Rank
     </div>
-    <!--button md-button [routerLink]="['/home','myProfile']" class="nav-btn text-center">Mi perfil</button>-->
-    <button md-button class="nav-btn" [routerLink]="['/home','myProfile']">
-        <md-icon style="margin-right: 12px;">person</md-icon>
-        Mi perfil
-    </button>
 
-    <button md-button class="nav-btn" [routerLink]="['/home','questions']">
-        <md-icon style="margin-right: 12px;">school</md-icon>
-        Mis preguntas
-    </button>
+    <div class="nav-button" [routerLink]="['/home','myProfile']">
+        <div class="child">
+            <md-icon style="margin-right: 12px;" class="vcenter">person</md-icon>
+            Mi perfil
+        </div>
+    </div>
 
-    <button md-button class="nav-btn" (click)="openNotifications()">
-        <md-icon *ngIf="notReaded < 1" style="margin-right: 12px;">notifications</md-icon>
-        <md-icon *ngIf="notReaded > 0" style="margin-right: 12px; color: green">notifications_active</md-icon>
-        Notificaciones
-    </button>
+    <div class="nav-button" [routerLink]="['/home','questions']">
+        <div class="child">
+            <md-icon style="margin-right: 12px;" class="vcenter">school</md-icon>
+            Mis preguntas
+        </div>
+    </div>
+
+    <div class="nav-button" (click)="openNotifications()">
+        <div class="child">
+            <md-icon *ngIf="notReaded < 1" style="margin-right: 12px;" class="vcenter">notifications</md-icon>
+            <md-icon *ngIf="notReaded > 0" style="margin-right: 12px; color: green" class="vcenter">notifications_active</md-icon>
+            Notificaciones
+        </div>
+    </div>
 
     <app-search></app-search>
 

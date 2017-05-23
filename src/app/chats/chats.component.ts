@@ -144,6 +144,9 @@ export class ChatsComponent implements OnInit {
                                 snapshot.val( )
                             );
 
+                            if ( this.dialogRef != undefined )
+                                this.dialogRef.componentInstance.scrollToBottom( );
+
                             if ( ( snapshot.val( ).id != this.userData.id && !snapshot.val( ).read && !this.dialogOpened.opened )
                                 || ( snapshot.val( ).id != this.userData.id && !snapshot.val( ).read && this.dialogOpened.opened &&
                                     this.dialogOpened.index != index ) ) {
@@ -185,6 +188,9 @@ export class ChatsComponent implements OnInit {
                             this.currentChats[ index ].msgs.push(
                                 snapshot.val( )
                             );
+
+                            if ( this.dialogRef != undefined )
+                                this.dialogRef.componentInstance.scrollToBottom( );
 
                             if ( ( snapshot.val( ).id != this.userData.id && !snapshot.val( ).read && !this.dialogOpened.opened )
                                 || ( snapshot.val( ).id != this.userData.id && !snapshot.val( ).read && this.dialogOpened.opened &&
