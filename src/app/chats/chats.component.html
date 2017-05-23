@@ -11,7 +11,7 @@
 			style="width: 90%;" *ngIf="!gotResponse"></md-progress-bar>
 
 		<div id="searchBox" *ngIf="checkForEmptyResponse(term)" [@fadeInOut]>
-			<li style="color: #538CD1;" [routerLink]="['/home','profile', u.username]"
+			<li style="color: #538CD1;" [routerLink]="['/home','profile', u.username]" (click)="userClicked()"
  				*ngFor="let u of allUsers">
 				{{u.username}}
 			</li>

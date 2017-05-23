@@ -71,6 +71,8 @@ export class ChatsComponent implements OnInit {
         index: -1
     };
 
+    someUserClicked: boolean = false;
+
     constructor( private uService: UserService, public lc: NgZone, public dialog: MdDialog, private ngRedux: NgRedux<IAppState> ) {
         ngRedux.select( 'authUserData' ).subscribe(
             res => {
@@ -226,7 +228,7 @@ export class ChatsComponent implements OnInit {
     }
 
     checkForEmptyResponse( term ) {
-        if ( term === '' )
+        if ( term === '' || this.someUserClicked )
             return false;
         if ( this.allUsers instanceof Array )
             return true;
@@ -250,6 +252,7 @@ export class ChatsComponent implements OnInit {
                 this.subscribeData( this.catchedTerm );
             }
         }, 600 );
+        this.someUserClicked = false;
     }
 
     openChat( index ) {
@@ -310,6 +313,10 @@ export class ChatsComponent implements OnInit {
 
         this.acceptChats = this.acceptChats.slice( 0, index )
             .concat( this.acceptChats.slice( index + 1, this.acceptChats.length ) );
+    }
+
+    userClicked() {
+        this.someUserClicked = true;
     }
 
 }

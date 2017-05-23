@@ -6,12 +6,12 @@
 
     padding: 8px;
 
-	background: #353840;
+	background: #474C59;
 
 }
 
 .nav-rank {
-	background-color: #202020;
+	background-color: #000000;
 	color: #ffffff;
 	margin-top: 8px;
 	margin-bottom: 20px;
@@ -26,7 +26,7 @@
 }
 
 .nav-button {
-    background: #353840;
+    background: #474C59;
     color: white;
     height: 40px;
     display: table;
@@ -40,7 +40,7 @@
 
 .nav-button:hover {
     cursor: pointer;
-    background: #464A55;
+    background: #5F6576;
     -webkit-transition: background-color 400ms linear;
     -ms-transition: background-color 400ms linear;
     transition: background-color 400ms linear;
