@@ -39,6 +39,7 @@
     width: 100%;
     text-align: left;
     padding-left: 35px;
+    transition: all 0.5s;
     -webkit-transition: background-color 200ms linear;
     -ms-transition: background-color 200ms linear;
     transition: background-color 200ms linear;
@@ -50,6 +51,35 @@
     -webkit-transition: background-color 400ms linear;
     -ms-transition: background-color 400ms linear;
     transition: background-color 400ms linear;
+}
+
+.nav-button:active {
+    background: #9198AE;
+}
+
+.div span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.div span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.div:hover span {
+  padding-right: 25px;
+}
+
+.div:hover span:after {
+  opacity: 1;
+  right: 0;
 }
 
 .child {

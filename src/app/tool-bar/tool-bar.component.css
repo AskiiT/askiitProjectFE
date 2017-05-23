@@ -73,6 +73,10 @@ div.home:hover {
     transition: background-color 300ms linear;
 }
 
+div.home:active {
+	background: #7F7F7F;
+}
+
 md-toolbar {
 	padding: 0px;
 }
