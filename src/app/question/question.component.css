@@ -41,7 +41,7 @@
 .divQuestion{
   padding-left: 10px;
   padding-right: 10px;
-  margin-top: 12px;
+  margin-top: 6px;
 }
 
 .cardQuestion{
@@ -76,13 +76,13 @@ md-card.cardQuestion:hover {
 }
 
 .cardBodyQuestion{
-  border-radius: 6px;
+  border-radius: 2px;
   background: #ffffff;
   overflow-x: hidden;
 
   color: #105477;
   padding: 0;
-  width: 95%;
+  width: 98%;
   height: 250px;
   position: relative;
   bottom: 10px;
@@ -148,9 +148,9 @@ md-card.cardQuestion:hover {
     box-shadow: inset 0px 0px 5px 0px rgba(0,0,0,0.8);
     padding: 10px;
 
-    -webkit-border-radius: 50px;
-    -moz-border-radius: 50px;
-    border-radius: 3px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
 }
 
 #know{
