@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter, OnInit} from '@angular/core';
 import {style, state, animate, transition, trigger} from '@angular/core';
 import { QuestionService } from '../question.service';
+import { UserService } from '../user.service';
 import { NgRedux } from 'ng2-redux';
 import { IAppState } from '../store';
 import { MdDialog, MdDialogRef } from '@angular/material';
@@ -23,7 +24,7 @@ export interface MyQuestion {
   selector: 'app-my-question',
   templateUrl: './my-question.component.html',
   styleUrls: ['./my-question.component.css'],
-  providers: [QuestionService],
+  providers: [ QuestionService, UserService ],
   animations: [
       trigger('slideIn', [
         state('*', style({ 'overflow-y': 'hidden' })),
@@ -60,9 +61,19 @@ export class MyQuestionComponent implements OnInit {
 
   userData: any;
 
-  constructor(private questionService: QuestionService, public snackBar: MdSnackBar, public dialog: MdDialog) { }
+  imageURL: string;
+
+  constructor(private questionService: QuestionService, public snackBar: MdSnackBar, public dialog: MdDialog,
+    private uService: UserService) { }
 
   ngOnInit() {
+      this.uService.getUserByUsername( this.myQuestion.user.username ).subscribe(
+        res => {
+                this.imageURL = "url('http://askiit.herokuapp.com" + res[ 0 ].avatar.avatars.avatars.url + "')"
+            },
+        () => {},
+        () => {}
+      );
   }
 
   onChange(e){
