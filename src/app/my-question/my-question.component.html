@@ -1,9 +1,18 @@
 <div class="divQuestion">
   <md-card class="cardQuestion" (click) ="onChange($event)">
     <md-card-content>
-        <div mdTooltip="Dificultad" id="difficulty">{{myQuestion.difficulty}}</div>
+        <div class="user" [ngStyle]="{'background-image':imageURL, 'background-color': myQuestion.user.color}"
+            [@fadeInOut]>
+        </div>
+
         <div class = "title">{{myQuestion.title}}</div>
         <span class="spacer"></span>
+        <div mdTooltip="Dificultad" id="difficulty" mdTooltipPosition="left"
+            [class.diff-low]="myQuestion.difficulty>=0&&myQuestion.difficulty<5"
+            [class.diff-med]="myQuestion.difficulty>=5&&myQuestion.difficulty<8"
+            [class.diff-height]="myQuestion.difficulty>=8">
+            {{myQuestion.difficulty}}
+        </div>
         <div mdTooltip="Postulados" mdTooltipPosition="right" id="postuls" (click)="openPostulatedDialog()">
             {{myQuestion.p_users.length}}
         </div>
